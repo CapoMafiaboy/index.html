@@ -1,0 +1,65 @@
+<!-- identificacao.html -->
+input { width: 100%; padding: 10px; border-radius: 8px; border: none; margin: .5rem 0; }
+.btn { background: green; color: white; border: none; padding: 1rem; cursor: pointer; border-radius: 8px; width: 100%; }
+</style>
+</head>
+<body>
+<h1>Identificação</h1>
+<input id="nome" placeholder="Nome" />
+<input id="sobrenome" placeholder="Sobrenome" />
+<input id="telefone" placeholder="Telefone com DDD" />
+<input id="endereco" placeholder="Rua, número, bairro" />
+<input id="cidade" placeholder="Cidade" />
+<input id="cep" placeholder="CEP" />
+<button class="btn" onclick="finalizarPedido()">Finalizar Pedido</button>
+
+
+<script>
+function gerarCodigo() {
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+let code = 'PED-';
+for (let i = 0; i < 6; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+return code;
+}
+
+
+function finalizarPedido() {
+const nome = document.getElementById('nome').value.trim();
+const sobrenome = document.getElementById('sobrenome').value.trim();
+const telefone = document.getElementById('telefone').value.trim();
+const endereco = document.getElementById('endereco').value.trim();
+const cidade = document.getElementById('cidade').value.trim();
+const cep = document.getElementById('cep').value.trim() || localStorage.getItem('cep');
+
+
+if (!nome || !sobrenome || !telefone || !endereco || !cidade || !cep) {
+alert('Preencha todos os campos.');
+return;
+}
+
+
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
+if (!cart.length) return alert('Carrinho vazio.');
+
+
+let texto = `Novo pedido recebido!%0A%0A`;
+texto += `Nome: ${nome} ${sobrenome}%0A`;
+texto += `Telefone: ${telefone}%0A`;
+texto += `Endereço: ${endereco}, ${cidade} - CEP ${cep}%0A%0A`;
+texto += `Itens:%0A`;
+let total = 0;
+cart.forEach(item => {
+total += item.preco * item.qtd;
+texto += `• ${item.nome} (x${item.qtd}) - R$ ${(item.preco * item.qtd).toLocaleString()}%0A`;
+});
+const codigo = gerarCodigo();
+texto += `%0ATotal: R$ ${total.toLocaleString()}%0APagamento: à vista na entrega%0AFrete: grátis%0ACódigo do pedido: ${codigo}`;
+
+
+const link = `https://wa.me/5511921905799?text=${texto}`;
+window.location.href = link;
+localStorage.clear();
+}
+</script>
+</body>
+</html>
