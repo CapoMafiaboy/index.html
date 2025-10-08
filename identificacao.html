@@ -1,67 +1,208 @@
-<!-- identificacao.html - redesenhado -->
-background: #00c46a;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identificação - XBRI Pneus</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --vermelho: #d60000;
+  --verde: #008b2f;
+  --cinza: #f4f4f4;
+  --texto: #333;
+  --preto: #111;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--cinza);
+  color: var(--texto);
+  margin: 0;
+}
+header {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+header h1 {
+  color: var(--vermelho);
+  font-size: 22px;
+  margin: 0;
+}
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+h2 {
+  margin-top: 0;
+  font-size: 22px;
+  color: var(--texto);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+input, select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  width: 100%;
+}
+input:focus {
+  border-color: var(--verde);
+  outline: none;
+}
+.row {
+  display: flex;
+  gap: 15px;
+}
+.row .col {
+  flex: 1;
+}
+button {
+  background: var(--verde);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover {
+  background: #006a24;
+}
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+footer {
+  background: var(--preto);
+  color: #eee;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+}
+.error {
+  color: var(--vermelho);
+  font-size: 13px;
+  margin-top: -10px;
 }
 </style>
 </head>
 <body>
-<header>Identificação</header>
-<main>
-<input id="nome" placeholder="Nome" />
-<input id="sobrenome" placeholder="Sobrenome" />
-<input id="telefone" placeholder="Telefone com DDD" />
-<input id="endereco" placeholder="Rua, número, bairro" />
-<input id="cidade" placeholder="Cidade" />
-<input id="cep" placeholder="CEP" />
-<button class="btn" onclick="finalizarPedido()">Finalizar Pedido</button>
-</main>
 
+<header>
+  <h1>XBRI</h1>
+  <div>Identificação do Cliente</div>
+</header>
+
+<div class="container">
+  <h2>Identifique-se para continuar</h2>
+  <form id="identForm">
+    <div class="row">
+      <div class="col">
+        <label for="nome">Nome*</label>
+        <input type="text" id="nome" required>
+      </div>
+      <div class="col">
+        <label for="sobrenome">Sobrenome*</label>
+        <input type="text" id="sobrenome" required>
+      </div>
+    </div>
+
+    <div>
+      <label for="telefone">Número de telefone (WhatsApp)*</label>
+      <input type="tel" id="telefone" placeholder="(11) 99999-9999" required>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="cidade">Cidade*</label>
+        <input type="text" id="cidade" required>
+      </div>
+      <div class="col">
+        <label for="estado">Estado*</label>
+        <select id="estado" required>
+          <option value="">Selecione</option>
+          <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+          <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+          <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+          <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+          <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+          <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+          <option>SP</option><option>SE</option><option>TO</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="cep">CEP*</label>
+        <input type="text" id="cep" placeholder="00000-000" required>
+      </div>
+      <div class="col">
+        <label for="endereco">Endereço*</label>
+        <input type="text" id="endereco" placeholder="Rua, número, complemento" required>
+      </div>
+    </div>
+
+    <p id="erro" class="error"></p>
+
+    <button type="submit" id="continuarBtn">CONTINUAR</button>
+  </form>
+</div>
+
+<footer>© 2025 XBRI Pneus - Todos os direitos reservados</footer>
 
 <script>
-function gerarCodigo() {
-const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-let code = 'PED-';
-for (let i = 0; i < 6; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
-return code;
-}
+const form = document.getElementById('identForm');
+const erro = document.getElementById('erro');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const nome = document.getElementById('nome').value.trim();
+  const sobrenome = document.getElementById('sobrenome').value.trim();
+  const telefone = document.getElementById('telefone').value.trim();
+  const cidade = document.getElementById('cidade').value.trim();
+  const estado = document.getElementById('estado').value.trim();
+  const cep = document.getElementById('cep').value.trim();
+  const endereco = document.getElementById('endereco').value.trim();
 
+  if (!nome || !sobrenome || !telefone || !cidade || !estado || !cep || !endereco) {
+    erro.textContent = 'Preencha todos os campos obrigatórios.';
+    return;
+  }
 
-function finalizarPedido() {
-const nome = document.getElementById('nome').value.trim();
-const sobrenome = document.getElementById('sobrenome').value.trim();
-const telefone = document.getElementById('telefone').value.trim();
-const endereco = document.getElementById('endereco').value.trim();
-const cidade = document.getElementById('cidade').value.trim();
-const cep = document.getElementById('cep').value.trim() || localStorage.getItem('cep');
+  // validação básica do CEP (8 dígitos)
+  const cepLimpo = cep.replace(/\D/g, '');
+  if (cepLimpo.length !== 8) {
+    erro.textContent = 'Digite um CEP válido.';
+    return;
+  }
 
+  erro.textContent = '';
 
-if (!nome || !sobrenome || !telefone || !endereco || !cidade || !cep) {
-alert('Preencha todos os campos.');
-return;
-}
+  const dados = { nome, sobrenome, telefone, cidade, estado, cep, endereco };
+  localStorage.setItem('dadosCliente', JSON.stringify(dados));
 
-
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
-if (!cart.length) return alert('Carrinho vazio.');
-
-
-let texto = `Novo pedido recebido!%0A%0A`;
-texto += `Nome: ${nome} ${sobrenome}%0A`;
-texto += `Telefone: ${telefone}%0A`;
-texto += `Endereço: ${endereco}, ${cidade} - CEP ${cep}%0A%0A`;
-texto += `Itens:%0A`;
-let total = 0;
-cart.forEach(item => {
-total += item.preco * item.qtd;
-texto += `• ${item.nome} (x${item.qtd}) - R$ ${(item.preco * item.qtd).toLocaleString()}%0A`;
+  window.location.href = 'pagamento.html'; // próxima etapa
 });
-const codigo = gerarCodigo();
-texto += `%0ATotal: R$ ${total.toLocaleString()}%0APagamento: à vista na entrega%0AFrete: grátis%0ACódigo do pedido: ${codigo}`;
-
-
-const link = `https://wa.me/5511921905799?text=${texto}`;
-window.location.href = link;
-localStorage.clear();
-}
 </script>
+
 </body>
 </html>
