@@ -1,49 +1,234 @@
-<!-- carrinho.html - redesenhado -->
-transition: background 0.3s;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho - XBRI Pneus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      color: #333;
+    }
 
+    header {
+      background: #fff;
+      padding: 15px 40px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-.btn:hover {
-background: #00c46a;
-}
-</style>
+    header h1 {
+      color: #d60000;
+      font-size: 22px;
+      margin: 0;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    select {
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .remove {
+      color: red;
+      cursor: pointer;
+      font-size: 18px;
+      border: none;
+      background: none;
+    }
+
+    .cep {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      flex: 1;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button {
+      background: #ccc;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: 600;
+      cursor: not-allowed;
+      transition: 0.3s;
+    }
+
+    button.enabled {
+      background: #008b2f;
+      cursor: pointer;
+    }
+
+    .frete-info {
+      background: #f6f6f6;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .pagamento {
+      background: #f6f6f6;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .btn-continuar {
+      background: #008b2f;
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+  </style>
 </head>
 <body>
-<header>Carrinho de Compras</header>
+
+<header>
+  <h1>XBRI</h1>
+</header>
+
 <main>
-<div id="cartItems"></div>
-<div class="total" id="total"></div>
-<input type="text" id="cep" placeholder="Digite seu CEP" />
-<p class="info">Frete grátis – entrega em até 4 a 5 dias úteis.</p>
-<button class="btn" onclick="continuar()">Continuar</button>
+  <h2>Carrinho</h2>
+  <table id="cartTable">
+    <tr>
+      <th>Produto</th>
+      <th>Remover</th>
+      <th>Qtd</th>
+      <th>Valor Unitário</th>
+      <th>Subtotal</th>
+    </tr>
+  </table>
+
+  <div class="cep">
+    <input type="text" id="cepInput" placeholder="Digite seu CEP">
+    <button id="btnCalcular">CALCULAR</button>
+  </div>
+
+  <div class="frete-info" id="freteInfo">
+    <p><strong>FRETE GRÁTIS</strong> - Prazo de entrega: de 4 a 5 dias úteis</p>
+  </div>
+
+  <div class="pagamento">
+    <p><strong>Pagamento no ato da entrega ✅</strong></p>
+  </div>
+
+  <button class="btn-continuar" id="btnContinuar">CONTINUAR</button>
 </main>
 
+<footer style="background:#111;color:#eee;text-align:center;padding:15px 0;margin-top:50px;">
+  © 2025 XBRI Pneus - Todos os direitos reservados
+</footer>
 
 <script>
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
-const container = document.getElementById('cartItems');
-const totalTag = document.getElementById('total');
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const table = document.getElementById('cartTable');
+  const cepInput = document.getElementById('cepInput');
+  const btnCalcular = document.getElementById('btnCalcular');
+  const freteInfo = document.getElementById('freteInfo');
 
+  if (cart.length === 0) {
+    window.location.href = 'index.html';
+  }
 
-let total = 0;
-cart.forEach(item => {
-total += item.preco * item.qtd;
-const div = document.createElement('div');
-div.className = 'item';
-div.innerHTML = `<div>${item.nome}<br><small>x${item.qtd}</small></div><div>R$ ${(item.preco * item.qtd).toLocaleString()}</div>`;
-container.appendChild(div);
-});
+  function atualizarTabela() {
+    table.innerHTML = `
+      <tr>
+        <th>Produto</th><th>Remover</th><th>Qtd</th><th>Valor Unitário</th><th>Subtotal</th>
+      </tr>
+    `;
 
+    cart.forEach((item, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td><button class="remove" onclick="remover(${index})">&times;</button></td>
+        <td>
+          <select onchange="mudarQtd(${index}, this.value)">
+            ${Array.from({length: 10}, (_, i) => `<option ${item.qtd === i+1 ? 'selected' : ''}>${i+1}</option>`).join('')}
+          </select>
+        </td>
+        <td>R$ ${item.price.toFixed(2)}</td>
+        <td>R$ ${(item.price * item.qtd).toFixed(2)}</td>
+      `;
+      table.appendChild(row);
+    });
+  }
 
-totalTag.textContent = `Total: R$ ${total.toLocaleString()}`;
+  function remover(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    if (cart.length === 0) window.location.href = 'index.html';
+    atualizarTabela();
+  }
 
+  function mudarQtd(index, qtd) {
+    cart[index].qtd = parseInt(qtd);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    atualizarTabela();
+  }
 
-function continuar() {
-const cep = document.getElementById('cep').value.trim();
-if (!cep) return alert('Digite seu CEP para continuar.');
-localStorage.setItem('cep', cep);
-window.location.href = 'identificacao.html';
-}
+  cepInput.addEventListener('input', () => {
+    const cleanCep = cepInput.value.replace(/\D/g, '');
+    if (cleanCep.length === 8) {
+      btnCalcular.classList.add('enabled');
+      btnCalcular.disabled = false;
+    } else {
+      btnCalcular.classList.remove('enabled');
+      btnCalcular.disabled = true;
+    }
+  });
+
+  btnCalcular.addEventListener('click', () => {
+    if (btnCalcular.disabled) return;
+    freteInfo.style.display = 'block';
+  });
+
+  document.getElementById('btnContinuar').addEventListener('click', () => {
+    alert('Próxima etapa (Identificação)');
+  });
+
+  cart.forEach(item => item.qtd = item.qtd || 1);
+  atualizarTabela();
 </script>
 </body>
 </html>
