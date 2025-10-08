@@ -223,12 +223,14 @@ footer {
   const continueBtn = document.getElementById('continueBtn');
   const buyBtn = document.getElementById('buyBtn');
 
+  // renderiza o carrinho
   function renderCart() {
     cartItems.innerHTML = '';
     if (cart.length === 0) {
       cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
       cartTotal.textContent = '';
       continueBtn.disabled = true;
+      cartCount.textContent = 0;
       return;
     }
     continueBtn.disabled = false;
@@ -293,6 +295,7 @@ footer {
     renderCart();
   }
 
+  // adiciona produto
   buyBtn.addEventListener('click', () => {
     const existing = cart.find(i => i.name === 'ECOWAY B1 (LISO)');
     if (existing) {
@@ -303,11 +306,12 @@ footer {
     saveCart();
   });
 
+  // alterna visibilidade do carrinho (abre/fecha sempre)
   cartBtn.addEventListener('click', () => {
-    if (cart.length === 0) return;
     cartPanel.style.display = cartPanel.style.display === 'flex' ? 'none' : 'flex';
   });
 
+  // botão continuar
   continueBtn.addEventListener('click', () => {
     if (cart.length > 0) window.location.href = 'carrinho.html';
   });
@@ -316,5 +320,7 @@ footer {
 })();
 </script>
 
+
 </body>
 </html>
+
