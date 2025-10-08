@@ -20,7 +20,6 @@
       justify-content: space-between;
       padding: 15px 40px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: relative;
     }
 
     header h1 {
@@ -199,13 +198,162 @@
       font-size: 14px;
     }
 
-    .cart-item span {
-      color: #555;
-    }
-
     .btn-continue {
       background: #008b2f;
       color: #fff;
       border: none;
       padding: 10px;
-      border-
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .remove-item {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .remove-item:hover svg path {
+      fill: #a00000;
+    }
+
+    .remove-item:hover {
+      transform: scale(1.15);
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>XBRI</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Busque seu pneu..." />
+      <button>Buscar</button>
+    </div>
+    <div class="cart-icon" id="cartBtn">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></div>
+  </header>
+
+  <div class="container">
+    <div class="filters">
+      <h3>Filtros</h3>
+      <p>Aro 14</p>
+      <p>Aro 15</p>
+      <p>Aro 16</p>
+      <p>Aro 17</p>
+      <p>Aro 18</p>
+      <p>Aro 19</p>
+      <p>Aro 22,5</p>
+    </div>
+
+    <div class="product-list">
+      <!-- Produto -->
+      <div class="product-card" data-name="ECOWAY B1 (LISO)" data-price="979">
+        <img src="images/ecoway-b1.jpg" alt="Pneu ECOWAY B1 (LISO)">
+        <div class="product-info">
+          <h2>275/80R22,5 18 LONAS 149/146M</h2>
+          <h3>ECOWAY B1 (LISO)</h3>
+          <p>Carga</p>
+          <div class="price">
+            R$ 979,00
+            <small>à vista ou em até <strong>12x de R$ 81,60</strong> no cartão</small>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn-details">+ DETALHES</button>
+          <button class="btn-buy">COMPRAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mini carrinho -->
+  <div class="cart-panel" id="cartPanel">
+    <h3>Seu carrinho</h3>
+    <div id="cartItems"></div>
+    <button class="btn-continue" onclick="goToCart()">CONTINUAR</button>
+  </div>
+
+  <footer>
+    © 2025 Loja Oficial XBRI — Todos os direitos reservados.
+  </footer>
+
+  <script>
+    let cart = [];
+    const cartCount = document.getElementById('cartCount');
+    const cartPanel = document.getElementById('cartPanel');
+    const cartItems = document.getElementById('cartItems');
+    const cartBtn = document.getElementById('cartBtn');
+
+    document.querySelectorAll('.btn-buy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.product-card');
+        const name = card.getAttribute('data-name');
+        const price = parseFloat(card.getAttribute('data-price'));
+
+        const existing = cart.find(item => item.name === name);
+        if (existing) existing.qtd++;
+        else cart.push({ name, price, qtd: 1 });
+
+        updateCart();
+      });
+    });
+
+    cartBtn.addEventListener('click', () => {
+      cartPanel.style.display = cartPanel.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    function updateCart() {
+      cartCount.textContent = cart.reduce((acc, item) => acc + item.qtd, 0);
+      cartItems.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="color:#777;text-align:center;">Seu carrinho está vazio.</p>';
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+          <span>${item.qtd}x ${item.name}</span>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <strong>R$ ${(item.price * item.qtd).toFixed(2)}</strong>
+            <button class="remove-item" data-index="${index}" title="Remover">
+              <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 448 512">
+                <path fill="#d60000" d="M135.2 17.7C140.3 7.2 150.7 0 162.4 0H285.6c11.7 0 22.1 7.2 
+                27.2 17.7L320 32H432c8.8 0 16 7.2 16 16s-7.2 16-16 16H416l-21.2 
+                403.2c-1.2 23.5-20.6 42.8-44.1 42.8H97.3c-23.5 0-42.9-19.3-44.1-42.8L32 
+                64H16C7.2 64 0 56.8 0 48S7.2 32 16 32H128l7.2-14.3zM96 96l20.8 
+                396.8c.1 2.4 2.1 4.2 4.5 4.2h253.3c2.4 0 4.4-1.9 4.5-4.2L400 
+                96H96z"/>
+              </svg>
+            </button>
+          </div>
+        `;
+        cartItems.appendChild(div);
+      });
+
+      document.querySelectorAll('.remove-item').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const index = e.target.closest('button').getAttribute('data-index');
+          cart.splice(index, 1);
+          updateCart();
+        });
+      });
+    }
+
+    function goToCart() {
+      window.location.href = 'carrinho.html';
+    }
+  </script>
+</body>
+</html>
