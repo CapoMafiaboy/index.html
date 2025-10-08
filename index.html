@@ -210,6 +210,13 @@
       cursor: pointer;
       width: 100%;
       margin-top: 10px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .btn-continue:disabled {
+      background: #ccc;
+      color: #666;
+      cursor: not-allowed;
     }
 
     .remove-item {
@@ -255,8 +262,6 @@
     </div>
 
     <div class="product-list">
-
-      <!-- CARD DO PNEU -->
       <div class="product-card" data-name="ECOWAY B1 (LISO)" data-price="979">
         <img src="images/ecoway-b1.jpg" alt="Pneu ECOWAY B1 (LISO)">
         <div class="product-info">
@@ -273,15 +278,13 @@
           <button class="btn-buy">COMPRAR</button>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Painel flutuante do carrinho -->
   <div class="cart-panel" id="cartPanel">
     <h3>Seu carrinho</h3>
     <div id="cartItems"></div>
-    <button class="btn-continue" id="continueBtn">CONTINUAR</button>
+    <button class="btn-continue" id="continueBtn" disabled>CONTINUAR</button>
   </div>
 
   <footer>
@@ -302,8 +305,11 @@
 
       if (cart.length === 0) {
         cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
+        continueBtn.disabled = true;
         return;
       }
+
+      continueBtn.disabled = false;
 
       cart.forEach((item, index) => {
         const div = document.createElement('div');
@@ -337,13 +343,14 @@
       });
     });
 
-    // ✅ NOVO: só abre o carrinho se houver item
+    // só abre o carrinho se houver item
     cartBtn.addEventListener('click', () => {
-      if (cart.length === 0) return; // não abre se vazio
+      if (cart.length === 0) return;
       cartPanel.style.display = cartPanel.style.display === 'flex' ? 'none' : 'flex';
     });
 
     continueBtn.addEventListener('click', () => {
+      if (cart.length === 0) return;
       window.location.href = 'carrinho.html';
     });
   </script>
