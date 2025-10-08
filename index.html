@@ -337,7 +337,9 @@
       });
     });
 
+    // ✅ NOVO: só abre o carrinho se houver item
     cartBtn.addEventListener('click', () => {
+      if (cart.length === 0) return; // não abre se vazio
       cartPanel.style.display = cartPanel.style.display === 'flex' ? 'none' : 'flex';
     });
 
