@@ -85,8 +85,6 @@
       font-size: 0.95rem;
       cursor: pointer;
     }
-
-    /* NOVO LAYOUT DE CARDS */
     .product-grid {
       flex: 1;
       margin-left: 30px;
@@ -104,8 +102,9 @@
       padding: 20px;
     }
     .product-card img {
-      width: 200px;
-      height: auto;
+      width: auto;
+      height: 180px;
+      object-fit: contain;
       margin-right: 30px;
     }
     .product-info {
@@ -166,7 +165,6 @@
     .buy-btn:hover {
       background: #006a26;
     }
-
     footer {
       background: #222;
       color: #eee;
@@ -203,14 +201,14 @@
 
     <section class="product-grid">
       <div class="product-card">
-        <img src="https://cdn.pneufree.com.br/XBRI/images/Site/BANNER-LINK-ECOMMERCE-XBRI.jpg" alt="Pneu ECOWAY B1" />
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAiYAAAImCAIAAADorNYRAAAQAElEQVR4Aez9ebBn2VUfep7hN94h7805syqzZknIAgzGDcgM9jPDa0I20PYL29jhCDvabaK7wy86gn+63c8GY3jwmIUQGIQGJEEJEEJzzap5yqrKrMqasnKeKqebd/7d33iG9/ndLe7LV0gyFCnVdG58..." alt="Pneu ECOWAY B1 (LISO)" />
         <div class="product-info">
           <h2>275/80R22,5 18 LONAS 149/146M</h2>
           <h3>ECOWAY B1 (LISO)</h3>
           <p>Carga</p>
           <div class="price">
             R$ 979,00
-            <small>à vista ou em até <strong>12x de R$ 81,60</strong> no cartão</small>
+            <small>à vista ou em até 12x de R$ 81,60 no cartão</small>
           </div>
         </div>
         <div class="actions">
@@ -226,4 +224,3 @@
   </footer>
 </body>
 </html>
-
