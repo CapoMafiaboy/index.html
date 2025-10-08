@@ -4,106 +4,72 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loja Oficial XBRI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      margin: 0;
       background-color: #f4f4f4;
+      margin: 0;
       color: #333;
     }
 
-    /* Cabeçalho */
     header {
       background: #fff;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 15px 40px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    .logo {
-      font-weight: 700;
-      font-size: 1.4rem;
+    header h1 {
       color: #d60000;
+      font-size: 22px;
+      margin: 0;
     }
 
     .search-bar {
       flex: 1;
-      margin: 0 40px;
-      display: flex;
-      background: #f1f1f1;
-      border-radius: 5px;
-      overflow: hidden;
+      margin: 0 20px;
     }
 
     .search-bar input {
-      flex: 1;
-      border: none;
+      width: 100%;
       padding: 10px;
-      outline: none;
-      background: none;
-      font-size: 0.95rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
     }
 
     .search-bar button {
       background: #d60000;
+      color: #fff;
       border: none;
-      color: white;
       padding: 10px 20px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .cart {
-      font-weight: 600;
-      color: #333;
+      border-radius: 5px;
       cursor: pointer;
     }
 
-    /* Layout principal */
-    main {
+    .container {
       display: flex;
-      padding: 30px 40px;
+      margin: 30px;
+      gap: 20px;
     }
 
-    aside {
-      width: 240px;
-      background: white;
-      border-radius: 8px;
+    .filters {
+      width: 200px;
+      background: #fff;
       padding: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      height: fit-content;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    aside h3 {
-      font-size: 1rem;
-      margin-bottom: 10px;
-      color: #111;
+    .filters h3 {
+      margin-top: 0;
     }
 
-    aside ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    aside ul li {
-      margin: 8px 0;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-
-    /* Cards de produtos */
-    .product-grid {
+    .product-list {
       flex: 1;
-      margin-left: 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
     }
 
     .product-card {
@@ -112,61 +78,49 @@
       align-items: center;
       justify-content: space-between;
       border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       padding: 20px;
-      transition: 0.2s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+      margin-bottom: 20px;
     }
 
     .product-card img {
-      width: auto;
-      height: 180px;
+      width: 180px;
+      height: auto;
       object-fit: contain;
-      margin-right: 30px;
       border-radius: 8px;
-      background: radial-gradient(circle at center, #f9f9f9 0%, #ececec 100%);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      padding: 6px;
     }
 
     .product-info {
       flex: 1;
+      margin-left: 20px;
     }
 
     .product-info h2 {
+      font-size: 20px;
       font-weight: 700;
-      font-size: 1.3rem;
       margin: 0;
     }
 
     .product-info h3 {
-      font-weight: 600;
-      font-size: 1rem;
-      margin: 5px 0 10px;
-      color: #7b7b7b;
+      font-size: 16px;
+      color: #777;
+      margin: 5px 0 10px 0;
     }
 
     .product-info p {
-      font-size: 0.95rem;
-      margin: 5px 0;
-      color: #555;
+      margin: 3px 0;
     }
 
     .price {
-      font-size: 1.3rem;
-      color: #000;
       font-weight: 700;
-      margin-top: 10px;
+      font-size: 20px;
+      margin: 10px 0;
     }
 
     .price small {
       display: block;
-      color: #777;
-      font-size: 0.85rem;
+      font-size: 13px;
+      color: #555;
       margin-top: 3px;
     }
 
@@ -176,71 +130,60 @@
       gap: 10px;
     }
 
-    .details-btn, .buy-btn {
-      padding: 10px 20px;
+    .btn-details {
+      background: #f4f4f4;
       border: none;
-      border-radius: 5px;
-      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: 0.2s;
+      font-weight: 600;
     }
 
-    .details-btn {
-      background: #f2f2f2;
-      color: #000;
-    }
-
-    .details-btn:hover {
-      background: #e1e1e1;
-    }
-
-    .buy-btn {
-      background: #007f2d;
+    .btn-buy {
+      background: #008b2f;
       color: #fff;
-    }
-
-    .buy-btn:hover {
-      background: #006a26;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
     }
 
     footer {
-      background: #222;
+      background: #111;
       color: #eee;
       text-align: center;
-      padding: 25px;
-      margin-top: 40px;
-      font-size: 0.9rem;
+      padding: 15px 0;
+      margin-top: 30px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Cabeçalho -->
   <header>
-    <div class="logo">XBRI</div>
+    <h1>XBRI</h1>
     <div class="search-bar">
       <input type="text" placeholder="Busque seu pneu..." />
-      <button>Buscar</button>
     </div>
-    <div class="cart">🛒 Carrinho</div>
+    <button class="search-bar button">Buscar</button>
   </header>
 
-  <!-- Corpo principal -->
-  <main>
-    <aside>
+  <div class="container">
+    <div class="filters">
       <h3>Filtros</h3>
-      <ul>
-        <li>Aro 14</li>
-        <li>Aro 15</li>
-        <li>Aro 16</li>
-        <li>Aro 17</li>
-        <li>Aro 18</li>
-        <li>Aro 19</li>
-        <li>Aro 22,5</li>
-      </ul>
-    </aside>
+      <p>Aro 14</p>
+      <p>Aro 15</p>
+      <p>Aro 16</p>
+      <p>Aro 17</p>
+      <p>Aro 18</p>
+      <p>Aro 19</p>
+      <p>Aro 22,5</p>
+    </div>
 
-    <section class="product-grid">
+    <div class="product-list">
+
+      <!-- CARD DO PNEU -->
       <div class="product-card">
         <img src="images/ecoway-b1.jpg" alt="Pneu ECOWAY B1 (LISO)">
         <div class="product-info">
@@ -249,20 +192,9 @@
           <p>Carga</p>
           <div class="price">
             R$ 979,00
-            <small>à vista ou em até 12x de R$ 81,60 no cartão</small>
+            <small>à vista ou em até <strong>12x de R$ 81,60</strong> no cartão</small>
           </div>
         </div>
         <div class="actions">
-          <button class="details-btn">+ DETALHES</button>
-          <button class="buy-btn">COMPRAR</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 Loja Oficial XBRI — Todos os direitos reservados.
-  </footer>
-
-</body>
-</html>
+          <button class="btn-details">+ DETALHES</button>
+          <button class="btn-buy">COMPRAR
