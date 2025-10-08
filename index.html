@@ -32,6 +32,8 @@
     .search-bar {
       flex: 1;
       margin: 0 20px;
+      display: flex;
+      gap: 10px;
     }
 
     .search-bar input {
@@ -49,6 +51,7 @@
       padding: 10px 20px;
       border-radius: 5px;
       cursor: pointer;
+      font-weight: 600;
     }
 
     .cart-icon {
@@ -205,122 +208,4 @@
       color: #fff;
       border: none;
       padding: 10px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 10px;
-    }
-
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>XBRI</h1>
-    <div class="search-bar">
-      <input type="text" placeholder="Busque seu pneu..." />
-    </div>
-    <button class="search-bar button">Buscar</button>
-    <div class="cart-icon" id="cartBtn">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></div>
-  </header>
-
-  <div class="container">
-    <div class="filters">
-      <h3>Filtros</h3>
-      <p>Aro 14</p>
-      <p>Aro 15</p>
-      <p>Aro 16</p>
-      <p>Aro 17</p>
-      <p>Aro 18</p>
-      <p>Aro 19</p>
-      <p>Aro 22,5</p>
-    </div>
-
-    <div class="product-list">
-
-      <!-- CARD DO PNEU -->
-      <div class="product-card" data-name="ECOWAY B1 (LISO)" data-price="979">
-        <img src="images/ecoway-b1.jpg" alt="Pneu ECOWAY B1 (LISO)">
-        <div class="product-info">
-          <h2>275/80R22,5 18 LONAS 149/146M</h2>
-          <h3>ECOWAY B1 (LISO)</h3>
-          <p>Carga</p>
-          <div class="price">
-            R$ 979,00
-            <small>à vista ou em até <strong>12x de R$ 81,60</strong> no cartão</small>
-          </div>
-        </div>
-        <div class="actions">
-          <button class="btn-details">+ DETALHES</button>
-          <button class="btn-buy">COMPRAR</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Painel flutuante do carrinho -->
-  <div class="cart-panel" id="cartPanel">
-    <h3>Seu carrinho</h3>
-    <div id="cartItems"></div>
-    <button class="btn-continue" onclick="goToCart()">CONTINUAR</button>
-  </div>
-
-  <footer>
-    © 2025 Loja Oficial XBRI — Todos os direitos reservados.
-  </footer>
-
-  <script>
-    const cart = [];
-    const cartCount = document.getElementById('cartCount');
-    const cartPanel = document.getElementById('cartPanel');
-    const cartItems = document.getElementById('cartItems');
-    const cartBtn = document.getElementById('cartBtn');
-
-    // adicionar produto ao carrinho
-    document.querySelectorAll('.btn-buy').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const card = btn.closest('.product-card');
-        const name = card.getAttribute('data-name');
-        const price = parseFloat(card.getAttribute('data-price'));
-
-        const existing = cart.find(item => item.name === name);
-        if (existing) {
-          existing.qtd++;
-        } else {
-          cart.push({ name, price, qtd: 1 });
-        }
-
-        updateCart();
-      });
-    });
-
-    // abrir mini carrinho
-    cartBtn.addEventListener('click', () => {
-      cartPanel.style.display = cartPanel.style.display === 'flex' ? 'none' : 'flex';
-    });
-
-    // atualizar carrinho
-    function updateCart() {
-      cartCount.textContent = cart.reduce((acc, item) => acc + item.qtd, 0);
-      cartItems.innerHTML = '';
-
-      cart.forEach(item => {
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML = `
-          <span>${item.qtd}x ${item.name}</span>
-          <strong>R$ ${(item.price * item.qtd).toFixed(2)}</strong>
-        `;
-        cartItems.appendChild(div);
-      });
-    }
-
-    // redirecionar depois que clicar em "continuar"
-    function goToCart() {
-      window.location.href = 'carrinho.html';
-    }
-  </script>
-</body>
-</html>
+      border-
