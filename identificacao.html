@@ -172,9 +172,10 @@ footer {
 <script>
 const form = document.getElementById('identForm');
 const erro = document.getElementById('erro');
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  
+
   const nome = document.getElementById('nome').value.trim();
   const sobrenome = document.getElementById('sobrenome').value.trim();
   const telefone = document.getElementById('telefone').value.trim();
@@ -200,7 +201,8 @@ form.addEventListener('submit', (e) => {
   const dados = { nome, sobrenome, telefone, cidade, estado, cep, endereco };
   localStorage.setItem('dadosCliente', JSON.stringify(dados));
 
-  window.location.href = 'pagamento.html'; // próxima etapa
+  // Redireciona para a página de confirmação
+  window.location.href = 'confirmacao.html';
 });
 </script>
 
