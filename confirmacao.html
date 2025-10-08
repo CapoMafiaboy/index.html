@@ -151,30 +151,12 @@
 
     <h2>Resumo do Pedido</h2>
 
-    <div class="pedido">
-      <div class="pedido-item">
-        <img src="images/ecoway-b1.jpg" alt="ECOWAY B1 (LISO)">
-        <div class="info">
-          <h4>ECOWAY B1 (LISO)</h4>
-          <p>Quantidade: 2</p>
-          <p>Valor unitário: R$ 979,00</p>
-        </div>
-        <p><strong>R$ 1.958,00</strong></p>
-      </div>
-      <p class="total">Total do pedido: <strong>R$ 1.958,00</strong></p>
-    </div>
+    <div class="pedido" id="pedidoResumo"></div>
 
     <h2>Dados do Cliente</h2>
-    <div class="dados">
-      <p><strong>Nome:</strong> João da Silva</p>
-      <p><strong>Telefone:</strong> (11) 99999-9999</p>
-      <p><strong>Cidade:</strong> São Paulo</p>
-      <p><strong>Estado:</strong> SP</p>
-      <p><strong>CEP:</strong> 04567-000</p>
-      <p><strong>Endereço:</strong> Rua Exemplo, 123 - Jardim Paulista</p>
-    </div>
+    <div class="dados" id="dadosCliente"></div>
 
-    <a href="https://wa.me/5511999999999?text=Olá,%20quero%20confirmar%20meu%20pedido!" class="btn-whatsapp">
+    <a id="btnWhats" href="#" class="btn-whatsapp" target="_blank">
       CONFIRMAR PEDIDO NO WHATSAPP
     </a>
   </div>
@@ -182,6 +164,64 @@
   <footer>
     © 2025 XBRI Pneus - Todos os direitos reservados
   </footer>
+
+  <script>
+    // Pega dados do cliente e do carrinho
+    const cliente = JSON.parse(localStorage.getItem("dadosCliente"));
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    // Se estiver vazio, redireciona pra index
+    if (!cliente || carrinho.length === 0) {
+      window.location.href = "index.html";
+    }
+
+    // Exibe dados do cliente
+    document.getElementById("dadosCliente").innerHTML = `
+      <p><strong>Nome:</strong> ${cliente.nome} ${cliente.sobrenome}</p>
+      <p><strong>Telefone:</strong> ${cliente.telefone}</p>
+      <p><strong>Cidade:</strong> ${cliente.cidade}</p>
+      <p><strong>Estado:</strong> ${cliente.estado}</p>
+      <p><strong>CEP:</strong> ${cliente.cep}</p>
+      <p><strong>Endereço:</strong> ${cliente.endereco}</p>
+    `;
+
+    // Exibe os produtos do carrinho
+    const pedidoDiv = document.getElementById("pedidoResumo");
+    let total = 0;
+
+    carrinho.forEach(produto => {
+      const subtotal = produto.price * produto.quantity;
+      total += subtotal;
+
+      const itemHTML = `
+        <div class="pedido-item">
+          <img src="${produto.image}" alt="${produto.name}">
+          <div class="info">
+            <h4>${produto.name}</h4>
+            <p>Quantidade: ${produto.quantity}</p>
+            <p>Valor unitário: R$ ${produto.price.toFixed(2)}</p>
+          </div>
+          <p><strong>R$ ${subtotal.toFixed(2)}</strong></p>
+        </div>
+      `;
+      pedidoDiv.insertAdjacentHTML("beforeend", itemHTML);
+    });
+
+    pedidoDiv.insertAdjacentHTML("beforeend", `
+      <p class="total">Total do pedido: <strong>R$ ${total.toFixed(2)}</strong></p>
+    `);
+
+    // Gera mensagem pro WhatsApp
+    const mensagem = encodeURIComponent(
+      `🚚 *Confirmação de Pedido XBRI*\n\n` +
+      `👤 *Cliente:* ${cliente.nome} ${cliente.sobrenome}\n📞 *Telefone:* ${cliente.telefone}\n🏙️ *Cidade:* ${cliente.cidade}/${cliente.estado}\n🏠 *Endereço:* ${cliente.endereco}\n📦 *CEP:* ${cliente.cep}\n\n` +
+      `🛞 *Itens do Pedido:*\n` +
+      carrinho.map(p => `- ${p.name} (Qtd: ${p.quantity}) — R$ ${(p.price * p.quantity).toFixed(2)}`).join("\n") +
+      `\n\n💰 *Total:* R$ ${total.toFixed(2)}\n\n✅ Desejo confirmar meu pedido e receber as instruções da entrega.`
+    );
+
+    document.getElementById("btnWhats").href = `https://wa.me/5511921905799?text=${mensagem}`;
+  </script>
 
 </body>
 </html>
