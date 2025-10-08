@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrinho - XBRI Pneus</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loja Oficial XBRI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: #f4f4f4;
+      background-color: #f4f4f4;
       margin: 0;
       color: #333;
     }
 
     header {
       background: #fff;
-      padding: 15px 40px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 15px 40px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
     }
 
     header h1 {
@@ -28,230 +29,266 @@
       margin: 0;
     }
 
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #eee;
-      text-align: left;
-      vertical-align: middle;
-    }
-
-    th {
-      font-weight: 600;
-    }
-
-    .product-cell {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .product-cell img {
-      width: 100px;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    select {
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .remove {
-      color: red;
-      cursor: pointer;
-      font-size: 18px;
-      border: none;
-      background: none;
-    }
-
-    .cep {
-      display: flex;
-      gap: 10px;
-      margin: 20px 0;
-    }
-
-    input[type="text"] {
-      padding: 10px;
+    .search-bar {
       flex: 1;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 14px;
     }
 
-    button {
-      background: #ccc;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      color: #fff;
+    .cart-icon {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
       font-weight: 600;
-      cursor: not-allowed;
+    }
+
+    .cart-count {
+      background: #008b2f;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      padding: 2px 6px;
+      margin-left: 5px;
+    }
+
+    .container {
+      display: flex;
+      margin: 30px;
+      gap: 20px;
+    }
+
+    .filters {
+      width: 200px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .product-card {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .product-card img {
+      width: 180px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .btn-buy {
+      background: #008b2f;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .cart-panel {
+      position: fixed;
+      top: 70px;
+      right: 40px;
+      width: 320px;
+      background: #fff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      border-radius: 10px;
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .cart-item select {
+      margin-left: 5px;
+      padding: 3px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .remove-item {
+      background: none;
+      border: none;
+      color: #d60000;
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    .btn-continue {
+      background: #008b2f;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
       transition: 0.3s;
     }
 
-    button.enabled {
-      background: #008b2f;
-      cursor: pointer;
+    .btn-continue:disabled {
+      background: #ccc;
+      cursor: not-allowed;
     }
 
-    .frete-info {
-      background: #f6f6f6;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      display: none;
+    footer {
+      background: #111;
+      color: #eee;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 30px;
+      font-size: 14px;
     }
-
-    .pagamento {
-      background: #f6f6f6;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-
-    .btn-continuar {
-      background: #008b2f;
-      color: #fff;
-      border: none;
-      width: 100%;
-      padding: 15px;
-      border-radius: 8px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
   </style>
 </head>
 <body>
 
-<header>
-  <h1>XBRI</h1>
-</header>
+  <header>
+    <h1>XBRI</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Busque seu pneu..." />
+    </div>
+    <div class="cart-icon" id="cartBtn">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></div>
+  </header>
 
-<main>
-  <h2>Carrinho</h2>
-  <table id="cartTable">
-    <tr>
-      <th>Produto</th>
-      <th>Remover</th>
-      <th>Qtd</th>
-      <th>Valor Unitário</th>
-      <th>Subtotal</th>
-    </tr>
-  </table>
+  <div class="container">
+    <div class="filters">
+      <h3>Filtros</h3>
+      <p>Aro 14</p>
+      <p>Aro 15</p>
+      <p>Aro 16</p>
+      <p>Aro 17</p>
+      <p>Aro 18</p>
+      <p>Aro 19</p>
+      <p>Aro 22,5</p>
+    </div>
 
-  <div class="cep">
-    <input type="text" id="cepInput" placeholder="Digite seu CEP">
-    <button id="btnCalcular">CALCULAR</button>
+    <div class="product-card" data-name="ECOWAY B1 (LISO)" data-price="979">
+      <img src="images/ecoway-b1.jpg" alt="Pneu ECOWAY B1 (LISO)">
+      <div>
+        <h2>275/80R22,5 18 LONAS 149/146M</h2>
+        <h3>ECOWAY B1 (LISO)</h3>
+        <p>Carga</p>
+        <p><strong>R$ 979,00</strong></p>
+      </div>
+      <button class="btn-buy">COMPRAR</button>
+    </div>
   </div>
 
-  <div class="frete-info" id="freteInfo">
-    <p><strong>FRETE GRÁTIS</strong> - Prazo de entrega: de 4 a 5 dias úteis</p>
+  <div class="cart-panel" id="cartPanel">
+    <h3>Seu carrinho</h3>
+    <div id="cartItems"></div>
+    <button class="btn-continue" id="continueBtn" disabled>CONTINUAR</button>
   </div>
 
-  <div class="pagamento">
-    <p><strong>Pagamento no ato da entrega ✅</strong></p>
-  </div>
+  <footer>
+    © 2025 XBRI Pneus - Todos os direitos reservados
+  </footer>
 
-  <button class="btn-continuar" id="btnContinuar">CONTINUAR</button>
-</main>
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartBtn = document.getElementById('cartBtn');
+    const cartPanel = document.getElementById('cartPanel');
+    const cartCount = document.getElementById('cartCount');
+    const cartItems = document.getElementById('cartItems');
+    const continueBtn = document.getElementById('continueBtn');
 
-<footer style="background:#111;color:#eee;text-align:center;padding:15px 0;margin-top:50px;">
-  © 2025 XBRI Pneus - Todos os direitos reservados
-</footer>
+    function updateCart() {
+      cartCount.textContent = cart.reduce((total, item) => total + item.qtd, 0);
+      cartItems.innerHTML = '';
 
-<script>
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const table = document.getElementById('cartTable');
-  const cepInput = document.getElementById('cepInput');
-  const btnCalcular = document.getElementById('btnCalcular');
-  const freteInfo = document.getElementById('freteInfo');
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
+        continueBtn.disabled = true;
+        return;
+      }
 
-  if (cart.length === 0) {
-    window.location.href = 'index.html';
-  }
+      continueBtn.disabled = false;
 
-  function atualizarTabela() {
-    table.innerHTML = `
-      <tr>
-        <th>Produto</th><th>Remover</th><th>Qtd</th><th>Valor Unitário</th><th>Subtotal</th>
-      </tr>
-    `;
-
-    cart.forEach((item, index) => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td class="product-cell">
-          <img src="images/ecoway-b1.jpg" alt="Pneu ${item.name}">
+      cart.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+          <span>${item.name}</span>
           <div>
-            <strong>${item.name}</strong><br>
-            <small>Código: 275/80R22,5 18 Lonas</small>
+            <strong>R$ ${(item.price * item.qtd).toFixed(2)}</strong>
+            <select data-index="${index}">
+              ${Array.from({length: 10}, (_, i) => `<option value="${i+1}" ${item.qtd===i+1?'selected':''}>${i+1}</option>`).join('')}
+            </select>
+            <button class="remove-item" data-index="${index}">&times;</button>
           </div>
-        </td>
-        <td><button class="remove" onclick="remover(${index})">&times;</button></td>
-        <td>
-          <select onchange="mudarQtd(${index}, this.value)">
-            ${Array.from({length: 10}, (_, i) => `<option ${item.qtd === i+1 ? 'selected' : ''}>${i+1}</option>`).join('')}
-          </select>
-        </td>
-        <td>R$ ${item.price.toFixed(2)}</td>
-        <td>R$ ${(item.price * item.qtd).toFixed(2)}</td>
-      `;
-      table.appendChild(row);
-    });
-  }
+        `;
+        cartItems.appendChild(div);
+      });
 
-  function remover(index) {
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    if (cart.length === 0) window.location.href = 'index.html';
-    atualizarTabela();
-  }
+      document.querySelectorAll('.remove-item').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const index = e.target.dataset.index;
+          cart.splice(index, 1);
+          updateCart();
+        });
+      });
 
-  function mudarQtd(index, qtd) {
-    cart[index].qtd = parseInt(qtd);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    atualizarTabela();
-  }
+      document.querySelectorAll('select').forEach(sel => {
+        sel.addEventListener('change', e => {
+          const index = e.target.dataset.index;
+          cart[index].qtd = parseInt(e.target.value);
+          updateCart();
+        });
+      });
 
-  cepInput.addEventListener('input', () => {
-    const cleanCep = cepInput.value.replace(/\D/g, '');
-    if (cleanCep.length === 8) {
-      btnCalcular.classList.add('enabled');
-      btnCalcular.disabled = false;
-    } else {
-      btnCalcular.classList.remove('enabled');
-      btnCalcular.disabled = true;
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
-  });
 
-  btnCalcular.addEventListener('click', () => {
-    if (btnCalcular.disabled) return;
-    freteInfo.style.display = 'block';
-  });
+    document.querySelector('.btn-buy').addEventListener('click', () => {
+      const name = 'ECOWAY B1 (LISO)';
+      const price = 979;
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        if (existing.qtd < 10) existing.qtd++;
+      } else {
+        cart.push({ name, price, qtd: 1 });
+      }
+      updateCart();
+    });
 
-  document.getElementById('btnContinuar').addEventListener('click', () => {
-    alert('Próxima etapa (Identificação)');
-  });
+    cartBtn.addEventListener('click', () => {
+      if (cart.length === 0) return;
+      cartPanel.style.display = cartPanel.style.display === 'flex' ? 'none' : 'flex';
+    });
 
-  cart.forEach(item => item.qtd = item.qtd || 1);
-  atualizarTabela();
-</script>
+    continueBtn.addEventListener('click', () => {
+      if (cart.length === 0) return;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'carrinho.html';
+    });
+
+    updateCart();
+  </script>
 </body>
 </html>
