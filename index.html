@@ -12,6 +12,8 @@
       background-color: #f4f4f4;
       color: #333;
     }
+
+    /* Cabeçalho */
     header {
       background: #fff;
       display: flex;
@@ -23,13 +25,13 @@
       top: 0;
       z-index: 1000;
     }
+
     .logo {
-      display: flex;
-      align-items: center;
       font-weight: 700;
       font-size: 1.4rem;
       color: #d60000;
     }
+
     .search-bar {
       flex: 1;
       margin: 0 40px;
@@ -38,6 +40,7 @@
       border-radius: 5px;
       overflow: hidden;
     }
+
     .search-bar input {
       flex: 1;
       border: none;
@@ -46,6 +49,7 @@
       background: none;
       font-size: 0.95rem;
     }
+
     .search-bar button {
       background: #d60000;
       border: none;
@@ -54,15 +58,19 @@
       cursor: pointer;
       font-weight: 600;
     }
+
     .cart {
       font-weight: 600;
       color: #333;
       cursor: pointer;
     }
+
+    /* Layout principal */
     main {
       display: flex;
       padding: 30px 40px;
     }
+
     aside {
       width: 240px;
       background: white;
@@ -71,22 +79,25 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
       height: fit-content;
     }
+
     aside h3 {
       font-size: 1rem;
       margin-bottom: 10px;
       color: #111;
     }
+
     aside ul {
       list-style: none;
       padding: 0;
     }
+
     aside ul li {
       margin: 8px 0;
       font-size: 0.95rem;
       cursor: pointer;
     }
 
-    /* --- CARDS --- */
+    /* Cards de produtos */
     .product-grid {
       flex: 1;
       margin-left: 30px;
@@ -94,6 +105,7 @@
       flex-direction: column;
       gap: 25px;
     }
+
     .product-card {
       background: #fff;
       display: flex;
@@ -104,10 +116,12 @@
       padding: 20px;
       transition: 0.2s;
     }
+
     .product-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 4px 10px rgba(0,0,0,0.12);
     }
+
     .product-card img {
       width: auto;
       height: 180px;
@@ -118,42 +132,50 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       padding: 6px;
     }
+
     .product-info {
       flex: 1;
     }
+
     .product-info h2 {
       font-weight: 700;
       font-size: 1.3rem;
       margin: 0;
     }
+
     .product-info h3 {
       font-weight: 600;
       font-size: 1rem;
       margin: 5px 0 10px;
       color: #7b7b7b;
     }
+
     .product-info p {
       font-size: 0.95rem;
       margin: 5px 0;
       color: #555;
     }
+
     .price {
       font-size: 1.3rem;
       color: #000;
       font-weight: 700;
       margin-top: 10px;
     }
+
     .price small {
       display: block;
       color: #777;
       font-size: 0.85rem;
       margin-top: 3px;
     }
+
     .actions {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
+
     .details-btn, .buy-btn {
       padding: 10px 20px;
       border: none;
@@ -162,20 +184,25 @@
       cursor: pointer;
       transition: 0.2s;
     }
+
     .details-btn {
       background: #f2f2f2;
       color: #000;
     }
+
     .details-btn:hover {
       background: #e1e1e1;
     }
+
     .buy-btn {
       background: #007f2d;
       color: #fff;
     }
+
     .buy-btn:hover {
       background: #006a26;
     }
+
     footer {
       background: #222;
       color: #eee;
@@ -187,6 +214,8 @@
   </style>
 </head>
 <body>
+
+  <!-- Cabeçalho -->
   <header>
     <div class="logo">XBRI</div>
     <div class="search-bar">
@@ -196,6 +225,7 @@
     <div class="cart">🛒 Carrinho</div>
   </header>
 
+  <!-- Corpo principal -->
   <main>
     <aside>
       <h3>Filtros</h3>
@@ -212,7 +242,7 @@
 
     <section class="product-grid">
       <div class="product-card">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAiYAAAImCAIAAADorNYRAAAQAElEQVR4Aez9ebBn2VUfep7hN94h7805syqzZknIAgzGDcgM9jPDa0I20PYL29jhCDvabaK7wy86gn+63c8GY3jwmIUQGIQGJEEJEEJzzap5yqrKrMqasnKeKqebd/7d33iG9/ndLe7LV0gyFCnVdG58..." alt="Pneu ECOWAY B1 (LISO)" />
+        <img src="images/ecoway-b1.jpg" alt="Pneu ECOWAY B1 (LISO)">
         <div class="product-info">
           <h2>275/80R22,5 18 LONAS 149/146M</h2>
           <h3>ECOWAY B1 (LISO)</h3>
@@ -233,5 +263,6 @@
   <footer>
     © 2025 Loja Oficial XBRI — Todos os direitos reservados.
   </footer>
+
 </body>
 </html>
