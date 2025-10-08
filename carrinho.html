@@ -47,6 +47,23 @@
       padding: 12px;
       border-bottom: 1px solid #eee;
       text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      font-weight: 600;
+    }
+
+    .product-cell {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .product-cell img {
+      width: 100px;
+      height: auto;
+      border-radius: 8px;
     }
 
     select {
@@ -180,7 +197,13 @@
     cart.forEach((item, index) => {
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td>${item.name}</td>
+        <td class="product-cell">
+          <img src="images/ecoway-b1.jpg" alt="Pneu ${item.name}">
+          <div>
+            <strong>${item.name}</strong><br>
+            <small>Código: 275/80R22,5 18 Lonas</small>
+          </div>
+        </td>
         <td><button class="remove" onclick="remover(${index})">&times;</button></td>
         <td>
           <select onchange="mudarQtd(${index}, this.value)">
