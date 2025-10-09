@@ -3,115 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Identificação - XBRI Pneus</title>
+<title>Identificação - Tchê Pneus</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --vermelho: #d60000;
-  --verde: #008b2f;
-  --cinza: #f4f4f4;
+  --verde: #009b48;
+  --verde-hover: #007c3b;
+  --cinza: #f5f5f5;
   --texto: #333;
-  --preto: #111;
 }
+
 body {
   font-family: 'Poppins', sans-serif;
   background: var(--cinza);
   color: var(--texto);
   margin: 0;
 }
+
 header {
   background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 40px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 15px 30px;
 }
+
 header h1 {
   color: var(--vermelho);
-  font-size: 22px;
   margin: 0;
-}
-.container {
-  max-width: 700px;
-  margin: 40px auto;
-  background: #fff;
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-h2 {
-  margin-top: 0;
   font-size: 22px;
+  font-weight: 700;
+}
+
+main {
+  max-width: 750px;
+  margin: 50px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  padding: 30px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
   color: var(--texto);
 }
+
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
 }
-label {
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-input, select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 15px;
-  width: 100%;
-}
-input:focus {
-  border-color: var(--verde);
-  outline: none;
-}
+
 .row {
   display: flex;
   gap: 15px;
 }
-.row .col {
+
+.col {
   flex: 1;
 }
+
+label {
+  font-weight: 600;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus {
+  border-color: var(--verde);
+  outline: none;
+}
+
 button {
   background: var(--verde);
   color: #fff;
   border: none;
-  padding: 12px;
   border-radius: 6px;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
+  padding: 14px;
   transition: background 0.3s;
 }
+
 button:hover {
-  background: #006a24;
+  background: var(--verde-hover);
 }
+
 button:disabled {
   background: #ccc;
   cursor: not-allowed;
 }
+
+.error {
+  color: var(--vermelho);
+  font-size: 14px;
+}
+
 footer {
-  background: var(--preto);
+  background: #111;
   color: #eee;
   text-align: center;
   padding: 15px 0;
   margin-top: 40px;
-}
-.error {
-  color: var(--vermelho);
-  font-size: 13px;
-  margin-top: -10px;
+  font-size: 14px;
 }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>XBRI</h1>
+  <h1>Tchê Pneus</h1>
   <div>Identificação do Cliente</div>
 </header>
 
-<div class="container">
+<main>
   <h2>Identifique-se para continuar</h2>
   <form id="identForm">
     <div class="row">
@@ -165,17 +185,16 @@ footer {
 
     <button type="submit" id="continuarBtn">CONTINUAR</button>
   </form>
-</div>
+</main>
 
-<footer>© 2025 XBRI Pneus - Todos os direitos reservados</footer>
+<footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
 
 <script>
 const form = document.getElementById('identForm');
 const erro = document.getElementById('erro');
-
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-
+  
   const nome = document.getElementById('nome').value.trim();
   const sobrenome = document.getElementById('sobrenome').value.trim();
   const telefone = document.getElementById('telefone').value.trim();
@@ -189,7 +208,6 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
-  // validação básica do CEP (8 dígitos)
   const cepLimpo = cep.replace(/\D/g, '');
   if (cepLimpo.length !== 8) {
     erro.textContent = 'Digite um CEP válido.';
@@ -201,7 +219,6 @@ form.addEventListener('submit', (e) => {
   const dados = { nome, sobrenome, telefone, cidade, estado, cep, endereco };
   localStorage.setItem('dadosCliente', JSON.stringify(dados));
 
-  // Redireciona para a página de confirmação
   window.location.href = 'confirmacao.html';
 });
 </script>
