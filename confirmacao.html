@@ -1,227 +1,121 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Confirmação do Pedido - XBRI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      color: #333;
-    }
-
-    header {
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 40px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
-      color: #d60000;
-      font-size: 22px;
-      margin: 0;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      padding: 30px 40px;
-    }
-
-    h2 {
-      text-align: center;
-      font-size: 24px;
-      color: #222;
-    }
-
-    .info-box {
-      background: #f9f9f9;
-      border-left: 5px solid #008b2f;
-      padding: 20px;
-      border-radius: 6px;
-      margin-bottom: 25px;
-    }
-
-    .info-box strong {
-      color: #008b2f;
-    }
-
-    .section-title {
-      font-weight: 700;
-      font-size: 18px;
-      margin-top: 20px;
-      color: #222;
-    }
-
-    .dados, .pedido {
-      background: #f9f9f9;
-      padding: 20px;
-      border-radius: 6px;
-      margin-top: 10px;
-    }
-
-    .dados p, .pedido p {
-      margin: 6px 0;
-      font-size: 14px;
-    }
-
-    .pedido-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #ddd;
-      padding: 10px 0;
-    }
-
-    .pedido-item img {
-      width: 80px;
-      height: auto;
-      border-radius: 6px;
-    }
-
-    .pedido-item .info {
-      flex: 1;
-      margin-left: 15px;
-    }
-
-    .pedido-item .info h4 {
-      margin: 0;
-      font-size: 15px;
-    }
-
-    .total {
-      font-size: 18px;
-      text-align: right;
-      margin-top: 15px;
-      font-weight: 700;
-    }
-
-    .btn-whatsapp {
-      display: block;
-      background: #008b2f;
-      color: #fff;
-      text-align: center;
-      font-weight: 700;
-      border: none;
-      border-radius: 6px;
-      padding: 14px;
-      text-decoration: none;
-      font-size: 16px;
-      margin-top: 25px;
-      transition: background 0.3s;
-    }
-
-    .btn-whatsapp:hover {
-      background: #00a63a;
-    }
-
-    footer {
-      background: #111;
-      color: #eee;
-      text-align: center;
-      padding: 15px 0;
-      margin-top: 50px;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Confirmação do Pedido — Tchê Pneus</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<style>
+:root{--red:#d60000;--green:#009b48;--green-hover:#007a39;--bg:#f5f5f5;--text:#333}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,sans-serif;background:var(--bg);color:var(--text)}
+header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.header-inner{max-width:900px;margin:0 auto;padding:14px 20px;display:flex;align-items:center}
+.brand{color:var(--red);font-weight:700;font-size:22px}
+main{max-width:900px;margin:28px auto;padding:0 20px;display:grid;gap:18px}
+.card{background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:18px}
+h2{margin:6px 0 12px}
+.section-title{font-weight:700;margin-bottom:8px}
+.summary-row{display:flex;gap:10px;justify-content:space-between;border-bottom:1px solid #eee;padding:10px 0}
+.summary-row img{width:64px;height:64px;object-fit:contain;border-radius:8px;background:#fff}
+.total{font-weight:700;text-align:right;margin-top:10px}
+.notice{background:#fff8e6;border:1px solid #ffe1a7;color:#8a6100;border-radius:10px;padding:12px;line-height:1.5}
+.btn{width:100%;border:none;border-radius:10px;padding:12px 14px;background:var(--green);color:#fff;font-weight:700;cursor:pointer;margin-top:10px}
+.btn:hover{background:var(--green-hover)}
+footer{color:#666;text-align:center;padding:24px 10px}
+/* mobile */
+@media (max-width:720px){
+  .summary-row{flex-direction:column;align-items:flex-start}
+  .total{text-align:left}
+}
+</style>
 </head>
 <body>
+<header><div class="header-inner"><div class="brand">Tchê Pneus</div><div style="margin-left:auto">Confirmação</div></div></header>
 
-  <header>
-    <h1>XBRI</h1>
-    <span><strong>Confirmação do Pedido</strong></span>
-  </header>
-
-  <div class="container">
-    <div class="info-box">
-      <p><strong>Estamos quase lá! 🚚</strong><br>
-      Para que o pagamento seja realizado com segurança na entrega, você precisa <strong>baixar o aplicativo da transportadora</strong>.<br><br>
-      É por lá que você vai <strong>confirmar sua titularidade</strong>, <strong>gerar o código de rastreio</strong>, <strong>acompanhar o trajeto do pedido em tempo real</strong> e <strong>receber o QR Code de entrega</strong> — que será escaneado pelo motorista no momento da entrega.<br><br>
-      Toque abaixo para <strong>confirmar seu pedido e receber as instruções no WhatsApp</strong>:</p>
-    </div>
-
-    <h2>Resumo do Pedido</h2>
-
-    <div class="pedido" id="pedidoResumo"></div>
-
-    <h2>Dados do Cliente</h2>
-    <div class="dados" id="dadosCliente"></div>
-
-    <a id="btnWhats" href="#" class="btn-whatsapp" target="_blank">
-      CONFIRMAR PEDIDO NO WHATSAPP
-    </a>
+<main>
+  <div class="card" id="clienteBox">
+    <h2>Dados do cliente</h2>
+    <div id="cliente"></div>
   </div>
 
-  <footer>
-    © 2025 XBRI Pneus - Todos os direitos reservados
-  </footer>
+  <div class="card">
+    <h2>Resumo do pedido</h2>
+    <div id="resumo"></div>
+    <div id="total" class="total"></div>
+  </div>
 
-  <script>
-    // Pega dados do cliente e do carrinho
-    const cliente = JSON.parse(localStorage.getItem("dadosCliente"));
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  <div class="card">
+    <div class="section-title">Atenção para o pagamento na entrega</div>
+    <div class="notice"><strong>Para efetuar o pagamento na entrega</strong>, será necessário baixar o aplicativo da transportadora para verificação de titularidade, gerar o código de rastreio, acompanhar a entrega em tempo real e obter o <strong>QR CODE</strong> que será escaneado pelo entregador.</div>
+    <button id="whats" class="btn">Confirmar pedido no WhatsApp</button>
+  </div>
+</main>
 
-    // Se estiver vazio, redireciona pra index
-    if (!cliente || carrinho.length === 0) {
-      window.location.href = "index.html";
-    }
+<footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
 
-    // Exibe dados do cliente
-    document.getElementById("dadosCliente").innerHTML = `
-      <p><strong>Nome:</strong> ${cliente.nome} ${cliente.sobrenome}</p>
-      <p><strong>Telefone:</strong> ${cliente.telefone}</p>
-      <p><strong>Cidade:</strong> ${cliente.cidade}</p>
-      <p><strong>Estado:</strong> ${cliente.estado}</p>
-      <p><strong>CEP:</strong> ${cliente.cep}</p>
-      <p><strong>Endereço:</strong> ${cliente.endereco}</p>
-    `;
+<script>
+const BRL=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+function getCart(){ try{ return JSON.parse(localStorage.getItem('cart'))||[] }catch{ return [] } }
 
-    // Exibe os produtos do carrinho
-    const pedidoDiv = document.getElementById("pedidoResumo");
-    let total = 0;
+const clienteBox=document.getElementById('cliente');
+const resumo=document.getElementById('resumo');
+const totalEl=document.getElementById('total');
+const whats=document.getElementById('whats');
 
-    carrinho.forEach(produto => {
-      const subtotal = produto.price * produto.quantity;
-      total += subtotal;
+function toNum(n){ return typeof n==='number'? n : Number(String(n).replace(/[^\d,.-]/g,'').replace(',', '.'))||0; }
 
-      const itemHTML = `
-        <div class="pedido-item">
-          <img src="${produto.image}" alt="${produto.name}">
-          <div class="info">
-            <h4>${produto.name}</h4>
-            <p>Quantidade: ${produto.quantity}</p>
-            <p>Valor unitário: R$ ${produto.price.toFixed(2)}</p>
-          </div>
-          <p><strong>R$ ${subtotal.toFixed(2)}</strong></p>
+function render(){
+  const dados=JSON.parse(localStorage.getItem('dadosCliente')||'null');
+  const cart=getCart();
+
+  if(!dados){ window.location.href='identificacao.html'; return; }
+  if(cart.length===0){ window.location.href='index.html'; return; }
+
+  clienteBox.innerHTML = `
+    <div><strong>Nome:</strong> ${dados.nome} ${dados.sobrenome}</div>
+    <div><strong>Telefone:</strong> ${dados.telefone}</div>
+    <div><strong>Cidade/UF:</strong> ${dados.cidade} - ${dados.estado}</div>
+    <div><strong>CEP:</strong> ${dados.cep}</div>
+    <div><strong>Endereço:</strong> ${dados.endereco}</div>
+  `;
+
+  resumo.innerHTML='';
+  let total=0;
+  cart.forEach(it=>{
+    const unit=toNum(it.price), qty=Number(it.quantity||1), sub=unit*qty; total+=sub;
+    const row=document.createElement('div');
+    row.className='summary-row';
+    row.innerHTML=`
+      <div style="display:flex;gap:10px;align-items:center">
+        <img src="${it.image}" alt="${it.name}">
+        <div>
+          <div><strong>${it.name}</strong></div>
+          <div>Unitário: ${BRL.format(unit)} • Qtd: ${qty}</div>
         </div>
-      `;
-      pedidoDiv.insertAdjacentHTML("beforeend", itemHTML);
-    });
+      </div>
+      <div style="align-self:center"><strong>${BRL.format(sub)}</strong></div>
+    `;
+    resumo.appendChild(row);
+  });
+  totalEl.textContent='Total: '+BRL.format(total);
+}
 
-    pedidoDiv.insertAdjacentHTML("beforeend", `
-      <p class="total">Total do pedido: <strong>R$ ${total.toFixed(2)}</strong></p>
-    `);
+whats.addEventListener('click', ()=>{
+  const dados=JSON.parse(localStorage.getItem('dadosCliente')||'{}');
+  const cart = getCart();
+  const total = cart.reduce((s,it)=> s + (toNum(it.price)*Number(it.quantity||1)), 0);
+  const itens = cart.map(it=>`${it.name} x${it.quantity} (${BRL.format(toNum(it.price))})`).join(' | ');
+  const msg = encodeURIComponent(
+    `Olá, quero confirmar meu pedido.\n\nItens: ${itens}\nTotal: ${BRL.format(total)}\n\nDados:\n${dados.nome} ${dados.sobrenome}\n${dados.telefone}\n${dados.endereco} - ${dados.cidade}/${dados.estado}\nCEP: ${dados.cep}`
+  );
+  window.location.href = `https://wa.me/5511921905799?text=${msg}`;
+});
 
-    // Gera mensagem pro WhatsApp
-    const mensagem = encodeURIComponent(
-      `🚚 *Confirmação de Pedido XBRI*\n\n` +
-      `👤 *Cliente:* ${cliente.nome} ${cliente.sobrenome}\n📞 *Telefone:* ${cliente.telefone}\n🏙️ *Cidade:* ${cliente.cidade}/${cliente.estado}\n🏠 *Endereço:* ${cliente.endereco}\n📦 *CEP:* ${cliente.cep}\n\n` +
-      `🛞 *Itens do Pedido:*\n` +
-      carrinho.map(p => `- ${p.name} (Qtd: ${p.quantity}) — R$ ${(p.price * p.quantity).toFixed(2)}`).join("\n") +
-      `\n\n💰 *Total:* R$ ${total.toFixed(2)}\n\n✅ Desejo confirmar meu pedido e receber as instruções da entrega.`
-    );
-
-    document.getElementById("btnWhats").href = `https://wa.me/5511921905799?text=${mensagem}`;
-  </script>
-
+window.addEventListener('DOMContentLoaded', render);
+</script>
 </body>
 </html>
