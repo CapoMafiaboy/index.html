@@ -1,200 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Identificação - Tchê Pneus</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Identificação — Tchê Pneus</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <style>
-:root {
-  --vermelho: #d60000;
-  --verde: #009b48;
-  --verde-hover: #007c3b;
-  --cinza: #f5f5f5;
-  --texto: #333;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: var(--cinza);
-  color: var(--texto);
-  margin: 0;
-}
-
-header {
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 30px;
-}
-
-header h1 {
-  color: var(--vermelho);
-  margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-}
-
-main {
-  max-width: 750px;
-  margin: 50px auto;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  padding: 30px;
-}
-
-h2 {
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: var(--texto);
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.row {
-  display: flex;
-  gap: 15px;
-}
-
-.col {
-  flex: 1;
-}
-
-label {
-  font-weight: 600;
-  font-size: 14px;
-  display: block;
-  margin-bottom: 5px;
-}
-
-input, select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 15px;
-  transition: border-color 0.2s ease;
-}
-
-input:focus, select:focus {
-  border-color: var(--verde);
-  outline: none;
-}
-
-button {
-  background: var(--verde);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 14px;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: var(--verde-hover);
-}
-
-button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-.error {
-  color: var(--vermelho);
-  font-size: 14px;
-}
-
-footer {
-  background: #111;
-  color: #eee;
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 40px;
-  font-size: 14px;
-}
+:root{--red:#d60000;--green:#009b48;--green-hover:#007a39;--bg:#f5f5f5;--text:#333}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,sans-serif;background:var(--bg);color:var(--text)}
+header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.header-inner{max-width:900px;margin:0 auto;padding:14px 20px;display:flex;align-items:center}
+.brand{color:var(--red);font-weight:700;font-size:22px}
+main{max-width:760px;margin:28px auto;padding:0 20px}
+.card{background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:18px}
+h2{margin:6px 0 16px;text-align:center}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.col{flex:1 min(320px,100%)}
+label{font-weight:600;display:block;margin:8px 0 6px}
+input,select{width:100%;padding:10px;border:1px solid #ccc;border-radius:10px}
+.btn{width:100%;border:none;border-radius:10px;padding:12px 14px;background:var(--green);color:#fff;font-weight:700;cursor:pointer}
+.btn:hover{background:var(--green-hover)}
+.error{color:var(--red);font-size:14px;margin-top:6px}
+footer{color:#666;text-align:center;padding:24px 10px}
 </style>
 </head>
 <body>
-
-<header>
-  <h1>Tchê Pneus</h1>
-  <div>Identificação do Cliente</div>
-</header>
+<header><div class="header-inner"><div class="brand">Tchê Pneus</div><div style="margin-left:auto">Identificação</div></div></header>
 
 <main>
-  <h2>Identifique-se para continuar</h2>
-  <form id="identForm">
-    <div class="row">
-      <div class="col">
-        <label for="nome">Nome*</label>
-        <input type="text" id="nome" required>
+  <div class="card">
+    <h2>Identifique-se para continuar</h2>
+    <form id="form">
+      <div class="row">
+        <div class="col">
+          <label for="nome">Nome*</label>
+          <input id="nome" required>
+        </div>
+        <div class="col">
+          <label for="sobrenome">Sobrenome*</label>
+          <input id="sobrenome" required>
+        </div>
       </div>
-      <div class="col">
-        <label for="sobrenome">Sobrenome*</label>
-        <input type="text" id="sobrenome" required>
-      </div>
-    </div>
 
-    <div>
-      <label for="telefone">Número de telefone (WhatsApp)*</label>
-      <input type="tel" id="telefone" placeholder="(11) 99999-9999" required>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <label for="cidade">Cidade*</label>
-        <input type="text" id="cidade" required>
+      <div class="row">
+        <div class="col">
+          <label for="telefone">Número de telefone (WhatsApp)*</label>
+          <input id="telefone" placeholder="(11) 99999-9999" required>
+        </div>
+        <div class="col">
+          <label for="cidade">Cidade*</label>
+          <input id="cidade" required>
+        </div>
       </div>
-      <div class="col">
-        <label for="estado">Estado*</label>
-        <select id="estado" required>
-          <option value="">Selecione</option>
-          <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
-          <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
-          <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
-          <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
-          <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
-          <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
-          <option>SP</option><option>SE</option><option>TO</option>
-        </select>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col">
-        <label for="cep">CEP*</label>
-        <input type="text" id="cep" placeholder="00000-000" required>
+      <div class="row">
+        <div class="col">
+          <label for="estado">Estado*</label>
+          <select id="estado" required>
+            <option value="">Selecione</option>
+            <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+            <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+            <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+            <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+            <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+            <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+            <option>SP</option><option>SE</option><option>TO</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="cep">CEP*</label>
+          <input id="cep" placeholder="00000-000" required>
+        </div>
       </div>
-      <div class="col">
-        <label for="endereco">Endereço*</label>
-        <input type="text" id="endereco" placeholder="Rua, número, complemento" required>
+
+      <div class="row">
+        <div class="col" style="flex:1 1 100%">
+          <label for="endereco">Endereço*</label>
+          <input id="endereco" placeholder="Rua, número, complemento" required>
+        </div>
       </div>
-    </div>
 
-    <p id="erro" class="error"></p>
-
-    <button type="submit" id="continuarBtn">CONTINUAR</button>
-  </form>
+      <div id="erro" class="error"></div>
+      <button class="btn" type="submit">CONTINUAR</button>
+    </form>
+  </div>
 </main>
 
 <footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
 
 <script>
-const form = document.getElementById('identForm');
+function getCart(){ try{ return JSON.parse(localStorage.getItem('cart'))||[] }catch{ return [] } }
+const form = document.getElementById('form');
 const erro = document.getElementById('erro');
-form.addEventListener('submit', (e) => {
+
+form.addEventListener('submit', (e)=>{
   e.preventDefault();
-  
+  // impede seguir sem itens
+  if(getCart().length===0){ erro.textContent='Seu carrinho está vazio.'; setTimeout(()=>location.href='index.html', 1000); return; }
+
   const nome = document.getElementById('nome').value.trim();
   const sobrenome = document.getElementById('sobrenome').value.trim();
   const telefone = document.getElementById('telefone').value.trim();
@@ -203,25 +110,16 @@ form.addEventListener('submit', (e) => {
   const cep = document.getElementById('cep').value.trim();
   const endereco = document.getElementById('endereco').value.trim();
 
-  if (!nome || !sobrenome || !telefone || !cidade || !estado || !cep || !endereco) {
-    erro.textContent = 'Preencha todos os campos obrigatórios.';
-    return;
+  if(!nome||!sobrenome||!telefone||!cidade||!estado||!cep||!endereco){
+    erro.textContent='Preencha todos os campos obrigatórios.'; return;
   }
-
-  const cepLimpo = cep.replace(/\D/g, '');
-  if (cepLimpo.length !== 8) {
-    erro.textContent = 'Digite um CEP válido.';
-    return;
-  }
-
-  erro.textContent = '';
+  const cep8 = cep.replace(/\D/g,'');
+  if(cep8.length!==8){ erro.textContent='Digite um CEP válido.'; return; }
 
   const dados = { nome, sobrenome, telefone, cidade, estado, cep, endereco };
   localStorage.setItem('dadosCliente', JSON.stringify(dados));
-
-  window.location.href = 'confirmacao.html';
+  setTimeout(()=>{ window.location.href='confirmacao.html'; }, 60);
 });
 </script>
-
 </body>
 </html>
