@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carrinho - Tchê Pneus</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --vermelho: #d60000;
-  --verde: #009b48;
-  --verde-hover: #007a39;
-  --cinza: #f5f5f5;
-  --preto: #111;
+  --verde: #008b2f;
+  --cinza: #f4f4f4;
   --texto: #333;
+  --preto: #111;
 }
-* { box-sizing: border-box; }
 body {
   font-family: 'Poppins', sans-serif;
   background: var(--cinza);
@@ -24,90 +22,93 @@ body {
 header {
   background: #fff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px 28px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  justify-content: space-between;
+  padding: 15px 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-header h1 { color: var(--vermelho); font-size: 22px; margin: 0; }
-main {
-  max-width: 920px;
-  margin: 38px auto;
+header h1 {
+  color: var(--vermelho);
+  font-size: 22px;
+  margin: 0;
+}
+.container {
+  max-width: 900px;
+  margin: 40px auto;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.08);
-  padding: 26px;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 h2 {
-  margin: 0 0 18px;
   text-align: center;
   font-size: 22px;
+  color: var(--texto);
 }
-.cart-item {
-  display: grid;
-  grid-template-columns: 100px 1fr auto;
-  gap: 16px;
-  align-items: center;
-  padding: 16px 0;
-  border-bottom: 1px solid #eee;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
-.cart-item img {
-  width: 100px; height: auto; border-radius: 8px; background: #fff;
+th, td {
+  text-align: left;
+  padding: 10px;
 }
-.item-info h3 { margin: 0; font-size: 16px; font-weight: 600; }
-.item-info p { margin: 6px 0 0; color:#666; font-size: 14px; }
-.item-actions {
-  display:flex; align-items:center; gap:10px; justify-content:flex-end;
+th {
+  border-bottom: 2px solid #eee;
 }
-.qty-select {
-  padding: 6px 8px; border:1px solid #ccc; border-radius:6px; font-size:14px;
+td img {
+  width: 70px;
+  border-radius: 6px;
 }
-.item-price { font-weight:700; color:var(--verde); min-width:110px; text-align:right; }
 .remove-btn {
-  width:30px; height:30px; border-radius:50%;
-  border:1px solid #f1c2c2; color:#ff4a4a; background:#ffecec;
-  cursor:pointer; font-size:16px; line-height:28px; text-align:center;
+  background: none;
+  border: none;
+  color: var(--vermelho);
+  font-size: 20px;
+  cursor: pointer;
 }
-.remove-btn:hover { background:#ffd9d9; }
-.total { text-align:right; font-weight:700; margin-top:18px; font-size:18px; }
-
-.frete { margin-top:26px; }
-.frete label { display:block; font-weight:600; margin-bottom:8px; }
-.frete-row { display:flex; gap:10px; flex-wrap:wrap; }
-.frete input {
-  width:220px; padding:10px; border:1px solid #ccc; border-radius:8px; font-size:14px;
+.total {
+  text-align: right;
+  font-weight: 700;
+  margin-top: 10px;
 }
-.btn-calcular {
-  background:#ccc; color:#fff; border:none; padding:10px 14px;
-  border-radius:8px; font-weight:600; cursor:not-allowed; transition:.25s;
+button {
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
 }
-.btn-calcular.ativo { background:var(--verde); cursor:pointer; }
-.btn-calcular.ativo:hover { background:var(--verde-hover); }
-.resultado-frete { margin-top:10px; color:var(--verde); font-weight:600; font-size:14px; }
-
-.btn-continuar {
-  width:100%; padding:14px; margin-top:28px; border:none; border-radius:10px;
-  background:#ccc; color:#fff; font-weight:700; font-size:16px; cursor:not-allowed;
-  transition:.25s;
+button:hover { opacity: 0.9; }
+#continuar {
+  background: var(--verde);
+  color: #fff;
+  width: 100%;
 }
-.btn-continuar.ativo { background:var(--verde); cursor:pointer; }
-.btn-continuar.ativo:hover { background:var(--verde-hover); }
-
+#continuar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+#calcular {
+  background: var(--verde);
+  color: #fff;
+}
+#cep {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 200px;
+}
 footer {
-  background: var(--preto); color:#eee; text-align:center; padding:14px 0; margin-top:40px;
-  font-size:14px;
+  background: var(--preto);
+  color: #eee;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
 }
-
-@media (max-width: 768px) {
-  main { margin:20px; padding:20px; }
-  .cart-item { grid-template-columns:80px 1fr; }
-  .item-actions { grid-column: 1 / -1; justify-content:flex-start; }
-  .item-price { text-align:left; }
-  .total { text-align:center; }
-  .frete-row { flex-direction:column; }
-  .frete input { width:100%; }
-}
-@media (max-width:480px) { header { flex-direction:column; gap:8px; } }
 </style>
 </head>
 <body>
@@ -117,94 +118,145 @@ footer {
   <div>Seu carrinho</div>
 </header>
 
-<main>
+<div class="container">
   <h2>Resumo do Pedido</h2>
 
-  <div id="cartItems"></div>
-  <div id="total" class="total"></div>
+  <table id="cartTable">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Qtd</th>
+        <th>Valor Unitário</th>
+        <th>Subtotal</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="cartBody"></tbody>
+  </table>
 
-  <div class="frete">
-    <label for="cep">Calcule o frete</label>
-    <div class="frete-row">
-      <input type="text" id="cep" placeholder="Digite seu CEP" />
-      <button id="btnCalcular" class="btn-calcular">Calcular</button>
-    </div>
-    <div id="resultadoFrete" class="resultado-frete"></div>
+  <div class="total" id="totalContainer"></div>
+
+  <div style="margin-top:20px;">
+    <label for="cep"><b>Calcule o frete</b></label><br>
+    <input type="text" id="cep" placeholder="Digite seu CEP">
+    <button id="calcular">Calcular</button>
+    <p id="freteInfo"></p>
   </div>
 
-  <button id="btnContinuar" class="btn-continuar">CONTINUAR</button>
-</main>
+  <button id="continuar" disabled>CONTINUAR</button>
+</div>
 
-<footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
+<footer>
+  © 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.
+</footer>
 
 <script>
-const cartContainer = document.getElementById('cartItems');
-const totalEl        = document.getElementById('total');
-const cepInput       = document.getElementById('cep');
-const btnCalcular    = document.getElementById('btnCalcular');
-const resFrete       = document.getElementById('resultadoFrete');
-const btnContinuar   = document.getElementById('btnContinuar');
+const cartBody = document.getElementById("cartBody");
+const totalContainer = document.getElementById("totalContainer");
+const continuarBtn = document.getElementById("continuar");
+const freteInfo = document.getElementById("freteInfo");
+const cepInput = document.getElementById("cep");
+const calcularBtn = document.getElementById("calcular");
 
-let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-let freteOk = false;
-
-// Formata BRL
-const BRL = new Intl.NumberFormat('pt-BR',{ style:'currency', currency:'BRL' });
-
-// Converte qualquer formato de preço (string/number) para número com ponto decimal
-function toNumber(val){
-  if (typeof val === 'number' && !isNaN(val)) return val;
-  if (typeof val === 'string'){
-    // remove tudo que não é dígito, vírgula ou ponto
-    let s = val.replace(/[^\d,.-]/g,'').trim();
-    // remove separadores de milhar
-    s = s.replace(/\.(?=\d{3}(\D|$))/g,'');
-    // vírgula decimal -> ponto
-    s = s.replace(',', '.');
-    const n = parseFloat(s);
-    if (!isNaN(n)) return n;
-  }
-  return 0;
+// --- Converte qualquer valor monetário para número real ---
+function toNumber(value) {
+  if (!value) return 0;
+  return parseFloat(value.toString().replace(/[^\d,.-]/g, "").replace(",", "."));
 }
 
-function updateContinueState(){
-  if (cart.length > 0 && freteOk){
-    btnContinuar.classList.add('ativo');
-    btnContinuar.disabled = false;
-  } else {
-    btnContinuar.classList.remove('ativo');
-    btnContinuar.disabled = true;
-  }
-}
+// --- Carrega produtos do localStorage ---
+function loadCart() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartBody.innerHTML = "";
 
-function renderCart(){
-  cartContainer.innerHTML = '';
-  let total = 0;
-
-  if (cart.length === 0){
-    cartContainer.innerHTML = '<p>Seu carrinho está vazio.</p>';
-    totalEl.textContent = '';
-    freteOk = false;
-    updateContinueState();
-    // Redireciona depois de 2s
-    setTimeout(()=>{ window.location.href = 'index.html'; }, 2000);
+  if (cart.length === 0) {
+    cartBody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:#888;">Seu carrinho está vazio.</td></tr>`;
+    totalContainer.textContent = "";
+    setTimeout(() => window.location.href = "index.html", 2000);
     return;
   }
 
-  cart.forEach((item, idx) => {
-    const unit = toNumber(item.price);       // robusto para "R$ 979,00", "979.00", 979 etc.
-    const qty  = Number(item.quantity || 1);
-    const subtotal = unit * qty;
-    total += subtotal;
+  cart.forEach((item, index) => {
+    const price = toNumber(item.price);
+    const quantity = item.quantity || 1;
+    const subtotal = price * quantity;
 
-    const row = document.createElement('div');
-    row.className = 'cart-item';
+    const row = document.createElement("tr");
     row.innerHTML = `
-      <img src="${item.image}" alt="${item.name}">
-      <div class="item-info">
-        <h3>${item.name}</h3>
-        <p>${BRL.format(unit)}</p>
-      </div>
-      <div class="item-actions">
-        <select class="qty-select" data-index="${idx}">
-          ${Array.from({length:10}, (_,i)=>`<option value="${i+1}" ${qty===i+
+      <td><img src="${item.image}" alt="${item.name}"> ${item.name}</td>
+      <td><input type="number" value="${quantity}" min="1" style="width:60px"></td>
+      <td>R$ ${price.toFixed(2)}</td>
+      <td>R$ ${(subtotal).toFixed(2)}</td>
+      <td><button class="remove-btn" data-index="${index}">✖</button></td>
+    `;
+    cartBody.appendChild(row);
+  });
+
+  updateTotal();
+}
+
+// --- Atualiza total ---
+function updateTotal() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let total = 0;
+  cart.forEach(item => total += toNumber(item.price) * (item.quantity || 1));
+  totalContainer.textContent = `Total: R$ ${total.toFixed(2)}`;
+}
+
+// --- Atualiza quantidades ---
+cartBody.addEventListener("input", e => {
+  if (e.target.type === "number") {
+    const index = Array.from(cartBody.children).indexOf(e.target.closest("tr"));
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart[index].quantity = parseInt(e.target.value);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+});
+
+// --- Remove produto ---
+cartBody.addEventListener("click", e => {
+  if (e.target.classList.contains("remove-btn")) {
+    const index = e.target.dataset.index;
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+});
+
+// --- Valida CEP e habilita botão ---
+let cepValido = false;
+calcularBtn.addEventListener("click", () => {
+  const cep = cepInput.value.replace(/\D/g, "");
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (cep.length !== 8) {
+    freteInfo.textContent = "Digite um CEP válido.";
+    freteInfo.style.color = "red";
+    cepValido = false;
+  } else if (cart.length === 0) {
+    freteInfo.textContent = "Carrinho vazio. Redirecionando...";
+    freteInfo.style.color = "red";
+    setTimeout(() => window.location.href = "index.html", 2000);
+    cepValido = false;
+  } else {
+    freteInfo.textContent = "FRETE GRÁTIS - Prazo de entrega: 4 a 5 dias úteis";
+    freteInfo.style.color = "black";
+    cepValido = true;
+  }
+
+  continuarBtn.disabled = !(cepValido && cart.length > 0);
+});
+
+// --- Continuar ---
+continuarBtn.addEventListener("click", () => {
+  if (cepValido) {
+    window.location.href = "identificacao.html";
+  }
+});
+
+loadCart();
+</script>
+</body>
+</html>
