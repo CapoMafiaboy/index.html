@@ -158,13 +158,11 @@ const freteInfo = document.getElementById("freteInfo");
 const cepInput = document.getElementById("cep");
 const calcularBtn = document.getElementById("calcular");
 
-// --- Converte qualquer valor monetário para número real ---
 function toNumber(value) {
   if (!value) return 0;
   return parseFloat(value.toString().replace(/[^\d,.-]/g, "").replace(",", "."));
 }
 
-// --- Carrega produtos do localStorage ---
 function loadCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   cartBody.innerHTML = "";
@@ -195,7 +193,6 @@ function loadCart() {
   updateTotal();
 }
 
-// --- Atualiza total ---
 function updateTotal() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   let total = 0;
@@ -203,18 +200,16 @@ function updateTotal() {
   totalContainer.textContent = `Total: R$ ${total.toFixed(2)}`;
 }
 
-// --- Atualiza quantidades ---
 cartBody.addEventListener("input", e => {
   if (e.target.type === "number") {
     const index = Array.from(cartBody.children).indexOf(e.target.closest("tr"));
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart[index].quantity = parseInt(e.target.value);
     localStorage.setItem("cart", JSON.stringify(cart));
-    loadCart();
+    updateTotal();
   }
 });
 
-// --- Remove produto ---
 cartBody.addEventListener("click", e => {
   if (e.target.classList.contains("remove-btn")) {
     const index = e.target.dataset.index;
@@ -225,7 +220,6 @@ cartBody.addEventListener("click", e => {
   }
 });
 
-// --- Valida CEP e habilita botão ---
 let cepValido = false;
 calcularBtn.addEventListener("click", () => {
   const cep = cepInput.value.replace(/\D/g, "");
@@ -249,14 +243,21 @@ calcularBtn.addEventListener("click", () => {
   continuarBtn.disabled = !(cepValido && cart.length > 0);
 });
 
-// --- Continuar ---
-continuarBtn.addEventListener("click", () => {
-  if (cepValido) {
+// ✅ NOVO FIX — garante salvamento antes de redirecionar
+continuarBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  if (cepValido && cart.length > 0) {
+    continuarBtn.disabled = true;
+    continuarBtn.textContent = "Salvando...";
+    await new Promise(r => setTimeout(r, 300)); // garante que localStorage foi escrito
     window.location.href = "identificacao.html";
   }
 });
 
 loadCart();
 </script>
+
 </body>
 </html>
+
