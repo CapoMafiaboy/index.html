@@ -1,326 +1,338 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XBRI Pneus - Loja Oficial</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --vermelho: #d60000;
-  --verde: #008b2f;
-  --cinza: #f4f4f4;
-  --texto: #333;
-  --preto: #111;
-}
-body {
-  font-family: 'Poppins', sans-serif;
-  background: var(--cinza);
-  color: var(--texto);
-  margin: 0;
-}
-header {
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 40px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-header h1 {
-  color: var(--vermelho);
-  font-size: 22px;
-  margin: 0;
-}
-.search-bar {
-  flex: 1;
-  margin: 0 20px;
-}
-.search-bar input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-}
-.cart-icon {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-weight: 600;
-}
-.cart-count {
-  background: var(--verde);
-  color: #fff;
-  border-radius: 50%;
-  font-size: 12px;
-  padding: 2px 6px;
-  margin-left: 5px;
-}
-.container {
-  display: flex;
-  margin: 30px;
-  gap: 20px;
-}
-.filters {
-  width: 200px;
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.product-card {
-  background: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  flex: 1;
-}
-.product-card img {
-  width: 180px;
-  height: auto;
-  border-radius: 8px;
-}
-.btn-buy {
-  background: var(--verde);
-  color: #fff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-.btn-buy:hover { background: #006a24; }
-.cart-panel {
-  position: fixed;
-  top: 75px;
-  right: 30px;
-  width: 340px;
-  background: #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  border-radius: 10px;
-  padding: 20px;
-  display: none;
-  flex-direction: column;
-  z-index: 1000;
-}
-.cart-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-.cart-item img {
-  width: 45px;
-  height: auto;
-  border-radius: 4px;
-  margin-right: 8px;
-}
-.cart-details {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.cart-details span {
-  font-size: 13px;
-  line-height: 1.3;
-}
-.cart-right {
-  text-align: right;
-}
-.cart-right select {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 3px;
-  font-size: 13px;
-  margin-top: 3px;
-}
-.remove-item {
-  background: none;
-  border: none;
-  color: var(--vermelho);
-  font-size: 18px;
-  cursor: pointer;
-}
-.total {
-  border-top: 1px solid #ddd;
-  padding-top: 10px;
-  margin-top: 10px;
-  text-align: right;
-  font-weight: 600;
-}
-.btn-continue {
-  background: var(--verde);
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 12px;
-  transition: background 0.3s;
-}
-.btn-continue:hover { background: #006a24; }
-.btn-continue:disabled { background: #ccc; cursor: not-allowed; }
-footer {
-  background: var(--preto);
-  color: #eee;
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 30px;
-}
-</style>
-</head>
-<body>
-
-<header>
-  <h1>XBRI</h1>
-  <div class="search-bar">
-    <input type="text" placeholder="Busque seu pneu...">
-  </div>
-  <div class="cart-icon" id="cartBtn">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></div>
-</header>
-
-<div class="container">
-  <div class="filters">
-    <h3>Filtros</h3>
-    <p>Aro 14</p><p>Aro 15</p><p>Aro 16</p><p>Aro 17</p><p>Aro 18</p><p>Aro 19</p><p>Aro 22,5</p>
-  </div>
-
-  <div class="product-card">
-    <img src="images/ecoway-b1.jpg" alt="Pneu ECOWAY B1 (LISO)">
-    <div>
-      <h2>275/80R22,5 18 LONAS 149/146M</h2>
-      <h3>ECOWAY B1 (LISO)</h3>
-      <p>Carga</p>
-      <p><strong>R$ 979,00</strong></p>
-    </div>
-    <button class="btn-buy" id="buyBtn">COMPRAR</button>
-  </div>
-</div>
-
-<div class="cart-panel" id="cartPanel">
-  <h3>Seu carrinho</h3>
-  <div id="cartItems"></div>
-  <div class="total" id="cartTotal"></div>
-  <button class="btn-continue" id="continueBtn" disabled>CONTINUAR</button>
-</div>
-
-<footer>© 2025 XBRI Pneus - Todos os direitos reservados</footer>
-
-<script>
-(function() {
-  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  const cartBtn = document.getElementById('cartBtn');
-  const cartPanel = document.getElementById('cartPanel');
-  const cartItems = document.getElementById('cartItems');
-  const cartCount = document.getElementById('cartCount');
-  const cartTotal = document.getElementById('cartTotal');
-  const continueBtn = document.getElementById('continueBtn');
-  const buyBtn = document.getElementById('buyBtn');
-
-  // renderiza o carrinho
-  function renderCart() {
-    cartItems.innerHTML = '';
-    if (cart.length === 0) {
-      cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
-      cartTotal.textContent = '';
-      continueBtn.disabled = true;
-      cartCount.textContent = 0;
-      return;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XBRI Pneus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --vermelho: #d60000;
+      --verde: #008b2f;
+      --cinza: #f4f4f4;
+      --texto: #333;
+      --preto: #111;
     }
-    continueBtn.disabled = false;
-    let total = 0;
-    cart.forEach((item, index) => {
-      total += item.price * item.qtd;
 
-      const div = document.createElement('div');
-      div.className = 'cart-item';
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: var(--cinza);
+      color: var(--texto);
+    }
 
-      const img = document.createElement('img');
-      img.src = 'images/ecoway-b1.jpg';
-      img.alt = item.name;
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 15px 40px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-      const info = document.createElement('div');
-      info.className = 'cart-details';
-      const span = document.createElement('span');
-      span.textContent = item.name;
-      info.appendChild(span);
+    header h1 {
+      color: var(--vermelho);
+      font-size: 24px;
+      margin: 0;
+    }
 
-      const right = document.createElement('div');
-      right.className = 'cart-right';
-      const price = document.createElement('strong');
-      price.textContent = 'R$ ' + (item.price * item.qtd).toFixed(2);
-      right.appendChild(price);
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-      const select = document.createElement('select');
-      for (let i = 1; i <= 10; i++) {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = i;
-        if (i === item.qtd) opt.selected = true;
-        select.appendChild(opt);
+    .search-bar input {
+      width: 300px;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .cart {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .cart-popup {
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background: white;
+      width: 320px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      display: none;
+      flex-direction: column;
+      z-index: 999;
+      padding: 20px;
+    }
+
+    .cart-popup.active {
+      display: flex;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .cart-total {
+      margin-top: 10px;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .btn-green {
+      background: var(--verde);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-green:hover {
+      background: #006a24;
+    }
+
+    footer {
+      background: var(--preto);
+      color: #eee;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 40px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      display: flex;
+      gap: 30px;
+    }
+
+    .sidebar {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      width: 250px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+      color: var(--preto);
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: var(--texto);
+    }
+
+    .product {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .product img {
+      width: 200px;
+    }
+
+    .product-info h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .product-info p {
+      margin: 5px 0;
+    }
+
+    .btn-buy {
+      background: var(--verde);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-buy:hover {
+      background: #006a24;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>XBRI</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Busque seu pneu..." />
+      <div class="cart" id="cartIcon">🛒 Carrinho <span id="cartCount">0</span></div>
+    </div>
+  </header>
+
+  <div class="cart-popup" id="cartPopup">
+    <h3>Seu carrinho</h3>
+    <div id="cartItemsContainer"></div>
+    <div class="cart-total" id="cartTotal">Total: R$ 0,00</div>
+    <button class="btn-green" id="btnContinuar">CONTINUAR</button>
+  </div>
+
+  <div class="container">
+    <div class="sidebar">
+      <h3>Filtros</h3>
+      <ul>
+        <li><a href="#">Aro 14</a></li>
+        <li><a href="#">Aro 15</a></li>
+        <li><a href="#">Aro 16</a></li>
+        <li><a href="#">Aro 17</a></li>
+        <li><a href="#">Aro 18</a></li>
+        <li><a href="#">Aro 19</a></li>
+        <li><a href="#">Aro 22,5</a></li>
+      </ul>
+    </div>
+
+    <div class="product">
+      <img src="https://i.ibb.co/G7gqTKx/pneu-xbri.png" alt="Pneu XBRI" />
+      <div class="product-info">
+        <h2>275/80R22,5 18 LONAS 149/146M</h2>
+        <p><strong>ECOWAY B1 (LISO)</strong></p>
+        <p>Carga</p>
+        <p><strong>R$ 979,00</strong></p>
+        <button class="btn-buy" id="btnComprar">COMPRAR</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2025 XBRI Pneus - Todos os direitos reservados</footer>
+
+  <script>
+    const cartIcon = document.getElementById('cartIcon');
+    const cartPopup = document.getElementById('cartPopup');
+    const btnComprar = document.getElementById('btnComprar');
+    const cartCount = document.getElementById('cartCount');
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const cartTotal = document.getElementById('cartTotal');
+    const btnContinuar = document.getElementById('btnContinuar');
+
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+    function atualizarCarrinho() {
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      cartCount.textContent = carrinho.reduce((acc, p) => acc + p.quantity, 0);
+      renderCartPopup();
+    }
+
+    function renderCartPopup() {
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+
+      if (carrinho.length === 0) {
+        cartItemsContainer.innerHTML = '<p>Seu carrinho está vazio.</p>';
+        btnContinuar.disabled = true;
+        btnContinuar.style.background = '#ccc';
+        return;
       }
-      select.addEventListener('change', () => {
-        cart[index].qtd = parseInt(select.value);
-        saveCart();
-      });
-      right.appendChild(select);
 
-      const remove = document.createElement('button');
-      remove.className = 'remove-item';
-      remove.textContent = '×';
-      remove.addEventListener('click', () => {
-        cart.splice(index, 1);
-        saveCart();
+      btnContinuar.disabled = false;
+      btnContinuar.style.background = '#008b2f';
+
+      carrinho.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <span>${item.name}</span>
+          <strong>R$ ${(item.price * item.quantity).toFixed(2)}</strong>
+          <select data-index="${index}">
+            ${Array.from({length:10},(_,i)=>`<option value="${i+1}" ${i+1===item.quantity?'selected':''}>${i+1}</option>`).join('')}
+          </select>
+          <span class="remove" style="color:red;cursor:pointer;" data-index="${index}">✖</span>
+        `;
+        cartItemsContainer.appendChild(div);
       });
 
-      div.appendChild(img);
-      div.appendChild(info);
-      div.appendChild(right);
-      div.appendChild(remove);
-      cartItems.appendChild(div);
+      cartTotal.textContent = `Total: R$ ${total.toFixed(2)}`;
+    }
+
+    btnComprar.addEventListener('click', () => {
+      const produto = {
+        name: 'ECOWAY B1 (LISO)',
+        price: 979,
+        image: 'https://i.ibb.co/G7gqTKx/pneu-xbri.png',
+        quantity: 1
+      };
+
+      const existente = carrinho.find(p => p.name === produto.name);
+      if (existente) {
+        if (existente.quantity < 10) existente.quantity++;
+      } else {
+        carrinho.push(produto);
+      }
+
+      atualizarCarrinho();
+      cartPopup.classList.add('active');
     });
 
-    cartTotal.textContent = 'Total: R$ ' + total.toFixed(2);
-    cartCount.textContent = cart.reduce((a,b)=>a+b.qtd,0);
-  }
+    cartIcon.addEventListener('click', () => {
+      cartPopup.classList.toggle('active');
+    });
 
-  function saveCart() {
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
-  }
+    cartItemsContainer.addEventListener('click', e => {
+      if (e.target.classList.contains('remove')) {
+        const index = e.target.dataset.index;
+        carrinho.splice(index, 1);
+        atualizarCarrinho();
+      }
+    });
 
-  // adiciona produto
-  buyBtn.addEventListener('click', () => {
-    const existing = cart.find(i => i.name === 'ECOWAY B1 (LISO)');
-    if (existing) {
-      if (existing.qtd < 10) existing.qtd++;
-    } else {
-      cart.push({ name: 'ECOWAY B1 (LISO)', price: 979, qtd: 1 });
-    }
-    saveCart();
-  });
+    cartItemsContainer.addEventListener('change', e => {
+      if (e.target.tagName === 'SELECT') {
+        const index = e.target.dataset.index;
+        carrinho[index].quantity = parseInt(e.target.value);
+        atualizarCarrinho();
+      }
+    });
 
-  // alterna visibilidade do carrinho (abre/fecha sempre)
-  cartBtn.addEventListener('click', () => {
-    cartPanel.style.display = cartPanel.style.display === 'flex' ? 'none' : 'flex';
-  });
+    // Redireciona corretamente para carrinho.html
+    btnContinuar.addEventListener('click', () => {
+      if (carrinho.length > 0) {
+        window.location.href = 'carrinho.html';
+      }
+    });
 
-  // botão continuar
-  continueBtn.addEventListener('click', () => {
-    if (cart.length > 0) window.location.href = 'carrinho.html';
-  });
-
-  renderCart();
-})();
-</script>
-
-
+    atualizarCarrinho();
+  </script>
 </body>
 </html>
-
