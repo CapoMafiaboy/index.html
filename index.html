@@ -3,33 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>XBRI Pneus - Premium</title>
+  <title>XBRI Pneus</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --fundo: #1b1b1b;
-      --preto: #0e0e0e;
-      --verde: #00a64f;
-      --verde-hover: #009145;
+      --branco: #f9f9f9;
+      --cinza-claro: #f1f1f1;
+      --cinza-texto: #555;
+      --verde: #009b48;
+      --verde-hover: #007c3b;
       --vermelho: #d60000;
-      --texto: #f2f2f2;
-      --cinza: #aaa;
+      --preto: #111;
     }
 
     * {
       box-sizing: border-box;
-      transition: 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: var(--fundo);
-      color: var(--texto);
+      background: linear-gradient(to bottom, #fff, #f5f5f5);
+      color: var(--preto);
     }
 
     header {
-      background: var(--preto);
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       padding: 15px 30px;
       display: flex;
       justify-content: space-between;
@@ -37,72 +38,76 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     }
 
     header h1 {
       color: var(--vermelho);
       margin: 0;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
+      letter-spacing: 1px;
     }
 
     .cart {
       cursor: pointer;
       font-weight: 600;
-      color: var(--texto);
+      color: var(--preto);
     }
 
     .container {
       max-width: 1200px;
-      margin: 40px auto;
+      margin: 50px auto;
       padding: 0 20px;
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
       justify-content: center;
+      gap: 25px;
     }
 
     .product-card {
-      background: #232323;
+      background: #fff;
       border-radius: 12px;
-      width: 330px;
-      padding: 20px;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 25px;
+      width: 340px;
       text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
     }
 
     .product-card img {
-      width: 220px;
+      width: 240px;
       height: auto;
       margin-bottom: 15px;
-      filter: brightness(0.95);
     }
 
     .product-card h2 {
       font-size: 18px;
-      margin: 5px 0;
-      color: var(--texto);
+      color: var(--preto);
+      font-weight: 700;
+      margin: 0;
     }
 
     .product-card h3 {
       font-size: 15px;
-      color: var(--cinza);
-      margin: 0 0 10px 0;
+      color: var(--cinza-texto);
+      margin-top: 5px;
+      font-weight: 600;
     }
 
-    .product-card .price {
+    .price {
       font-size: 20px;
       font-weight: 700;
-      margin-bottom: 10px;
-      color: #fff;
+      margin-top: 10px;
+      color: var(--preto);
     }
 
     .product-card small {
-      color: var(--cinza);
+      color: var(--cinza-texto);
     }
 
     .btn-buy {
@@ -110,37 +115,38 @@
       color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 10px 20px;
+      padding: 12px 24px;
       font-weight: 600;
       font-size: 15px;
       cursor: pointer;
-      margin-top: 10px;
-      box-shadow: 0 0 8px rgba(0,166,79,0.4);
+      margin-top: 12px;
+      box-shadow: 0 3px 10px rgba(0,155,72,0.25);
     }
 
     .btn-buy:hover {
       background: var(--verde-hover);
-      box-shadow: 0 0 12px rgba(0,166,79,0.6);
+      box-shadow: 0 4px 15px rgba(0,155,72,0.35);
     }
 
     footer {
-      background: var(--preto);
-      color: #aaa;
+      background: #fff;
+      color: var(--cinza-texto);
       text-align: center;
-      padding: 15px 0;
+      padding: 20px 0;
       margin-top: 40px;
       font-size: 14px;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
     }
 
     /* Carrinho Flutuante */
     .cart-popup {
       position: fixed;
       top: 80px;
-      right: 20px;
-      background: #2b2b2b;
+      right: 25px;
+      background: #fff;
       border-radius: 12px;
       width: 320px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
       display: none;
       flex-direction: column;
       z-index: 200;
@@ -158,7 +164,7 @@
     }
 
     .cart-popup h3 {
-      color: var(--texto);
+      color: var(--preto);
       margin: 0 0 10px 0;
       font-size: 17px;
       font-weight: 600;
@@ -168,20 +174,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #444;
+      border-bottom: 1px solid #eee;
       padding: 10px 0;
     }
 
     .cart-item img {
       width: 40px;
       height: 40px;
-      border-radius: 5px;
+      border-radius: 4px;
     }
 
     .cart-item span {
       flex: 1;
       margin-left: 10px;
-      color: var(--texto);
+      color: var(--preto);
       font-size: 14px;
     }
 
@@ -194,7 +200,7 @@
       text-align: right;
       margin-top: 10px;
       font-weight: 700;
-      color: #fff;
+      color: var(--preto);
     }
 
     .btn-green {
@@ -212,16 +218,11 @@
       background: var(--verde-hover);
     }
 
-    /* Responsividade */
+    /* Responsivo */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
         gap: 10px;
-      }
-
-      .container {
-        flex-direction: column;
-        align-items: center;
       }
 
       .product-card {
@@ -284,14 +285,14 @@
       let total = 0;
 
       if (carrinho.length === 0) {
-        cartItemsContainer.innerHTML = '<p style="color:#ccc;">Seu carrinho está vazio.</p>';
+        cartItemsContainer.innerHTML = '<p style="color:#777;">Seu carrinho está vazio.</p>';
         btnContinuar.disabled = true;
-        btnContinuar.style.background = '#444';
+        btnContinuar.style.background = '#ccc';
         return;
       }
 
       btnContinuar.disabled = false;
-      btnContinuar.style.background = '#00a64f';
+      btnContinuar.style.background = '#009b48';
 
       carrinho.forEach((item, index) => {
         total += item.price * item.quantity;
@@ -304,7 +305,7 @@
           <select data-index="${index}">
             ${Array.from({length:10},(_,i)=>`<option value="${i+1}" ${i+1===item.quantity?'selected':''}>${i+1}</option>`).join('')}
           </select>
-          <span style="color:#ff4c4c;cursor:pointer;font-size:18px;" data-index="${index}">✖</span>
+          <span style="color:#d60000;cursor:pointer;font-size:18px;" data-index="${index}">✖</span>
         `;
         cartItemsContainer.appendChild(div);
       });
