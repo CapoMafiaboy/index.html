@@ -55,7 +55,7 @@ h2 {
 
 .cart-header, .cart-item {
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr 1fr 50px;
   gap: 10px;
   align-items: center;
   padding: 12px 0;
@@ -79,14 +79,9 @@ h2 {
   display: flex;
   align-items: center;
   gap: 15px;
-  position: relative;
 }
 
 .remove {
-  position: absolute;
-  right: -35px;
-  top: 50%;
-  transform: translateY(-50%);
   background: #ffeaea;
   border-radius: 50%;
   width: 28px;
@@ -97,6 +92,7 @@ h2 {
   cursor: pointer;
   transition: all 0.25s ease;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-left: auto;
 }
 
 .remove svg {
@@ -106,7 +102,7 @@ h2 {
 
 .remove:hover {
   background: #ffd3d3;
-  transform: translateY(-50%) scale(1.1);
+  transform: scale(1.1);
 }
 
 #cep {
@@ -195,6 +191,7 @@ footer {
     <span>Qtd</span>
     <span>Valor Unitário</span>
     <span>Subtotal</span>
+    <span></span>
   </div>
   <div id="cartItems"></div>
 
@@ -239,12 +236,6 @@ function atualizarCarrinho() {
           <strong>${item.name}</strong><br>
           <small>Código: 275/80R22,5 18 Lonas</small>
         </div>
-        <span class="remove" data-index="${index}">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#d60000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </span>
       </div>
       <div>
         <select data-index="${index}">
@@ -253,6 +244,14 @@ function atualizarCarrinho() {
       </div>
       <div>R$ ${item.price.toFixed(2)}</div>
       <div>R$ ${(item.price * item.quantity).toFixed(2)}</div>
+      <div>
+        <span class="remove" data-index="${index}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#d60000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </span>
+      </div>
     `;
     cartContainer.appendChild(div);
   });
