@@ -81,12 +81,88 @@ footer{text-align:center;color:#777;padding:30px 10px;font-size:13px;margin-top:
 
 <main>
   <div class="grid" id="productList">
-    <!-- Produtos (seu conteúdo atual está mantido aqui, não alterei nada visualmente) -->
-    <!-- ... -->
+    <!-- Produtos -->
+    <div class="card" data-id="ecoway-b1">
+      <img src="images/ecoway-b1.jpg" alt="Pneu XBRI Ecoway B1 (LISO)">
+      <div class="info">
+        <h2>275/80R22,5 18 LONAS 149/146M</h2>
+        <h3>XBRI ECOWAY B1 (LISO) • Carga</h3>
+        <div class="price">R$ 979,00<small>à vista ou em até 12x de R$ 81,60 no cartão</small></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-outline" disabled>+ DETALHES</button>
+        <button class="btn btn-primary addCart" data-id="ecoway-b1" data-name="XBRI ECOWAY B1 (LISO)" data-price="979.00" data-image="images/ecoway-b1.jpg">COMPRAR</button>
+      </div>
+    </div>
+
+    <div class="card" data-id="robusto-b4">
+      <img src="images/robusto-b4.jpg" alt="Pneu XBRI Robusto B4 (BORRACHUDO)">
+      <div class="info">
+        <h2>275/80R22,5 18 LONAS 149/146L</h2>
+        <h3>XBRI ROBUSTO B4 (BORRACHUDO) • Carga</h3>
+        <div class="price">R$ 1.210,00<small>à vista ou em até 12x de R$ 100,90 no cartão</small></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-outline" disabled>+ DETALHES</button>
+        <button class="btn btn-primary addCart" data-id="robusto-b4" data-name="XBRI ROBUSTO B4 (BORRACHUDO)" data-price="1210.00" data-image="images/robusto-b4.jpg">COMPRAR</button>
+      </div>
+    </div>
+
+    <div class="card" data-id="robusto-b5">
+      <img src="images/robusto-b5.jpg" alt="Pneu XBRI Robusto B5 (BORRACHUDO)">
+      <div class="info">
+        <h2>295/80R22,5 18 LONAS 152/149M</h2>
+        <h3>XBRI ROBUSTO B5 (BORRACHUDO) • Carga</h3>
+        <div class="price">R$ 1.215,78<small>à vista ou em até 12x de R$ 101,32 no cartão</small></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-outline" disabled>+ DETALHES</button>
+        <button class="btn btn-primary addCart" data-id="robusto-b5" data-name="XBRI ROBUSTO B5 (BORRACHUDO)" data-price="1215.78" data-image="images/robusto-b5.jpg">COMPRAR</button>
+      </div>
+    </div>
+
+    <div class="card" data-id="ecoway-f1">
+      <img src="images/ecoway-f1.jpg" alt="Pneu XBRI Ecoway F1 (LISO)">
+      <div class="info">
+        <h2>295/80R22,5 18 LONAS 152/149M</h2>
+        <h3>XBRI ECOWAY F1 (LISO) • Carga</h3>
+        <div class="price">R$ 1.170,00<small>à vista ou em até 12x de R$ 97,50 no cartão</small></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-outline" disabled>+ DETALHES</button>
+        <button class="btn btn-primary addCart" data-id="ecoway-f1" data-name="XBRI ECOWAY F1 (LISO)" data-price="1170.00" data-image="images/ecoway-f1.jpg">COMPRAR</button>
+      </div>
+    </div>
+
+    <div class="card" data-id="ecomix-a1">
+      <img src="images/ecomix-a1.jpg" alt="Pneu XBRI Ecomix A1 (MISTO LISO)">
+      <div class="info">
+        <h2>295/80R22,5 18 LONAS 152/149L</h2>
+        <h3>XBRI ECOMIX A1 (MISTO LISO) • Carga</h3>
+        <div class="price">R$ 1.260,00<small>à vista ou em até 12x de R$ 105,00 no cartão</small></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-outline" disabled>+ DETALHES</button>
+        <button class="btn btn-primary addCart" data-id="ecomix-a1" data-name="XBRI ECOMIX A1 (MISTO LISO)" data-price="1260.00" data-image="images/ecomix-a1.jpg">COMPRAR</button>
+      </div>
+    </div>
+
+    <div class="card" data-id="forzablock-f1">
+      <img src="images/forzablock-f1.jpg" alt="Pneu XBRI Forza Block F1 (MISTO BORRACHUDO)">
+      <div class="info">
+        <h2>295/80R22,5 18 LONAS 152/149K</h2>
+        <h3>XBRI FORZA BLOCK F1 (MISTO BORRACHUDO) • Carga</h3>
+        <div class="price">R$ 1.511,14<small>à vista ou em até 12x de R$ 125,93 no cartão</small></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-outline" disabled>+ DETALHES</button>
+        <button class="btn btn-primary addCart" data-id="forzablock-f1" data-name="XBRI FORZA BLOCK F1 (MISTO BORRACHUDO)" data-price="1511.14" data-image="images/forzablock-f1.jpg">COMPRAR</button>
+      </div>
+    </div>
   </div>
 </main>
 
-<div id="cartFly" class="cart-fly" aria-live="polite">
+<div id="cartFly" class="cart-fly">
   <div class="cart-title"><strong>Seu carrinho</strong><button id="closeCart" class="remove-mini">Fechar</button></div>
   <div id="miniItems"></div>
   <div id="miniEmpty" class="cart-empty" style="display:none;">Seu carrinho está vazio.</div>
@@ -97,7 +173,7 @@ footer{text-align:center;color:#777;padding:30px 10px;font-size:13px;margin-top:
 <footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
 
 <script>
-const BRL = new Intl.NumberFormat('pt-BR', {style:'currency', currency:'BRL'});
+const BRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
 const cartFly=document.getElementById('cartFly');
 const openCartBtn=document.getElementById('openCart');
 const closeCartBtn=document.getElementById('closeCart');
@@ -114,31 +190,16 @@ function upCount(){cartCount.textContent=getCart().reduce((s,i)=>s+i.quantity,0)
 function addToCart({id,name,price,image}){
   let cart=getCart();
   const idx=cart.findIndex(p=>p.id===id);
-  if(idx>-1){
-    cart[idx].quantity=Math.min(10,(cart[idx].quantity||1)+1);
-  } else {
-    cart.push({id,name,price:Number(price),quantity:1,image});
-  }
-  setCart(cart);
-  upCount();
-  renderMini();
-  cartFly.style.display='flex'; // abre o carrinho automaticamente
+  if(idx>-1){cart[idx].quantity=Math.min(10,(cart[idx].quantity||1)+1);}
+  else{cart.push({id,name,price:Number(price),quantity:1,image});}
+  setCart(cart);upCount();renderMini();cartFly.style.display='flex';
 }
 
 function renderMini(){
-  const cart=getCart();
-  miniItems.innerHTML='';
-  if(cart.length===0){
-    miniEmpty.style.display='block';
-    miniTotal.textContent=BRL.format(0);
-    miniContinue.disabled=true;
-    return;
-  }
-  miniEmpty.style.display='none';
-  let total=0;
-  cart.forEach((item,ix)=>{
-    const subtotal=item.price*item.quantity;
-    total+=subtotal;
+  const cart=getCart();miniItems.innerHTML='';
+  if(cart.length===0){miniEmpty.style.display='block';miniTotal.textContent=BRL.format(0);miniContinue.disabled=true;return;}
+  miniEmpty.style.display='none';let total=0;
+  cart.forEach((item,ix)=>{const subtotal=item.price*item.quantity;total+=subtotal;
     const row=document.createElement('div');
     row.className='cart-item';
     row.innerHTML=`
@@ -171,26 +232,16 @@ document.body.addEventListener('click',e=>{
     });
   }
   if(e.target.dataset.remove!==undefined){
-    let cart=getCart();
-    cart.splice(Number(e.target.dataset.remove),1);
-    setCart(cart);
-    upCount();
-    renderMini();
-    if(getCart().length===0){
-      miniEmpty.style.display='block';
-      miniContinue.disabled=true;
-    }
+    let cart=getCart();cart.splice(Number(e.target.dataset.remove),1);
+    setCart(cart);upCount();renderMini();
+    if(getCart().length===0){miniEmpty.style.display='block';miniContinue.disabled=true;}
   }
 });
 
 miniItems.addEventListener('change',e=>{
   if(e.target.tagName==='SELECT'){
-    let cart=getCart();
-    const ix=e.target.dataset.ix;
-    cart[ix].quantity=Number(e.target.value);
-    setCart(cart);
-    upCount();
-    renderMini();
+    let cart=getCart();const ix=e.target.dataset.ix;
+    cart[ix].quantity=Number(e.target.value);setCart(cart);upCount();renderMini();
   }
 });
 
@@ -198,15 +249,5 @@ openCartBtn.addEventListener('click',()=>{
   if(cartFly.style.display==='flex'){cartFly.style.display='none';}
   else{renderMini();cartFly.style.display='flex';}
 });
-
 closeCartBtn.addEventListener('click',()=>{cartFly.style.display='none';});
-
-miniContinue.addEventListener('click',()=>{
-  if(getCart().length>0) window.location.href='carrinho.html';
-});
-
-upCount();
-renderMini();
-</script>
-</body>
-</html>
+miniContinue.addEventListener('click',()=>{if(getCart().length>0)window.location.href='carr
