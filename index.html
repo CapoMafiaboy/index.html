@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Tchê Pneus — Catálogo</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<!-- Anti-cache básico -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -21,7 +20,6 @@ header{position:sticky;top:0;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06
 .spacer{flex:1}
 .cart-button{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #eee;padding:8px 12px;border-radius:10px;cursor:pointer}
 .cart-count{background:var(--green);color:#fff;font-size:12px;padding:2px 8px;border-radius:999px;font-weight:700}
-
 main{max-width:1100px;margin:26px auto;padding:0 20px}
 .grid{display:grid;grid-template-columns:1fr;gap:18px}
 .card{display:flex;gap:18px;background:var(--card);border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.06);padding:16px;align-items:center}
@@ -36,8 +34,6 @@ main{max-width:1100px;margin:26px auto;padding:0 20px}
 .btn-outline{background:#f6f6f6}
 .btn-primary{background:var(--green);color:#fff}
 .btn-primary:hover{background:var(--green-hover)}
-
-/* Mini-carrinho (flyout) */
 .cart-fly{position:fixed;top:72px;right:16px;width:360px;max-width:92vw;background:#fff;border:1px solid #eee;border-radius:14px;box-shadow:0 12px 24px rgba(0,0,0,.12);padding:14px;display:none;flex-direction:column;gap:10px;z-index:60}
 .cart-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 .cart-item{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;border-bottom:1px solid #f1f1f1;padding:8px 0}
@@ -55,7 +51,6 @@ main{max-width:1100px;margin:26px auto;padding:0 20px}
 </style>
 </head>
 <body>
-
 <header>
   <div class="header-inner">
     <div class="brand">Tchê Pneus</div>
@@ -68,7 +63,7 @@ main{max-width:1100px;margin:26px auto;padding:0 20px}
 
 <main>
   <div class="grid" id="productList">
-    <!-- Produto 1: XBRI ECOWAY B1 (LISO) -->
+    <!-- Produto 1 -->
     <div class="card" data-id="ecoway-b1">
       <img src="images/ecoway-b1.jpg?v=1" alt="Pneu XBRI Ecoway B1 (LISO)">
       <div class="info">
@@ -84,9 +79,9 @@ main{max-width:1100px;margin:26px auto;padding:0 20px}
       </div>
     </div>
 
-    <!-- Produto 2: XBRI ROBUSTO B4 (BORRACHUDO) -->
+    <!-- Produto 2 -->
     <div class="card" data-id="robusto-b4">
-      <img src="images/robusto-b4.jpg?v=1" alt="Pneu XBRI Robusto B4 (Borrrachudo)">
+      <img src="images/robusto-b4.jpg?v=1" alt="Pneu XBRI Robusto B4 (BORRACHUDO)">
       <div class="info">
         <h2>275/80R22,5 18 LONAS 149/146L</h2>
         <h3>XBRI ROBUSTO B4 (BORRACHUDO) • Carga</h3>
@@ -96,123 +91,60 @@ main{max-width:1100px;margin:26px auto;padding:0 20px}
       </div>
       <div class="actions">
         <button class="btn btn-outline" disabled>+ DETALHES</button>
-        <button class="btn btn-primary addCart"
-          data-id="robusto-b4"
-          data-name="XBRI ROBUSTO B4 (BORRACHUDO)"
-          data-price="1210.00"
-          data-image="images/robusto-b4.jpg?v=1">COMPRAR</button>
+        <button class="btn btn-primary addCart" data-id="robusto-b4" data-name="XBRI ROBUSTO B4 (BORRACHUDO)" data-price="1210.00" data-image="images/robusto-b4.jpg?v=1">COMPRAR</button>
+      </div>
+    </div>
+
+    <!-- Produto 3 -->
+    <div class="card" data-id="robusto-b5">
+      <img src="images/robusto-b5.jpg?v=1" alt="Pneu XBRI Robusto B5 (BORRACHUDO)">
+      <div class="info">
+        <h2>295/80R22,5 18 LONAS 152/149M</h2>
+        <h3>XBRI ROBUSTO B5 (BORRACHUDO) • Carga</h3>
+        <div class="price">R$ 2.300,00
+          <small>à vista ou em até <strong>12x de R$ 191,70</strong> no cartão</small>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-outline" disabled>+ DETALHES</button>
+        <button class="btn btn-primary addCart" data-id="robusto-b5" data-name="XBRI ROBUSTO B5 (BORRACHUDO)" data-price="2300.00" data-image="images/robusto-b5.jpg?v=1">COMPRAR</button>
       </div>
     </div>
   </div>
 </main>
 
-<!-- Mini-carrinho -->
 <div id="cartFly" class="cart-fly" aria-live="polite">
-  <div class="cart-title">
-    <strong>Seu carrinho</strong>
-    <button id="closeCart" class="remove-mini">Fechar</button>
-  </div>
+  <div class="cart-title"><strong>Seu carrinho</strong><button id="closeCart" class="remove-mini">Fechar</button></div>
   <div id="miniItems"></div>
   <div id="miniEmpty" class="cart-empty" style="display:none;">Seu carrinho está vazio.</div>
   <div class="cart-summary"><span>Total</span><span id="miniTotal">R$ 0,00</span></div>
-  <div class="cart-actions">
-    <button id="miniContinue" class="btn btn-primary btn-full">CONTINUAR</button>
-  </div>
+  <div class="cart-actions"><button id="miniContinue" class="btn btn-primary btn-full">CONTINUAR</button></div>
 </div>
 
 <footer style="text-align:center;color:#666;padding:24px 10px">© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
 
 <script>
-const BRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
-const cartFly = document.getElementById('cartFly');
-const openCartBtn = document.getElementById('openCart');
-const closeCartBtn = document.getElementById('closeCart');
-const miniItems = document.getElementById('miniItems');
-const miniEmpty = document.getElementById('miniEmpty');
-const miniTotal = document.getElementById('miniTotal');
-const miniContinue = document.getElementById('miniContinue');
-const cartCount = document.getElementById('cartCount');
-
-function getCart(){ try{ return JSON.parse(localStorage.getItem('cart'))||[] }catch{ return [] } }
-function setCart(c){ localStorage.setItem('cart', JSON.stringify(c)); }
-function upCount(){ cartCount.textContent = getCart().reduce((s,i)=>s+i.quantity,0); }
-
-function addToCart({id,name,price,image}){
-  let cart = getCart();
-  const idx = cart.findIndex(p=>p.id===id);
-  if (idx>-1){ cart[idx].quantity = Math.min(10, (cart[idx].quantity||1)+1); }
-  else { cart.push({id,name,price: Number(price), quantity:1, image}); }
-  setCart(cart); upCount(); renderMini();
-}
-
-function renderMini(){
-  const cart = getCart();
-  miniItems.innerHTML = '';
-  if(cart.length===0){
-    miniEmpty.style.display='block';
-    miniTotal.textContent=BRL.format(0);
-    miniContinue.disabled=true;
-    return;
-  }
-  miniEmpty.style.display='none';
-  let total=0;
-  cart.forEach((item,ix)=>{
-    const subtotal = Number(item.price)*Number(item.quantity||1);
-    total += subtotal;
-    const row = document.createElement('div');
-    row.className = 'cart-item';
-    row.innerHTML = `
-      <img src="${item.image}" alt="${item.name}">
-      <div>
-        <h4>${item.name}</h4>
-        <div class="mini-price">${BRL.format(item.price)} • Subtotal: ${BRL.format(subtotal)}</div>
-        <div class="qty-row">
-          <label for="q${ix}" style="font-size:12px;color:#666">Qtd</label>
-          <select id="q${ix}" data-ix="${ix}">
-            ${Array.from({length:10},(_,i)=>`<option value="${i+1}" ${i+1==item.quantity?'selected':''}>${i+1}</option>`).join('')}
-          </select>
-        </div>
-      </div>
-      <button class="remove-mini" data-remove="${ix}">✖</button>
-    `;
-    miniItems.appendChild(row);
-  });
-  miniTotal.textContent = BRL.format(total);
-  miniContinue.disabled = false;
-}
-
-document.body.addEventListener('click', (e)=>{
-  if(e.target.classList.contains('addCart')){
-    const btn = e.target;
-    addToCart({ id:btn.dataset.id, name:btn.dataset.name, price:btn.dataset.price, image:btn.dataset.image });
-    cartFly.style.display='flex';
-  }
-  if(e.target.dataset.remove!==undefined){
-    let cart=getCart(); cart.splice(Number(e.target.dataset.remove),1); setCart(cart); upCount(); renderMini();
-    if(getCart().length===0){ miniEmpty.style.display='block'; miniContinue.disabled=true; }
-  }
-});
-
-miniItems.addEventListener('change', (e)=>{
-  if(e.target.tagName==='SELECT' && e.target.dataset.ix!==undefined){
-    let cart=getCart(); cart[Number(e.target.dataset.ix)].quantity = Number(e.target.value); setCart(cart); upCount(); renderMini();
-  }
-});
-
-openCartBtn.onclick=()=>{
-  if(getCart().length===0){ cartFly.style.display='none'; return; }
-  renderMini(); cartFly.style.display='flex';
-};
-closeCartBtn.onclick=()=>{ cartFly.style.display='none'; };
-
-miniContinue.onclick=()=>{
-  if(getCart().length>0){
-    // pequena espera garante persistência no mobile
-    setTimeout(()=>{ window.location.href='carrinho.html'; }, 80);
-  }
-};
-
-window.addEventListener('DOMContentLoaded', ()=>{ upCount(); });
+const BRL=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+const cartFly=document.getElementById('cartFly');
+const openCartBtn=document.getElementById('openCart');
+const closeCartBtn=document.getElementById('closeCart');
+const miniItems=document.getElementById('miniItems');
+const miniEmpty=document.getElementById('miniEmpty');
+const miniTotal=document.getElementById('miniTotal');
+const miniContinue=document.getElementById('miniContinue');
+const cartCount=document.getElementById('cartCount');
+function getCart(){try{return JSON.parse(localStorage.getItem('cart'))||[]}catch{return[]}}
+function setCart(c){localStorage.setItem('cart',JSON.stringify(c));}
+function upCount(){cartCount.textContent=getCart().reduce((s,i)=>s+i.quantity,0);}
+function addToCart({id,name,price,image}){let cart=getCart();const idx=cart.findIndex(p=>p.id===id);if(idx>-1){cart[idx].quantity=Math.min(10,(cart[idx].quantity||1)+1);}else{cart.push({id,name,price:Number(price),quantity:1,image});}setCart(cart);upCount();renderMini();}
+function renderMini(){const cart=getCart();miniItems.innerHTML='';if(cart.length===0){miniEmpty.style.display='block';miniTotal.textContent=BRL.format(0);miniContinue.disabled=true;return;}miniEmpty.style.display='none';let total=0;cart.forEach((item,ix)=>{const subtotal=Number(item.price)*Number(item.quantity||1);total+=subtotal;const row=document.createElement('div');row.className='cart-item';row.innerHTML=`<img src="${item.image}" alt="${item.name}"><div><h4>${item.name}</h4><div class="mini-price">${BRL.format(item.price)} • Subtotal: ${BRL.format(subtotal)}</div><div class="qty-row"><label for="q${ix}" style="font-size:12px;color:#666">Qtd</label><select id="q${ix}" data-ix="${ix}">${Array.from({length:10},(_,i)=>`<option value="${i+1}" ${i+1==item.quantity?'selected':''}>${i+1}</option>`).join('')}</select></div></div><button class="remove-mini" data-remove="${ix}">✖</button>`;miniItems.appendChild(row);});miniTotal.textContent=BRL.format(total);miniContinue.disabled=false;}
+document.body.addEventListener('click',e=>{if(e.target.classList.contains('addCart')){const btn=e.target;addToCart({id:btn.dataset.id,name:btn.dataset.name,price:btn.dataset.price,image:btn.dataset.image});cartFly.style.display='flex';}
+if(e.target.dataset.remove!==undefined){let cart=getCart();cart.splice(Number(e.target.dataset.remove),1);setCart(cart);upCount();renderMini();if(getCart().length===0){miniEmpty.style.display='block';miniContinue.disabled=true;}}});
+miniItems.addEventListener('change',e=>{if(e.target.tagName==='SELECT'&&e.target.dataset.ix!==undefined){let cart=getCart();cart[Number(e.target.dataset.ix)].quantity=Number(e.target.value);setCart(cart);upCount();renderMini();}});
+openCartBtn.onclick=()=>{if(getCart().length===0){cartFly.style.display='none';return;}renderMini();cartFly.style.display='flex';};
+closeCartBtn.onclick=()=>{cartFly.style.display='none';};
+miniContinue.onclick=()=>{if(getCart().length>0){setTimeout(()=>{window.location.href='carrinho.html';},80);}};
+window.addEventListener('DOMContentLoaded',()=>{upCount();});
 </script>
 </body>
 </html>
