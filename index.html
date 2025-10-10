@@ -1,233 +1,533 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>Tchê Pneus — Catálogo</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<style>
-:root{
-  --red:#d60000; --green:#009b48; --green-hover:#007a39;
-  --bg:#f8f8f8; --text:#222; --muted:#666; --card:#fff;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Poppins,sans-serif;background:var(--bg);color:var(--text)}
-header{position:sticky;top:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08);z-index:99}
-.header-inner{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:12px}
-.brand{color:var(--red);font-weight:700;font-size:22px}
-.spacer{flex:1}
-.cart-button{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #eee;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
-.cart-count{background:var(--green);color:#fff;font-size:12px;padding:2px 8px;border-radius:999px;font-weight:700}
-main{max-width:1100px;margin:24px auto;padding:0 16px}
-.grid{display:grid;grid-template-columns:1fr;gap:18px}
-.card{display:flex;align-items:center;gap:14px;background:var(--card);border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.05);padding:14px;transition:transform .15s}
-.card:hover{transform:translateY(-2px)}
-.card img{width:120px;height:120px;object-fit:contain;border-radius:10px;background:#fff}
-.info{flex:1}
-.info h2{font-size:16px;font-weight:700;margin-bottom:4px}
-.info h3{font-size:13px;color:var(--muted);margin-bottom:8px}
-.price{font-weight:700;font-size:16px}
-.price small{display:block;color:#444;font-weight:400;margin-top:4px;font-size:13px}
-.actions{display:flex;flex-direction:column;gap:8px;min-width:110px}
-.btn{border:none;border-radius:10px;padding:10px 12px;font-weight:700;cursor:pointer;transition:.2s}
-.btn-outline{background:#f6f6f6}
-.btn-primary{background:var(--green);color:#fff}
-.btn-primary:hover{background:var(--green-hover)}
-.cart-fly{position:fixed;top:70px;right:10px;width:360px;max-width:94vw;background:#fff;border:1px solid #eee;border-radius:14px;box-shadow:0 12px 24px rgba(0,0,0,.15);padding:14px;display:none;flex-direction:column;gap:10px;z-index:999}
-.cart-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;font-weight:700}
-.cart-item{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;border-bottom:1px solid #f1f1f1;padding:8px 0}
-.cart-item img{width:64px;height:64px;object-fit:contain;border-radius:8px;background:#fff}
-.cart-item h4{margin:0;font-size:14px}
-.cart-item .mini-price{font-weight:700;color:var(--green);font-size:13px;margin-top:4px}
-.qty-row{display:flex;align-items:center;gap:8px;margin-top:6px}
-.qty-row select{padding:6px;border:1px solid #ddd;border-radius:8px;font-size:14px}
-.remove-mini{background:#ffecec;color:#ff4a4a;border:1px solid #ffd2d2;border-radius:8px;padding:6px 8px;cursor:pointer;font-weight:700}
-.cart-summary{display:flex;align-items:center;justify-content:space-between;font-weight:700;margin-top:4px}
-.cart-empty{padding:20px;color:#888;text-align:center}
-.cart-actions{display:flex;gap:10px}
-.btn-full{width:100%}
-footer{text-align:center;color:#777;padding:30px 10px;font-size:13px;margin-top:20px}
-@media (max-width:480px){
-  .brand{font-size:20px}
-  .header-inner{padding:12px 14px}
-  .card{flex-direction:column;align-items:flex-start;padding:14px}
-  .card img{width:100%;height:auto;max-height:220px;margin-bottom:10px}
-  .info h2{font-size:15px}
-  .info h3{font-size:13px}
-  .price{font-size:15px}
-  .actions{width:100%;flex-direction:row;justify-content:space-between}
-  .btn{flex:1;text-align:center}
-  .cart-fly{right:6px;top:68px;width:95vw;max-height:80vh;overflow-y:auto;border-radius:12px;padding:12px}
-  .cart-item{grid-template-columns:56px 1fr auto}
-  .cart-item img{width:56px;height:56px}
-  .cart-summary{font-size:14px}
-  .remove-mini{padding:8px 10px}
-}
-</style>
-</head>
-<body>
-<header>
-  <div class="header-inner">
-    <div class="brand">Tchê Pneus</div>
-    <div class="spacer"></div>
-    <button id="openCart" class="cart-button" aria-label="Abrir carrinho">
-      🛒 <span>Carrinho</span> <span id="cartCount" class="cart-count">0</span>
-    </button>
-  </div>
-</header>
-
-<main>
-  <div class="grid" id="productList">
-
-    <!-- PRODUTO 1 -->
-    <div class="card" data-id="ecoway-b1">
-      <img src="images/ecoway-b1.jpg" alt="XBRI Ecoway B1 (LISO)">
-      <div class="info">
-        <h2>275/80R22,5 18 LONAS 149/146M</h2>
-        <h3>XBRI ECOWAY B1 (LISO) • Carga</h3>
-        <div class="price">R$ 979,00<small>à vista ou em até 12x de R$ 81,60 no cartão</small></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Tchê Pneus — Catálogo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <style>
+      :root {
+        --red: #d60000;
+        --green: #009b48;
+        --green-hover: #007a39;
+        --bg: #f8f8f8;
+        --text: #222;
+        --muted: #666;
+        --card: #fff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Poppins, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      header {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        z-index: 99;
+      }
+      .header-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand {
+        color: var(--red);
+        font-weight: 700;
+        font-size: 22px;
+      }
+      .spacer {
+        flex: 1;
+      }
+      .cart-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff;
+        border: 1px solid #eee;
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .cart-count {
+        background: var(--green);
+        color: #fff;
+        font-size: 12px;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-weight: 700;
+      }
+      main {
+        max-width: 1100px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 14px;
+        transition: transform 0.15s;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+      }
+      .card img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        border-radius: 10px;
+        background: #fff;
+      }
+      .info {
+        flex: 1;
+      }
+      .info h2 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .info h3 {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .price {
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .price small {
+        display: block;
+        color: #444;
+        font-weight: 400;
+        margin-top: 4px;
+        font-size: 13px;
+      }
+      .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 110px;
+      }
+      .btn {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .btn-outline {
+        background: #f6f6f6;
+      }
+      .btn-primary {
+        background: var(--green);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--green-hover);
+      }
+      .cart-fly {
+        position: fixed;
+        top: 70px;
+        right: 10px;
+        width: 360px;
+        max-width: 94vw;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 14px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        padding: 14px;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 999;
+      }
+      .cart-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+      .cart-item {
+        display: grid;
+        grid-template-columns: 64px 1fr auto;
+        gap: 10px;
+        align-items: center;
+        border-bottom: 1px solid #f1f1f1;
+        padding: 8px 0;
+      }
+      .cart-item img {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .cart-item h4 {
+        margin: 0;
+        font-size: 14px;
+      }
+      .cart-item .mini-price {
+        font-weight: 700;
+        color: var(--green);
+        font-size: 13px;
+        margin-top: 4px;
+      }
+      .qty-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .qty-row select {
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+      .remove-mini {
+        background: #ffecec;
+        color: #ff4a4a;
+        border: 1px solid #ffd2d2;
+        border-radius: 8px;
+        padding: 6px 8px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .cart-summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 700;
+        margin-top: 4px;
+      }
+      .cart-empty {
+        padding: 20px;
+        color: #888;
+        text-align: center;
+      }
+      .cart-actions {
+        display: flex;
+        gap: 10px;
+      }
+      .btn-full {
+        width: 100%;
+      }
+      footer {
+        text-align: center;
+        color: #777;
+        padding: 30px 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      }
+      @media (max-width: 480px) {
+        .brand {
+          font-size: 20px;
+        }
+        .header-inner {
+          padding: 12px 14px;
+        }
+        .card {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 14px;
+        }
+        .card img {
+          width: 100%;
+          height: auto;
+          max-height: 220px;
+          margin-bottom: 10px;
+        }
+        .info h2 {
+          font-size: 15px;
+        }
+        .info h3 {
+          font-size: 13px;
+        }
+        .price {
+          font-size: 15px;
+        }
+        .actions {
+          width: 100%;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .btn {
+          flex: 1;
+          text-align: center;
+        }
+        .cart-fly {
+          right: 6px;
+          top: 68px;
+          width: 95vw;
+          max-height: 80vh;
+          overflow-y: auto;
+          border-radius: 12px;
+          padding: 12px;
+        }
+        .cart-item {
+          grid-template-columns: 56px 1fr auto;
+        }
+        .cart-item img {
+          width: 56px;
+          height: 56px;
+        }
+        .cart-summary {
+          font-size: 14px;
+        }
+        .remove-mini {
+          padding: 8px 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div class="brand">Tchê Pneus</div>
+        <div class="spacer"></div>
+        <button id="openCart" class="cart-button" aria-label="Abrir carrinho">
+          🛒 <span>Carrinho</span> <span id="cartCount" class="cart-count">0</span>
+        </button>
       </div>
-      <div class="actions">
-        <button class="btn btn-outline" disabled>+ DETALHES</button>
-        <button class="btn btn-primary addCart" data-id="ecoway-b1" data-name="XBRI ECOWAY B1 (LISO)" data-price="979.00" data-image="images/ecoway-b1.jpg">COMPRAR</button>
+    </header>
+
+    <main>
+      <div class="grid" id="productList">
+        <!-- PRODUTO 1 -->
+        <div class="card" data-id="ecoway-b1">
+          <img src="images/ecoway-b1.jpg" alt="XBRI Ecoway B1 (LISO)" />
+          <div class="info">
+            <h2>275/80R22,5 18 LONAS 149/146M</h2>
+            <h3>XBRI ECOWAY B1 (LISO) • Carga</h3>
+            <div class="price">R$ 979,00<small>à vista ou em até 12x de R$ 81,60 no cartão</small></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <button
+              class="btn btn-primary addCart"
+              data-id="ecoway-b1"
+              data-name="XBRI ECOWAY B1 (LISO)"
+              data-price="979.00"
+              data-image="images/ecoway-b1.jpg"
+            >
+              COMPRAR
+            </button>
+          </div>
+        </div>
+
+        <!-- PRODUTO 2 -->
+        <div class="card" data-id="robusto-b4">
+          <img src="images/robusto-b4.jpg" alt="XBRI Robusto B4 (BORRACHUDO)" />
+          <div class="info">
+            <h2>275/80R22,5 18 LONAS 149/146L</h2>
+            <h3>XBRI ROBUSTO B4 (BORRACHUDO) • Carga</h3>
+            <div class="price">R$ 1.210,00<small>à vista ou em até 12x de R$ 100,90 no cartão</small></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <button
+              class="btn btn-primary addCart"
+              data-id="robusto-b4"
+              data-name="XBRI ROBUSTO B4 (BORRACHUDO)"
+              data-price="1210.00"
+              data-image="images/robusto-b4.jpg"
+            >
+              COMPRAR
+            </button>
+          </div>
+        </div>
+
+        <!-- PRODUTO 3 -->
+        <div class="card" data-id="robusto-b5">
+          <img src="images/robusto-b5.jpg" alt="XBRI Robusto B5 (BORRACHUDO)" />
+          <div class="info">
+            <h2>295/80R22,5 18 LONAS 152/149M</h2>
+            <h3>XBRI ROBUSTO B5 (BORRACHUDO) • Carga</h3>
+            <div class="price">R$ 1.215,78<small>à vista ou em até 12x de R$ 101,32 no cartão</small></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <button
+              class="btn btn-primary addCart"
+              data-id="robusto-b5"
+              data-name="XBRI ROBUSTO B5 (BORRACHUDO)"
+              data-price="1215.78"
+              data-image="images/robusto-b5.jpg"
+            >
+              COMPRAR
+            </button>
+          </div>
+        </div>
+
+        <!-- PRODUTO 4 -->
+        <div class="card" data-id="ecoway-f1">
+          <img src="images/ecoway-f1.jpg" alt="XBRI Ecoway F1 (LISO)" />
+          <div class="info">
+            <h2>295/80R22,5 18 LONAS 152/149M</h2>
+            <h3>XBRI ECOWAY F1 (LISO) • Carga</h3>
+            <div class="price">R$ 1.170,00<small>à vista ou em até 12x de R$ 97,50 no cartão</small></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <button
+              class="btn btn-primary addCart"
+              data-id="ecoway-f1"
+              data-name="XBRI ECOWAY F1 (LISO)"
+              data-price="1170.00"
+              data-image="images/ecoway-f1.jpg"
+            >
+              COMPRAR
+            </button>
+          </div>
+        </div>
+
+        <!-- PRODUTO 5 -->
+        <div class="card" data-id="ecomix-a1">
+          <img src="images/ecomix-a1.jpg" alt="XBRI Ecomix A1 (MISTO LISO)" />
+          <div class="info">
+            <h2>295/80R22,5 18 LONAS 152/149L</h2>
+            <h3>XBRI ECOMIX A1 (MISTO LISO) • Carga</h3>
+            <div class="price">R$ 1.260,00<small>à vista ou em até 12x de R$ 105,00 no cartão</small></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <button
+              class="btn btn-primary addCart"
+              data-id="ecomix-a1"
+              data-name="XBRI ECOMIX A1 (MISTO LISO)"
+              data-price="1260.00"
+              data-image="images/ecomix-a1.jpg"
+            >
+              COMPRAR
+            </button>
+          </div>
+        </div>
+
+        <!-- PRODUTO 6 -->
+        <div class="card" data-id="forzablock-f1">
+          <img src="images/forzablock-f1.jpg" alt="XBRI Forza Block F1 (MISTO BORRACHUDO)" />
+          <div class="info">
+            <h2>295/80R22,5 18 LONAS 152/149K</h2>
+            <h3>XBRI FORZA BLOCK F1 (MISTO BORRACHUDO) • Carga</h3>
+            <div class="price">R$ 1.511,14<small>à vista ou em até 12x de R$ 125,93 no cartão</small></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <button
+              class="btn btn-primary addCart"
+              data-id="forzablock-f1"
+              data-name="XBRI FORZA BLOCK F1 (MISTO BORRACHUDO)"
+              data-price="1511.14"
+              data-image="images/forzablock-f1.jpg"
+            >
+              COMPRAR
+            </button>
+          </div>
+        </div>
       </div>
+    </main>
+
+    <div id="cartFly" class="cart-fly">
+      <div class="cart-title"><strong>Seu carrinho</strong><button id="closeCart" class="remove-mini">Fechar</button></div>
+      <div id="miniItems"></div>
+      <div id="miniEmpty" class="cart-empty" style="display: none">Seu carrinho está vazio.</div>
+      <div class="cart-summary"><span>Total</span><span id="miniTotal">R$ 0,00</span></div>
+      <div class="cart-actions"><button id="miniContinue" class="btn btn-primary btn-full">CONTINUAR</button></div>
     </div>
 
-    <!-- PRODUTO 2 -->
-    <div class="card" data-id="robusto-b4">
-      <img src="images/robusto-b4.jpg" alt="XBRI Robusto B4 (BORRACHUDO)">
-      <div class="info">
-        <h2>275/80R22,5 18 LONAS 149/146L</h2>
-        <h3>XBRI ROBUSTO B4 (BORRACHUDO) • Carga</h3>
-        <div class="price">R$ 1.210,00<small>à vista ou em até 12x de R$ 100,90 no cartão</small></div>
-      </div>
-      <div class="actions">
-        <button class="btn btn-outline" disabled>+ DETALHES</button>
-        <button class="btn btn-primary addCart" data-id="robusto-b4" data-name="XBRI ROBUSTO B4 (BORRACHUDO)" data-price="1210.00" data-image="images/robusto-b4.jpg">COMPRAR</button>
-      </div>
-    </div>
+    <footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
 
-    <!-- PRODUTO 3 -->
-    <div class="card" data-id="robusto-b5">
-      <img src="images/robusto-b5.jpg" alt="XBRI Robusto B5 (BORRACHUDO)">
-      <div class="info">
-        <h2>295/80R22,5 18 LONAS 152/149M</h2>
-        <h3>XBRI ROBUSTO B5 (BORRACHUDO) • Carga</h3>
-        <div class="price">R$ 1.215,78<small>à vista ou em até 12x de R$ 101,32 no cartão</small></div>
-      </div>
-      <div class="actions">
-        <button class="btn btn-outline" disabled>+ DETALHES</button>
-        <button class="btn btn-primary addCart" data-id="robusto-b5" data-name="XBRI ROBUSTO B5 (BORRACHUDO)" data-price="1215.78" data-image="images/robusto-b5.jpg">COMPRAR</button>
-      </div>
-    </div>
+    <script>
+      console.log("🚀 Script do carrinho iniciado!");
+      const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+      const cartFly = document.getElementById("cartFly");
+      const openCartBtn = document.getElementById("openCart");
+      const closeCartBtn = document.getElementById("closeCart");
+      const miniItems = document.getElementById("miniItems");
+      const miniEmpty = document.getElementById("miniEmpty");
+      const miniTotal = document.getElementById("miniTotal");
+      const miniContinue = document.getElementById("miniContinue");
+      const cartCount = document.getElementById("cartCount");
 
-    <!-- PRODUTO 4 -->
-    <div class="card" data-id="ecoway-f1">
-      <img src="images/ecoway-f1.jpg" alt="XBRI Ecoway F1 (LISO)">
-      <div class="info">
-        <h2>295/80R22,5 18 LONAS 152/149M</h2>
-        <h3>XBRI ECOWAY F1 (LISO) • Carga</h3>
-        <div class="price">R$ 1.170,00<small>à vista ou em até 12x de R$ 97,50 no cartão</small></div>
-      </div>
-      <div class="actions">
-        <button class="btn btn-outline" disabled>+ DETALHES</button>
-        <button class="btn btn-primary addCart" data-id="ecoway-f1" data-name="XBRI ECOWAY F1 (LISO)" data-price="1170.00" data-image="images/ecoway-f1.jpg">COMPRAR</button>
-      </div>
-    </div>
+      console.log("📦 Elementos:", { cartFly, openCartBtn, closeCartBtn, cartCount });
 
-    <!-- PRODUTO 5 -->
-    <div class="card" data-id="ecomix-a1">
-      <img src="images/ecomix-a1.jpg" alt="XBRI Ecomix A1 (MISTO LISO)">
-      <div class="info">
-        <h2>295/80R22,5 18 LONAS 152/149L</h2>
-        <h3>XBRI ECOMIX A1 (MISTO LISO) • Carga</h3>
-        <div class="price">R$ 1.260,00<small>à vista ou em até 12x de R$ 105,00 no cartão</small></div>
-      </div>
-      <div class="actions">
-        <button class="btn btn-outline" disabled>+ DETALHES</button>
-        <button class="btn btn-primary addCart" data-id="ecomix-a1" data-name="XBRI ECOMIX A1 (MISTO LISO)" data-price="1260.00" data-image="images/ecomix-a1.jpg">COMPRAR</button>
-      </div>
-    </div>
+      function getCart() {
+        try {
+          return JSON.parse(localStorage.getItem("cart")) || [];
+        } catch {
+          return [];
+        }
+      }
+      function setCart(c) {
+        localStorage.setItem("cart", JSON.stringify(c));
+      }
+      function upCount() {
+        cartCount.textContent = getCart().reduce((s, i) => s + i.quantity, 0);
+      }
 
-    <!-- PRODUTO 6 -->
-    <div class="card" data-id="forzablock-f1">
-      <img src="images/forzablock-f1.jpg" alt="XBRI Forza Block F1 (MISTO BORRACHUDO)">
-      <div class="info">
-        <h2>295/80R22,5 18 LONAS 152/149K</h2>
-        <h3>XBRI FORZA BLOCK F1 (MISTO BORRACHUDO) • Carga</h3>
-        <div class="price">R$ 1.511,14<small>à vista ou em até 12x de R$ 125,93 no cartão</small></div>
-      </div>
-      <div class="actions">
-        <button class="btn btn-outline" disabled>+ DETALHES</button>
-        <button class="btn btn-primary addCart" data-id="forzablock-f1" data-name="XBRI FORZA BLOCK F1 (MISTO BORRACHUDO)" data-price="1511.14" data-image="images/forzablock-f1.jpg">COMPRAR</button>
-      </div>
-    </div>
+      console.log("✅ Funções declaradas!");
+      console.log("🛒 Carrinho inicial:", getCart());
 
-  </div>
-</main>
+      function addToCart({ id, name, price, image }) {
+        console.log("➕ addToCart chamada com:", { id, name, price, image });
+        let cart = getCart();
+        const idx = cart.findIndex((p) => p.id === id);
+        if (idx > -1) {
+          console.log("📦 Produto já existe, incrementando quantidade");
+          cart[idx].quantity = Math.min(10, (cart[idx].quantity || 1) + 1);
+        } else {
+          console.log("🆕 Novo produto adicionado ao carrinho");
+          cart.push({ id, name, price: Number(price), quantity: 1, image });
+        }
+        setCart(cart);
+        console.log("💾 Carrinho salvo:", cart);
+        upCount();
+        renderMini();
+        cartFly.style.display = "flex";
+        console.log("✅ Carrinho exibido!");
+      }
 
-<div id="cartFly" class="cart-fly">
-  <div class="cart-title"><strong>Seu carrinho</strong><button id="closeCart" class="remove-mini">Fechar</button></div>
-  <div id="miniItems"></div>
-  <div id="miniEmpty" class="cart-empty" style="display:none;">Seu carrinho está vazio.</div>
-  <div class="cart-summary"><span>Total</span><span id="miniTotal">R$ 0,00</span></div>
-  <div class="cart-actions"><button id="miniContinue" class="btn btn-primary btn-full">CONTINUAR</button></div>
-</div>
-
-<footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
-
-<script>
-console.log('🚀 Script do carrinho iniciado!');
-const BRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
-const cartFly=document.getElementById('cartFly');
-const openCartBtn=document.getElementById('openCart');
-const closeCartBtn=document.getElementById('closeCart');
-const miniItems=document.getElementById('miniItems');
-const miniEmpty=document.getElementById('miniEmpty');
-const miniTotal=document.getElementById('miniTotal');
-const miniContinue=document.getElementById('miniContinue');
-const cartCount=document.getElementById('cartCount');
-
-console.log('📦 Elementos:', {cartFly, openCartBtn, closeCartBtn, cartCount});
-
-function getCart(){try{return JSON.parse(localStorage.getItem('cart'))||[]}catch{return[]}}
-function setCart(c){localStorage.setItem('cart',JSON.stringify(c));}
-function upCount(){cartCount.textContent=getCart().reduce((s,i)=>s+i.quantity,0);}
-
-console.log('✅ Funções declaradas!');
-console.log('🛒 Carrinho inicial:', getCart());
-
-function addToCart({id,name,price,image}){
-  console.log('➕ addToCart chamada com:', {id,name,price,image});
-  let cart=getCart();
-  const idx=cart.findIndex(p=>p.id===id);
-  if(idx>-1){
-    console.log('📦 Produto já existe, incrementando quantidade');
-    cart[idx].quantity=Math.min(10,(cart[idx].quantity||1)+1);
-  }
-  else{
-    console.log('🆕 Novo produto adicionado ao carrinho');
-    cart.push({id,name,price:Number(price),quantity:1,image});
-  }
-  setCart(cart);
-  console.log('💾 Carrinho salvo:', cart);
-  upCount();
-  renderMini();
-  cartFly.style.display='flex';
-  console.log('✅ Carrinho exibido!');
-}
-
-function renderMini(){
-  const cart=getCart();miniItems.innerHTML='';
-  if(cart.length===0){miniEmpty.style.display='block';miniTotal.textContent=BRL.format(0);miniContinue.disabled=true;return;}
-  miniEmpty.style.display='none';let total=0;
-  cart.forEach((item,ix)=>{const subtotal=item.price*item.quantity;total+=subtotal;
-    const row=document.createElement('div');
-    row.className='cart-item';
-    row.innerHTML=`
+      function renderMini() {
+        const cart = getCart();
+        miniItems.innerHTML = "";
+        if (cart.length === 0) {
+          miniEmpty.style.display = "block";
+          miniTotal.textContent = BRL.format(0);
+          miniContinue.disabled = true;
+          return;
+        }
+        miniEmpty.style.display = "none";
+        let total = 0;
+        cart.forEach((item, ix) => {
+          const subtotal = item.price * item.quantity;
+          total += subtotal;
+          const row = document.createElement("div");
+          row.className = "cart-item";
+          row.innerHTML = `
       <img src="${item.image}" alt="${item.name}">
       <div>
         <h4>${item.name}</h4>
@@ -235,64 +535,83 @@ function renderMini(){
         <div class="qty-row">
           <label style="font-size:12px;color:#666">Qtd</label>
           <select data-ix="${ix}">
-            ${Array.from({length:10},(_,i)=><option value="${i+1}" ${i+1==item.quantity?'selected':''}>${i+1}</option>).join('')}
+            ${Array.from({ length: 10 }, (_, i) => `<option value="${i + 1}" ${i + 1 == item.quantity ? "selected" : ""}>${i + 1}</option>`).join("")}
           </select>
         </div>
       </div>
       <button class="remove-mini" data-remove="${ix}">✖</button>`;
-    miniItems.appendChild(row);
-  });
-  miniTotal.textContent=BRL.format(total);
-  miniContinue.disabled=false;
-}
+          miniItems.appendChild(row);
+        });
+        miniTotal.textContent = BRL.format(total);
+        miniContinue.disabled = false;
+      }
 
-document.body.addEventListener('click',e=>{
-  console.log('👆 Clique detectado em:', e.target);
-  
-  if(e.target.classList.contains('addCart')){
-    console.log('🛒 Botão COMPRAR clicado!');
-    const btn=e.target;
-    addToCart({
-      id:btn.dataset.id,
-      name:btn.dataset.name,
-      price:btn.dataset.price,
-      image:btn.dataset.image
-    });
-  }
-  if(e.target.dataset.remove!==undefined){
-    console.log('🗑️ Removendo item do carrinho');
-    let cart=getCart();cart.splice(Number(e.target.dataset.remove),1);
-    setCart(cart);upCount();renderMini();
-    if(getCart().length===0){miniEmpty.style.display='block';miniContinue.disabled=true;}
-  }
-});
-console.log('✅ Event listener de clique adicionado!');
+      document.body.addEventListener("click", (e) => {
+        console.log("👆 Clique detectado em:", e.target);
 
-miniItems.addEventListener('change',e=>{
-  if(e.target.tagName==='SELECT'){
-    let cart=getCart();const ix=e.target.dataset.ix;
-    cart[ix].quantity=Number(e.target.value);setCart(cart);upCount();renderMini();
-  }
-});
+        if (e.target.classList.contains("addCart")) {
+          console.log("🛒 Botão COMPRAR clicado!");
+          const btn = e.target;
+          addToCart({
+            id: btn.dataset.id,
+            name: btn.dataset.name,
+            price: btn.dataset.price,
+            image: btn.dataset.image,
+          });
+        }
+        if (e.target.dataset.remove !== undefined) {
+          console.log("🗑️ Removendo item do carrinho");
+          let cart = getCart();
+          cart.splice(Number(e.target.dataset.remove), 1);
+          setCart(cart);
+          upCount();
+          renderMini();
+          if (getCart().length === 0) {
+            miniEmpty.style.display = "block";
+            miniContinue.disabled = true;
+          }
+        }
+      });
+      console.log("✅ Event listener de clique adicionado!");
 
-openCartBtn.addEventListener('click',()=>{
-  console.log('🛒 Botão do carrinho clicado!');
-  if(cartFly.style.display==='flex'){cartFly.style.display='none';}
-  else{renderMini();cartFly.style.display='flex';}
-});
-console.log('✅ Event listener do carrinho adicionado!');
+      miniItems.addEventListener("change", (e) => {
+        if (e.target.tagName === "SELECT") {
+          let cart = getCart();
+          const ix = e.target.dataset.ix;
+          cart[ix].quantity = Number(e.target.value);
+          setCart(cart);
+          upCount();
+          renderMini();
+        }
+      });
 
-closeCartBtn.addEventListener('click',()=>{
-  console.log('❌ Fechar carrinho clicado!');
-  cartFly.style.display='none';
-});
+      openCartBtn.addEventListener("click", () => {
+        console.log("🛒 Botão do carrinho clicado!");
+        if (cartFly.style.display === "flex") {
+          cartFly.style.display = "none";
+        } else {
+          renderMini();
+          cartFly.style.display = "flex";
+        }
+      });
+      console.log("✅ Event listener do carrinho adicionado!");
 
-miniContinue.addEventListener('click',()=>{
-  console.log('➡️ Continuar clicado!');
-  if(getCart().length>0){window.location.href='identificacao.html';}
-});
+      closeCartBtn.addEventListener("click", () => {
+        console.log("❌ Fechar carrinho clicado!");
+        cartFly.style.display = "none";
+      });
 
-console.log('🎬 Inicializando carrinho...');
-upCount();renderMini();
-console.log('✅ Script completo carregado!');
-</script>
+      miniContinue.addEventListener("click", () => {
+        console.log("➡️ Continuar clicado!");
+        if (getCart().length > 0) {
+          window.location.href = "identificacao.html";
+        }
+      });
+
+      console.log("🎬 Inicializando carrinho...");
+      upCount();
+      renderMini();
+      console.log("✅ Script completo carregado!");
+    </script>
+  </body>
+</html>
