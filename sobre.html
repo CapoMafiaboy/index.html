@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Sobre Nós — Tchê Pneus</title>
+    <link rel="icon" type="image/png" href="images/logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --red: #d60000;
+        --green: #009b48;
+        --green-hover: #007a39;
+        --bg: #f8f8f8;
+        --text: #222;
+        --muted: #666;
+        --card: #fff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Poppins, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        z-index: 99;
+      }
+      .header-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .brand {
+        color: var(--red);
+        font-weight: 700;
+        font-size: 22px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .brand:hover {
+        opacity: 0.8;
+      }
+      .spacer {
+        flex: 1;
+      }
+      .nav-link {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: 0.2s;
+      }
+      .nav-link:hover {
+        background: var(--bg);
+      }
+      .btn-catalogo {
+        background: var(--green);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.2s;
+      }
+      .btn-catalogo:hover {
+        background: var(--green-hover);
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, var(--red) 0%, #b60000 100%);
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: 48px;
+        margin-bottom: 16px;
+        font-weight: 700;
+      }
+      .hero p {
+        font-size: 20px;
+        opacity: 0.95;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* Main Content */
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
+
+      .section {
+        margin-bottom: 60px;
+      }
+
+      .section-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 24px;
+        color: var(--red);
+        text-align: center;
+      }
+
+      .about-content {
+        background: var(--card);
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        margin-bottom: 40px;
+      }
+
+      .about-content p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: var(--text);
+      }
+
+      /* Cards de Valores */
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-top: 40px;
+      }
+
+      .value-card {
+        background: var(--card);
+        padding: 32px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s;
+        text-align: center;
+      }
+
+      .value-card:hover {
+        transform: translateY(-8px);
+      }
+
+      .value-icon {
+        font-size: 56px;
+        margin-bottom: 16px;
+      }
+
+      .value-card h3 {
+        font-size: 22px;
+        margin-bottom: 12px;
+        color: var(--red);
+      }
+
+      .value-card p {
+        color: var(--muted);
+        font-size: 16px;
+      }
+
+      /* Seção de Contato */
+      .contact-section {
+        background: linear-gradient(135deg, var(--green) 0%, var(--green-hover) 100%);
+        color: white;
+        padding: 60px 40px;
+        border-radius: 16px;
+        text-align: center;
+        margin-top: 60px;
+      }
+
+      .contact-section h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      .contact-section p {
+        font-size: 18px;
+        margin-bottom: 12px;
+        opacity: 0.95;
+      }
+
+      .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 32px;
+        flex-wrap: wrap;
+      }
+
+      .contact-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .contact-item-icon {
+        font-size: 32px;
+      }
+
+      .contact-item strong {
+        font-size: 18px;
+      }
+
+      .contact-item span {
+        font-size: 16px;
+        opacity: 0.9;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        color: #777;
+        padding: 40px 20px;
+        font-size: 14px;
+        margin-top: 40px;
+        border-top: 1px solid #e0e0e0;
+      }
+      footer p {
+        margin: 4px 0;
+        line-height: 1.5;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 36px;
+        }
+        .hero p {
+          font-size: 18px;
+        }
+        .section-title {
+          font-size: 28px;
+        }
+        .about-content {
+          padding: 24px;
+        }
+        .about-content p {
+          font-size: 16px;
+        }
+        .contact-section {
+          padding: 40px 24px;
+        }
+        .contact-section h2 {
+          font-size: 28px;
+        }
+        .contact-info {
+          gap: 24px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header-inner {
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .nav-link {
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+        .hero {
+          padding: 50px 16px;
+        }
+        .hero h1 {
+          font-size: 28px;
+        }
+        .hero p {
+          font-size: 16px;
+        }
+        main {
+          padding: 40px 16px;
+        }
+        .values-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <a href="index.html" class="brand" style="text-decoration: none">Tchê Pneus</a>
+        <div class="spacer"></div>
+        <a href="sobre.html" class="nav-link">Sobre Nós</a>
+        <a href="index.html" class="btn-catalogo">Ver Catálogo</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Sobre a Tchê Pneus</h1>
+      <p>Qualidade, transparência e segurança em cada entrega</p>
+    </section>
+
+    <main>
+      <!-- Quem Somos -->
+      <section class="section">
+        <h2 class="section-title">Quem Somos</h2>
+        <div class="about-content">
+          <p>
+            A <strong>Centro Automotivo Tchee Ltda</strong>, registrada sob o CNPJ <strong>50.311.400/0001-96</strong>, atua no mercado com o nome
+            fantasia <strong>Tchê Pneus</strong> desde 13 de abril de 2023. Nossa sede está localizada na Avenida Aníbal Correia, 470 – Votupoca,
+            Barueri/SP – CEP 06447-010.
+          </p>
+          <p>
+            Com atividade principal voltada para serviços de borracharia e comercialização de pneus para veículos automotores (CNAE G-4520-0/06),
+            temos como missão oferecer produtos de qualidade e atendimento de excelência a todos os nossos clientes.
+          </p>
+        </div>
+      </section>
+
+      <!-- Compromisso e Confiança -->
+      <section class="section">
+        <h2 class="section-title">Compromisso e Confiança</h2>
+        <div class="about-content">
+          <p>
+            A <strong>Tchê Pneus</strong> é uma das pioneiras no setor a trabalhar exclusivamente com a modalidade de
+            <strong>pagamento no ato da entrega</strong>, uma prática que garante total segurança e transparência ao consumidor.
+          </p>
+          <p>
+            Com essa política, o cliente paga somente após receber o produto em mãos, podendo verificar a qualidade, autenticidade e condições da
+            mercadoria antes de finalizar o pagamento. Caso o item apresente defeito de fábrica ou não corresponda ao anunciado, a troca ou devolução
+            é feita de forma imediata e sem complicações.
+          </p>
+        </div>
+      </section>
+
+      <!-- Entrega Garantida -->
+      <section class="section">
+        <h2 class="section-title">Entrega Garantida</h2>
+        <div class="about-content">
+          <p>
+            Em parceria com a empresa de logística e transportes <strong>Jetpack</strong>, asseguramos entregas rápidas, seguras e rastreáveis para
+            todo o Brasil.
+          </p>
+          <p>
+            Nosso objetivo é simples: proporcionar a melhor experiência de compra possível, unindo <strong>preço justo</strong>,
+            <strong>confiança</strong> e <strong>agilidade</strong>.
+          </p>
+        </div>
+      </section>
+
+      <!-- Nossos Diferenciais -->
+      <section class="section">
+        <h2 class="section-title">Nossos Diferenciais</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">💳</div>
+            <h3>Pagamento na Entrega</h3>
+            <p>Pague somente após receber e verificar o produto. Segurança e transparência garantidas.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">🚚</div>
+            <h3>Parceria Jetpack</h3>
+            <p>Entregas rápidas, seguras e rastreáveis para todo o Brasil com logística especializada.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">🔍</div>
+            <h3>Transparência Total</h3>
+            <p>Verifique qualidade e autenticidade antes de pagar. Sem surpresas, sem riscos.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">🏆</div>
+            <h3>Qualidade Certificada</h3>
+            <p>Produtos originais e certificados. Se houver defeito de fábrica, troca imediata.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">💰</div>
+            <h3>Preço Justo</h3>
+            <p>Melhor custo-benefício do mercado sem abrir mão da qualidade e atendimento.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">⚡</div>
+            <h3>Agilidade</h3>
+            <p>Processo de compra simples, entrega rápida e suporte sempre disponível.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contato -->
+      <section class="contact-section">
+        <h2>Nossa Localização e Contato</h2>
+        <p><strong>Centro Automotivo Tchee Ltda</strong></p>
+        <p>CNPJ: 50.311.400/0001-96</p>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <strong>Endereço</strong>
+            <span>Av. Aníbal Correia, 470 – Votupoca</span>
+            <span>Barueri/SP – CEP 06447-010</span>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-item-icon">🏢</div>
+            <strong>CNAE</strong>
+            <span>G-4520-0/06</span>
+            <span>Serviços de borracharia</span>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-item-icon">📅</div>
+            <strong>Desde</strong>
+            <span>13 de abril de 2023</span>
+            <span>Atuando no mercado</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p><strong>Centro Automotivo Tchee Ltda</strong> — Tchê Pneus</p>
+      <p>CNPJ: 50.311.400/0001-96 | Barueri/SP</p>
+      <p>© 2023-2025 — Todos os direitos reservados</p>
+    </footer>
+  </body>
+</html>
