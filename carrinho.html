@@ -1,180 +1,341 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carrinho — Tchê Pneus</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <link rel="icon" type="image/png" href="images/logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <style>
-        :root{--red:#d60000;--green:#009b48;--green-hover:#007a39;--bg:#f5f5f5;--text:#333;--muted:#777;--card:#fff}
-        *{box-sizing:border-box}
-        body{margin:0;font-family:Poppins,sans-serif;background:var(--bg);color:var(--text)}
-        header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-        .header-inner{max-width:1000px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:12px}
-        .brand{color:var(--red);font-weight:700;font-size:22px}
-        main{max-width:1000px;margin:28px auto;padding:0 20px}
-        .card{background:var(--card);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:18px}
-        h2{margin:4px 0 14px;text-align:center}
-        .table{width:100%;border-collapse:collapse}
-        .table th,.table td{padding:10px;border-bottom:1px solid #eee;text-align:left;vertical-align:middle}
-        .table img{width:70px;height:70px;object-fit:contain;border-radius:8px;background:#fff}
-        .qty{width:64px;padding:6px;border:1px solid #ddd;border-radius:8px}
-        .remove{background:#ffecec;color:#ff4a4a;border:1px solid #ffd2d2;border-radius:8px;padding:6px 8px;cursor:pointer}
-        .total{margin-top:12px;text-align:right;font-weight:700}
-        .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
-        .input{padding:10px;border:1px solid #ccc;border-radius:10px}
-        .btn{border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
-        .btn-ghost{background:#f1f1f1}
-        .btn-primary{background:var(--green);color:#fff}
-        .btn-primary:disabled{background:#ccc;cursor:not-allowed}
-        footer{color:#666;text-align:center;padding:24px 10px}
-        /* mobile stack */
-        @media (max-width:720px){  
-            .table thead{display:none}  
-            .table tr{display:grid;grid-template-columns:80px 1fr;gap:8px;padding:12px 0}  
-            .table td{border:none;padding:6px 0}  
-            .td-actions{grid-column:1/-1;display:flex;gap:8px;align-items:center}  
-            .total{text-align:center}
+      :root {
+        --red: #d60000;
+        --green: #009b48;
+        --green-hover: #007a39;
+        --bg: #f5f5f5;
+        --text: #333;
+        --muted: #777;
+        --card: #fff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Poppins, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      header {
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .header-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+       .brand {
+         color: var(--red);
+         font-weight: 700;
+         font-size: 22px;
+         cursor: pointer;
+         transition: opacity 0.2s;
+         text-decoration: none;
+       }
+       .brand:hover {
+         opacity: 0.8;
+       }
+      main {
+        max-width: 1000px;
+        margin: 28px auto;
+        padding: 0 20px;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 14px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        padding: 18px;
+      }
+      h2 {
+        margin: 4px 0 14px;
+        text-align: center;
+      }
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .table th,
+      .table td {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+        vertical-align: middle;
+      }
+      .table img {
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .qty {
+        width: 64px;
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      .remove {
+        background: #ffecec;
+        color: #ff4a4a;
+        border: 1px solid #ffd2d2;
+        border-radius: 8px;
+        padding: 6px 8px;
+        cursor: pointer;
+      }
+      .total {
+        margin-top: 12px;
+        text-align: right;
+        font-weight: 700;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 8px;
+      }
+      .input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+      .btn {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .btn-ghost {
+        background: #f1f1f1;
+      }
+      .btn-primary {
+        background: var(--green);
+        color: #fff;
+      }
+      .btn-primary:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+      footer {
+        color: #666;
+        text-align: center;
+        padding: 24px 10px;
+      }
+      footer p {
+        margin: 4px 0;
+        line-height: 1.5;
+      }
+      /* mobile stack */
+      @media (max-width: 720px) {
+        .table thead {
+          display: none;
         }
+        .table tr {
+          display: grid;
+          grid-template-columns: 80px 1fr;
+          gap: 8px;
+          padding: 12px 0;
+        }
+        .table td {
+          border: none;
+          padding: 6px 0;
+        }
+        .td-actions {
+          grid-column: 1/-1;
+          display: flex;
+          gap: 8px;
+          align-items: center;
+        }
+        .total {
+          text-align: center;
+        }
+      }
     </style>
-</head>
-<body>
-<header>
-    <div class="header-inner">
-        <div class="brand">Tchê Pneus</div>
-        <div style="margin-left:auto">Carrinho</div>
-    </div>
-</header>
-<main>
-    <div class="card">
+  </head>
+  <body>
+     <header>
+       <div class="header-inner">
+         <a href="index.html" class="brand" style="text-decoration: none">Tchê Pneus</a>
+         <div style="margin-left: auto; display: flex; align-items: center; gap: 12px">
+          <a href="index.html" style="text-decoration: none; color: var(--text); font-weight: 600">← Voltar</a>
+          <span style="color: var(--red); font-weight: 700">Carrinho</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="card">
         <h2>Resumo do Pedido</h2>
         <table class="table" id="cartTable">
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Qtd</th>
-                    <th>Valor Unitário</th>
-                    <th>Subtotal</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="cartBody"></tbody>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Qtd</th>
+              <th>Valor Unitário</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cartBody"></tbody>
         </table>
         <div class="total" id="cartTotal">Total: R$ 0,00</div>
 
-        <div class="row" style="margin-top:16px">
-            <label for="cep"><strong>Calcule o frete</strong></label>
-            <input id="cep" class="input" placeholder="Digite seu CEP"/>
-            <button id="calc" class="btn btn-ghost">Calcular</button>
+        <div class="row" style="margin-top: 16px">
+          <label for="cep"><strong>Calcule o frete</strong></label>
+          <input id="cep" class="input" placeholder="Digite seu CEP" />
+          <button id="calc" class="btn btn-ghost">Calcular</button>
         </div>
-        <div id="freteInfo" style="margin-top:8px;color:#009b48;font-weight:700"></div>
+        <div id="freteInfo" style="margin-top: 8px; color: #009b48; font-weight: 700"></div>
 
-        <button id="continueBtn" class="btn btn-primary" style="width:100%;margin-top:18px" disabled>CONTINUAR</button>
-    </div>
-</main>
-<footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
-<script>
-    const BRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
-    const cartBody = document.getElementById('cartBody');
-    const cartTotal = document.getElementById('cartTotal');
-    const cepInput = document.getElementById('cep');
-    const calcBtn = document.getElementById('calc');
-    const freteInfo = document.getElementById('freteInfo');
-    const continueBtn = document.getElementById('continueBtn');
+        <button id="continueBtn" class="btn btn-primary" style="width: 100%; margin-top: 18px" disabled>CONTINUAR</button>
+      </div>
+    </main>
+    <footer>
+      <p><strong>Centro Automotivo Tchee Ltda</strong> — Tchê Pneus</p>
+      <p>CNPJ: 50.311.400/0001-96 | Barueri/SP</p>
+      <p>© 2023-2025 — Todos os direitos reservados</p>
+    </footer>
+    <script>
+      const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+      const cartBody = document.getElementById("cartBody");
+      const cartTotal = document.getElementById("cartTotal");
+      const cepInput = document.getElementById("cep");
+      const calcBtn = document.getElementById("calc");
+      const freteInfo = document.getElementById("freteInfo");
+      const continueBtn = document.getElementById("continueBtn");
 
-    function getCart(){ try{ return JSON.parse(localStorage.getItem('cart'))||[] }catch{ return [] } }
-    function setCart(c){ localStorage.setItem('cart', JSON.stringify(c)); }
-    function toNum(n){ return typeof n==='number'? n : Number(String(n).replace(/[^\d,.-]/g,'').replace(',', '.'))||0; }
+      function getCart() {
+        try {
+          return JSON.parse(localStorage.getItem("cart")) || [];
+        } catch {
+          return [];
+        }
+      }
+      function setCart(c) {
+        localStorage.setItem("cart", JSON.stringify(c));
+      }
+      function toNum(n) {
+        return typeof n === "number"
+          ? n
+          : Number(
+              String(n)
+                .replace(/[^\d,.-]/g, "")
+                .replace(",", ".")
+            ) || 0;
+      }
 
-    let cepOk=false;
-    
-    function render(){  
-        const cart=getCart();  
-        cartBody.innerHTML='';  
-        if(cart.length===0){    
-            cartBody.innerHTML='<tr><td colspan="5" style="text-align:center;color:#888">Carrinho vazio. Redirecionando…</td></tr>';    
-            cartTotal.textContent='Total: R$ 0,00';    
-            freteInfo.textContent='';    
-            continueBtn.disabled=true;    
-            localStorage.removeItem('cepFrete'); // Limpa o CEP salvo se o carrinho estiver vazio
-            setTimeout(()=>{ window.location.href='index.html'; }, 1200);    
-            return;  
-        }  
-        let total=0;  
-        cart.forEach((it,ix)=>{    
-            const unit = toNum(it.price);    
-            const qty  = Number(it.quantity||1);    
-            const sub  = unit*qty; total+=sub;    
-            const tr=document.createElement('tr');    
-            tr.innerHTML = `      
+      let cepOk = false;
+
+      function render() {
+        const cart = getCart();
+        cartBody.innerHTML = "";
+        if (cart.length === 0) {
+          cartBody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#888">Carrinho vazio. Redirecionando…</td></tr>';
+          cartTotal.textContent = "Total: R$ 0,00";
+          freteInfo.textContent = "";
+          continueBtn.disabled = true;
+          localStorage.removeItem("cepFrete"); // Limpa o CEP salvo se o carrinho estiver vazio
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1200);
+          return;
+        }
+        let total = 0;
+        cart.forEach((it, ix) => {
+          const unit = toNum(it.price);
+          const qty = Number(it.quantity || 1);
+          const sub = unit * qty;
+          total += sub;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `      
                 <td><div style="display:flex;align-items:center;gap:10px"><img src="${it.image}" alt="${it.name}"><div>${it.name}</div></div></td>
                 <td><input type="number" min="1" max="10" value="${qty}" class="qty" data-ix="${ix}"></td>
                 <td>${BRL.format(unit)}</td>
                 <td>${BRL.format(sub)}</td>
-                <td class="td-actions"><button class="remove" data-rm="${ix}">✖</button></td>`;    
-            cartBody.appendChild(tr);  
-        });  
-        cartTotal.textContent='Total: '+BRL.format(total);  
-        // atualizar botão continuar  
-        continueBtn.disabled = !(cepOk && getCart().length>0);
-    }
+                <td class="td-actions"><button class="remove" data-rm="${ix}">✖</button></td>`;
+          cartBody.appendChild(tr);
+        });
+        cartTotal.textContent = "Total: " + BRL.format(total);
+        // atualizar botão continuar
+        continueBtn.disabled = !(cepOk && getCart().length > 0);
+      }
 
-    cartBody.addEventListener('input',(e)=>{  
-        if(e.target.classList.contains('qty')){    
-            const ix = Number(e.target.dataset.ix);    
-            let cart=getCart();    
-            const v = Math.max(1, Math.min(10, Number(e.target.value||1)));    
-            cart[ix].quantity=v; setCart(cart); render();  
+      cartBody.addEventListener("input", (e) => {
+        if (e.target.classList.contains("qty")) {
+          const ix = Number(e.target.dataset.ix);
+          let cart = getCart();
+          const v = Math.max(1, Math.min(10, Number(e.target.value || 1)));
+          cart[ix].quantity = v;
+          setCart(cart);
+          render();
         }
-    });
+      });
 
-    cartBody.addEventListener('click',(e)=>{  
-        if(e.target.dataset.rm!==undefined){    
-            let cart=getCart(); cart.splice(Number(e.target.dataset.rm),1); setCart(cart); render();  
+      cartBody.addEventListener("click", (e) => {
+        if (e.target.dataset.rm !== undefined) {
+          let cart = getCart();
+          cart.splice(Number(e.target.dataset.rm), 1);
+          setCart(cart);
+          render();
         }
-    });
+      });
 
-    // LÓGICA DE CÁLCULO DE FRETE E SALVAMENTO DO CEP
-    calcBtn.addEventListener('click', ()=>{  
-        const cep = (cepInput.value||'').replace(/\D/g,'');
-        const hasItems = getCart().length>0;
-        
-        if(cep.length!==8){ 
-            freteInfo.style.color='#d60000'; 
-            freteInfo.textContent='Digite um CEP válido.'; 
-            cepOk=false; 
-            localStorage.removeItem('cepFrete'); // Limpa CEP inválido
+      // LÓGICA DE CÁLCULO DE FRETE E SALVAMENTO DO CEP
+      calcBtn.addEventListener("click", () => {
+        const cep = (cepInput.value || "").replace(/\D/g, "");
+        const hasItems = getCart().length > 0;
+
+        if (cep.length !== 8) {
+          freteInfo.style.color = "#d60000";
+          freteInfo.textContent = "Digite um CEP válido.";
+          cepOk = false;
+          localStorage.removeItem("cepFrete"); // Limpa CEP inválido
+        } else if (!hasItems) {
+          freteInfo.style.color = "#d60000";
+          freteInfo.textContent = "Carrinho vazio. Redirecionando…";
+          cepOk = false;
+          localStorage.removeItem("cepFrete"); // Limpa CEP se carrinho vazio
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1000);
+        } else {
+          freteInfo.style.color = "#009b48";
+          freteInfo.textContent = "FRETE GRÁTIS — Prazo de entrega: 4 a 5 dias úteis.";
+          cepOk = true;
+          // SALVA O CEP VÁLIDO NO LOCAL STORAGE
+          localStorage.setItem("cepFrete", cep);
         }
-        else if(!hasItems){ 
-            freteInfo.style.color='#d60000'; 
-            freteInfo.textContent='Carrinho vazio. Redirecionando…'; 
-            cepOk=false; 
-            localStorage.removeItem('cepFrete'); // Limpa CEP se carrinho vazio
-            setTimeout(()=>{window.location.href='index.html'},1000); 
-        }
-        else{ 
-            freteInfo.style.color='#009b48'; 
-            freteInfo.textContent='FRETE GRÁTIS — Prazo de entrega: 4 a 5 dias úteis.'; 
-            cepOk=true; 
-            // SALVA O CEP VÁLIDO NO LOCAL STORAGE
-            localStorage.setItem('cepFrete', cep); 
-        }
-        
+
         continueBtn.disabled = !(cepOk && hasItems);
-    });
+      });
 
-    continueBtn.addEventListener('click', (e)=>{  
-        e.preventDefault();  
-        if(!continueBtn.disabled){    
-            // pequena espera garante persistência no mobile    
-            setTimeout(()=>{ window.location.href='identificacao.html'; }, 60);  
+      continueBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (!continueBtn.disabled) {
+          // pequena espera garante persistência no mobile
+          setTimeout(() => {
+            window.location.href = "identificacao.html";
+          }, 60);
         }
-    });
+      });
 
-    window.addEventListener('DOMContentLoaded', render);
-</script>
-</body>
+      window.addEventListener("DOMContentLoaded", render);
+    </script>
+  </body>
 </html>
