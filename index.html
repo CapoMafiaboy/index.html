@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Tchê Pneus — Catálogo</title>
+    <link rel="icon" type="image/png" href="images/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -47,6 +48,11 @@
         color: var(--red);
         font-weight: 700;
         font-size: 22px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .brand:hover {
+        opacity: 0.8;
       }
       .spacer {
         flex: 1;
@@ -243,12 +249,163 @@
         font-size: 13px;
         margin-top: 20px;
       }
+      footer p {
+        margin: 4px 0;
+        line-height: 1.5;
+      }
+      /* Search Bar */
+      .search-container {
+        max-width: 1100px;
+        margin: 24px auto 0;
+        padding: 0 16px;
+      }
+      .search-box {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto 16px;
+      }
+      .filters-container {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+      .filter-group {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .filter-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .filter-btn {
+        padding: 8px 16px;
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        color: var(--text);
+      }
+      .filter-btn:hover {
+        border-color: var(--green);
+        color: var(--green);
+      }
+      .filter-btn.active {
+        background: var(--green);
+        border-color: var(--green);
+        color: white;
+      }
+      .clear-filters {
+        padding: 8px 16px;
+        background: #ffecec;
+        border: 2px solid #ffd2d2;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #ff4a4a;
+      }
+      .clear-filters:hover {
+        background: #ffd2d2;
+      }
+      .search-input {
+        width: 100%;
+        padding: 14px 48px 14px 20px;
+        font-size: 16px;
+        font-family: Poppins, sans-serif;
+        border: 2px solid #e0e0e0;
+        border-radius: 50px;
+        outline: none;
+        transition: 0.3s;
+        background: white;
+      }
+      .search-input:focus {
+        border-color: var(--green);
+        box-shadow: 0 4px 12px rgba(0, 155, 72, 0.15);
+      }
+      .search-icon {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: var(--muted);
+        pointer-events: none;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--muted);
+        display: none;
+      }
+      .no-results-icon {
+        font-size: 64px;
+        margin-bottom: 16px;
+        opacity: 0.5;
+      }
+      .no-results h3 {
+        font-size: 24px;
+        margin-bottom: 8px;
+        color: var(--text);
+      }
+      .no-results p {
+        font-size: 16px;
+      }
       @media (max-width: 480px) {
         .brand {
           font-size: 20px;
         }
         .header-inner {
           padding: 12px 14px;
+        }
+        .search-container {
+          margin: 16px auto 0;
+        }
+        .search-input {
+          padding: 12px 40px 12px 16px;
+          font-size: 14px;
+        }
+        .search-icon {
+          right: 14px;
+          font-size: 18px;
+        }
+        .filters-container {
+          gap: 8px;
+        }
+        .filter-group {
+          width: 100%;
+          justify-content: center;
+        }
+        .filter-label {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 4px;
+        }
+        .filter-btn {
+          padding: 6px 12px;
+          font-size: 12px;
+        }
+        .clear-filters {
+          width: 100%;
+          padding: 10px;
+        }
+        .no-results-icon {
+          font-size: 48px;
+        }
+        .no-results h3 {
+          font-size: 20px;
+        }
+        .no-results p {
+          font-size: 14px;
         }
         .card {
           flex-direction: column;
@@ -307,15 +464,58 @@
   <body>
     <header>
       <div class="header-inner">
-        <div class="brand">Tchê Pneus</div>
+        <a href="index.html" class="brand" style="text-decoration: none; color: var(--red)">Tchê Pneus</a>
         <div class="spacer"></div>
+        <a
+          href="sobre.html"
+          style="text-decoration: none; color: var(--text); font-weight: 600; padding: 8px 16px; border-radius: 8px; transition: 0.2s"
+          onmouseover="this.style.background='var(--bg)'"
+          onmouseout="this.style.background='transparent'"
+          >Sobre Nós</a
+        >
         <button id="openCart" class="cart-button" aria-label="Abrir carrinho">
           🛒 <span>Carrinho</span> <span id="cartCount" class="cart-count">0</span>
         </button>
       </div>
     </header>
 
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar pneus por modelo, medida ou tipo..." autocomplete="off" />
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <div class="filters-container">
+        <div class="filter-group">
+          <span class="filter-label">Tipo:</span>
+          <button class="filter-btn" data-filter="type" data-value="liso">LISO</button>
+          <button class="filter-btn" data-filter="type" data-value="borrachudo">BORRACHUDO</button>
+          <button class="filter-btn" data-filter="type" data-value="misto">MISTO</button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Medida:</span>
+          <button class="filter-btn" data-filter="size" data-value="275">275/80</button>
+          <button class="filter-btn" data-filter="size" data-value="295">295/80</button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Preço:</span>
+          <button class="filter-btn" data-filter="price" data-value="0-1000">Até R$ 1.000</button>
+          <button class="filter-btn" data-filter="price" data-value="1000-1300">R$ 1.000 - R$ 1.300</button>
+          <button class="filter-btn" data-filter="price" data-value="1300+">Acima de R$ 1.300</button>
+        </div>
+
+        <button class="clear-filters" id="clearFilters">✖ Limpar Filtros</button>
+      </div>
+    </div>
+
     <main>
+      <div id="noResults" class="no-results">
+        <div class="no-results-icon">🔍</div>
+        <h3>Nenhum produto encontrado</h3>
+        <p>Tente buscar por outro termo</p>
+      </div>
       <div class="grid" id="productList">
         <!-- PRODUTO 1 -->
         <div class="card" data-id="ecoway-b1">
@@ -326,7 +526,9 @@
             <div class="price">R$ 979,00<small>à vista ou em até 12x de R$ 81,60 no cartão</small></div>
           </div>
           <div class="actions">
-            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <a href="detalhes.html?id=ecoway-b1" class="btn btn-outline" style="text-decoration: none; text-align: center; display: block"
+              >+ DETALHES</a
+            >
             <button
               class="btn btn-primary addCart"
               data-id="ecoway-b1"
@@ -348,7 +550,9 @@
             <div class="price">R$ 1.210,00<small>à vista ou em até 12x de R$ 100,90 no cartão</small></div>
           </div>
           <div class="actions">
-            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <a href="detalhes.html?id=robusto-b4" class="btn btn-outline" style="text-decoration: none; text-align: center; display: block"
+              >+ DETALHES</a
+            >
             <button
               class="btn btn-primary addCart"
               data-id="robusto-b4"
@@ -370,7 +574,9 @@
             <div class="price">R$ 1.215,78<small>à vista ou em até 12x de R$ 101,32 no cartão</small></div>
           </div>
           <div class="actions">
-            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <a href="detalhes.html?id=robusto-b5" class="btn btn-outline" style="text-decoration: none; text-align: center; display: block"
+              >+ DETALHES</a
+            >
             <button
               class="btn btn-primary addCart"
               data-id="robusto-b5"
@@ -392,7 +598,9 @@
             <div class="price">R$ 1.170,00<small>à vista ou em até 12x de R$ 97,50 no cartão</small></div>
           </div>
           <div class="actions">
-            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <a href="detalhes.html?id=ecoway-f1" class="btn btn-outline" style="text-decoration: none; text-align: center; display: block"
+              >+ DETALHES</a
+            >
             <button
               class="btn btn-primary addCart"
               data-id="ecoway-f1"
@@ -414,7 +622,9 @@
             <div class="price">R$ 1.260,00<small>à vista ou em até 12x de R$ 105,00 no cartão</small></div>
           </div>
           <div class="actions">
-            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <a href="detalhes.html?id=ecomix-a1" class="btn btn-outline" style="text-decoration: none; text-align: center; display: block"
+              >+ DETALHES</a
+            >
             <button
               class="btn btn-primary addCart"
               data-id="ecomix-a1"
@@ -436,7 +646,9 @@
             <div class="price">R$ 1.511,14<small>à vista ou em até 12x de R$ 125,93 no cartão</small></div>
           </div>
           <div class="actions">
-            <button class="btn btn-outline" disabled>+ DETALHES</button>
+            <a href="detalhes.html?id=forzablock-f1" class="btn btn-outline" style="text-decoration: none; text-align: center; display: block"
+              >+ DETALHES</a
+            >
             <button
               class="btn btn-primary addCart"
               data-id="forzablock-f1"
@@ -459,7 +671,11 @@
       <div class="cart-actions"><button id="miniContinue" class="btn btn-primary btn-full">CONTINUAR</button></div>
     </div>
 
-    <footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
+    <footer>
+      <p><strong>Centro Automotivo Tchee Ltda</strong> — Tchê Pneus</p>
+      <p>CNPJ: 50.311.400/0001-96 | Barueri/SP</p>
+      <p>© 2023-2025 — Todos os direitos reservados</p>
+    </footer>
 
     <script>
       console.log("🚀 Script do carrinho iniciado!");
@@ -587,14 +803,19 @@
 
       openCartBtn.addEventListener("click", () => {
         console.log("🛒 Botão do carrinho clicado!");
+        console.log("📊 Display atual:", cartFly.style.display);
+
         if (cartFly.style.display === "flex") {
+          console.log("❌ Fechando carrinho");
           cartFly.style.display = "none";
         } else {
+          console.log("✅ Abrindo carrinho");
           renderMini();
           cartFly.style.display = "flex";
         }
+
+        console.log("📊 Display depois:", cartFly.style.display);
       });
-      console.log("✅ Event listener do carrinho adicionado!");
 
       closeCartBtn.addEventListener("click", () => {
         console.log("❌ Fechar carrinho clicado!");
@@ -611,8 +832,137 @@
       console.log("🎬 Inicializando carrinho...");
       upCount();
       renderMini();
-      console.log("✅ Script completo carregado!");
+      console.log("✅ Carrinho inicializado!");
+      console.log("📊 Estado inicial:", {
+        cartCount: cartCount.textContent,
+        cartFlyDisplay: cartFly.style.display,
+        itemsInCart: getCart().length,
+      });
+
+      // BUSCA E FILTROS DE PRODUTOS
+      const searchInput = document.getElementById("searchInput");
+      const productCards = document.querySelectorAll(".card");
+      const noResults = document.getElementById("noResults");
+      const productList = document.getElementById("productList");
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const clearFiltersBtn = document.getElementById("clearFilters");
+
+      // Estado dos filtros
+      const activeFilters = {
+        type: null,
+        size: null,
+        price: null,
+      };
+
+      function applyFilters() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        productCards.forEach((card) => {
+          // Pega informações do produto
+          const title = card.querySelector("h2").textContent.toLowerCase();
+          const description = card.querySelector("h3").textContent.toLowerCase();
+          const searchableText = title + " " + description;
+          const priceText = card.querySelector(".price").textContent;
+          const priceValue = parseFloat(priceText.replace(/[^\d,]/g, "").replace(",", "."));
+
+          // Verifica busca por texto
+          let matchesSearch = searchTerm === "" || searchableText.includes(searchTerm);
+
+          // Verifica filtro de tipo
+          let matchesType = true;
+          if (activeFilters.type) {
+            if (activeFilters.type === "liso") {
+              matchesType = description.includes("liso") && !description.includes("misto");
+            } else if (activeFilters.type === "borrachudo") {
+              matchesType = description.includes("borrachudo") && !description.includes("misto");
+            } else if (activeFilters.type === "misto") {
+              matchesType = description.includes("misto");
+            }
+          }
+
+          // Verifica filtro de medida
+          let matchesSize = true;
+          if (activeFilters.size) {
+            matchesSize = title.includes(activeFilters.size);
+          }
+
+          // Verifica filtro de preço
+          let matchesPrice = true;
+          if (activeFilters.price) {
+            if (activeFilters.price === "0-1000") {
+              matchesPrice = priceValue <= 1000;
+            } else if (activeFilters.price === "1000-1300") {
+              matchesPrice = priceValue > 1000 && priceValue <= 1300;
+            } else if (activeFilters.price === "1300+") {
+              matchesPrice = priceValue > 1300;
+            }
+          }
+
+          // Mostra ou esconde o card
+          if (matchesSearch && matchesType && matchesSize && matchesPrice) {
+            card.style.display = "";
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        // Mostra mensagem se nenhum produto for encontrado
+        if (visibleCount === 0) {
+          noResults.style.display = "block";
+          productList.style.display = "none";
+        } else {
+          noResults.style.display = "none";
+          productList.style.display = "grid";
+        }
+
+        console.log(`✅ ${visibleCount} produto(s) encontrado(s)`, activeFilters);
+      }
+
+      // Event listener para busca
+      searchInput.addEventListener("input", applyFilters);
+
+      // Event listeners para filtros
+      filterButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filterType = btn.dataset.filter;
+          const filterValue = btn.dataset.value;
+
+          // Toggle do filtro
+          if (activeFilters[filterType] === filterValue) {
+            activeFilters[filterType] = null;
+            btn.classList.remove("active");
+          } else {
+            // Remove active de outros botões do mesmo grupo
+            filterButtons.forEach((b) => {
+              if (b.dataset.filter === filterType) {
+                b.classList.remove("active");
+              }
+            });
+            activeFilters[filterType] = filterValue;
+            btn.classList.add("active");
+          }
+
+          applyFilters();
+        });
+      });
+
+      // Limpar todos os filtros
+      clearFiltersBtn.addEventListener("click", () => {
+        activeFilters.type = null;
+        activeFilters.size = null;
+        activeFilters.price = null;
+        searchInput.value = "";
+
+        filterButtons.forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        applyFilters();
+      });
+
+      console.log("🔍 Sistema de busca e filtros inicializado!");
     </script>
   </body>
 </html>
-
