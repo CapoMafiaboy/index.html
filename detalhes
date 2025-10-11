@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Detalhes do Produto — Tchê Pneus</title>
+    <link rel="icon" type="image/png" href="images/logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --red: #d60000;
+        --green: #009b48;
+        --green-hover: #007a39;
+        --bg: #f8f8f8;
+        --text: #222;
+        --muted: #666;
+        --card: #fff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Poppins, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        z-index: 99;
+      }
+      .header-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .brand {
+        color: var(--red);
+        font-weight: 700;
+        font-size: 22px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .brand:hover {
+        opacity: 0.8;
+      }
+      .spacer {
+        flex: 1;
+      }
+      .btn-back {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: 0.2s;
+      }
+      .btn-back:hover {
+        background: var(--bg);
+      }
+      .cart-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff;
+        border: 1px solid #eee;
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .cart-count {
+        background: var(--green);
+        color: #fff;
+        font-size: 12px;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-weight: 700;
+      }
+      .cart-fly {
+        position: fixed;
+        top: 70px;
+        right: 10px;
+        width: 360px;
+        max-width: 94vw;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 14px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        padding: 14px;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 999;
+      }
+      .cart-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+      .cart-item {
+        display: grid;
+        grid-template-columns: 64px 1fr auto;
+        gap: 10px;
+        align-items: center;
+        border-bottom: 1px solid #f1f1f1;
+        padding: 8px 0;
+      }
+      .cart-item img {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .cart-item h4 {
+        margin: 0;
+        font-size: 14px;
+      }
+      .cart-item .mini-price {
+        font-weight: 700;
+        color: var(--green);
+        font-size: 13px;
+        margin-top: 4px;
+      }
+      .qty-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .qty-row select {
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+      .remove-mini {
+        background: #ffecec;
+        color: #ff4a4a;
+        border: 1px solid #ffd2d2;
+        border-radius: 8px;
+        padding: 6px 8px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .cart-summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 700;
+        margin-top: 4px;
+      }
+      .cart-empty {
+        padding: 20px;
+        color: #888;
+        text-align: center;
+      }
+      .cart-actions {
+        display: flex;
+        gap: 10px;
+      }
+      .btn-full {
+        width: 100%;
+      }
+      main {
+        max-width: 1100px;
+        margin: 32px auto;
+        padding: 0 20px;
+      }
+      .breadcrumb {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+      .breadcrumb a {
+        color: var(--green);
+        text-decoration: none;
+      }
+      .product-detail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .product-image {
+        text-align: center;
+      }
+      .product-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      }
+      .product-info h1 {
+        font-size: 28px;
+        margin-bottom: 8px;
+        color: var(--text);
+      }
+      .product-info .category {
+        color: var(--muted);
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      .price-box {
+        background: linear-gradient(135deg, var(--green) 0%, var(--green-hover) 100%);
+        color: white;
+        padding: 24px;
+        border-radius: 12px;
+        margin: 24px 0;
+      }
+      .price-box .price {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .price-box .installment {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+      .btn-buy {
+        width: 100%;
+        background: var(--red);
+        color: white;
+        border: none;
+        padding: 16px;
+        font-size: 18px;
+        font-weight: 700;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 16px;
+      }
+      .btn-buy:hover {
+        background: #b60000;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(214, 0, 0, 0.3);
+      }
+      .btn-primary {
+        background: var(--green);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .btn-primary:hover {
+        background: var(--green-hover);
+      }
+      .btn-primary:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+      .specs-section {
+        margin-top: 32px;
+      }
+      .specs-section h2 {
+        font-size: 24px;
+        margin-bottom: 16px;
+        color: var(--red);
+      }
+      .specs-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .spec-item {
+        background: var(--bg);
+        padding: 16px;
+        border-radius: 10px;
+        border-left: 4px solid var(--green);
+      }
+      .spec-item strong {
+        display: block;
+        color: var(--green);
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+      .spec-item span {
+        font-size: 16px;
+        color: var(--text);
+      }
+      .description {
+        margin-top: 32px;
+        line-height: 1.8;
+      }
+      .description h2 {
+        font-size: 24px;
+        margin-bottom: 16px;
+        color: var(--red);
+      }
+      .description p {
+        margin-bottom: 16px;
+        color: var(--text);
+      }
+      .features-list {
+        list-style: none;
+        padding: 0;
+      }
+      .features-list li {
+        padding: 12px 0;
+        padding-left: 32px;
+        position: relative;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .features-list li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--green);
+        font-weight: 700;
+        font-size: 20px;
+      }
+      .error-message {
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .error-message h2 {
+        color: var(--red);
+        margin-bottom: 16px;
+      }
+      footer {
+        text-align: center;
+        color: #777;
+        padding: 30px 10px;
+        font-size: 13px;
+        margin-top: 40px;
+      }
+      footer p {
+        margin: 4px 0;
+        line-height: 1.5;
+      }
+      @media (max-width: 768px) {
+        .product-detail {
+          grid-template-columns: 1fr;
+          padding: 24px;
+          gap: 24px;
+        }
+        .specs-grid {
+          grid-template-columns: 1fr;
+        }
+        .product-info h1 {
+          font-size: 24px;
+        }
+        .price-box .price {
+          font-size: 28px;
+        }
+        .cart-fly {
+          right: 6px;
+          top: 68px;
+          width: 95vw;
+          max-height: 80vh;
+          overflow-y: auto;
+          border-radius: 12px;
+          padding: 12px;
+        }
+        .cart-item {
+          grid-template-columns: 56px 1fr auto;
+        }
+        .cart-item img {
+          width: 56px;
+          height: 56px;
+        }
+        .header-inner {
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .btn-back {
+          order: 3;
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <a href="index.html" class="brand" style="text-decoration: none">Tchê Pneus</a>
+        <div class="spacer"></div>
+        <a href="index.html" class="btn-back">← Voltar ao Catálogo</a>
+        <button id="openCart" class="cart-button" aria-label="Abrir carrinho">
+          🛒 <span>Carrinho</span> <span id="cartCount" class="cart-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <div id="cartFly" class="cart-fly">
+      <div class="cart-title"><strong>Seu carrinho</strong><button id="closeCart" class="remove-mini">Fechar</button></div>
+      <div id="miniItems"></div>
+      <div id="miniEmpty" class="cart-empty" style="display: none">Seu carrinho está vazio.</div>
+      <div class="cart-summary"><span>Total</span><span id="miniTotal">R$ 0,00</span></div>
+      <div class="cart-actions"><button id="miniContinue" class="btn btn-primary btn-full">CONTINUAR</button></div>
+    </div>
+
+    <main id="mainContent">
+      <div class="error-message" id="errorMessage" style="display: none">
+        <h2>❌ Produto não encontrado</h2>
+        <p>O produto que você procura não existe ou foi removido.</p>
+        <a href="index.html" class="btn-buy" style="display: inline-block; text-decoration: none; margin-top: 20px">Voltar ao Catálogo</a>
+      </div>
+    </main>
+
+    <footer>
+      <p><strong>Centro Automotivo Tchee Ltda</strong> — Tchê Pneus</p>
+      <p>CNPJ: 50.311.400/0001-96 | Barueri/SP</p>
+      <p>© 2023-2025 — Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+      // Base de dados dos produtos
+      const products = {
+        "ecoway-b1": {
+          id: "ecoway-b1",
+          name: "XBRI ECOWAY B1 (LISO)",
+          title: "275/80R22,5 18 LONAS 149/146M",
+          category: "XBRI ECOWAY B1 (LISO) • Pneu de Carga",
+          price: 979.0,
+          installment: "81,60",
+          image: "images/ecoway-b1.jpg",
+          specs: {
+            measure: "275/80R22,5",
+            plies: "18 Lonas",
+            loadIndex: "149/146M",
+            treadType: "LISO",
+            application: "Eixo de Tração",
+            brand: "XBRI",
+          },
+          description:
+            "O <strong>XBRI Ecoway B1</strong> é um pneu de alta performance desenvolvido especialmente para veículos de carga pesada. Com sua banda de rodagem <strong>LISA</strong>, oferece excelente aderência e estabilidade em rodovias pavimentadas.",
+          features: [
+            "Banda de rodagem lisa ideal para eixo de tração em rodovias",
+            "Estrutura reforçada com 18 lonas para maior durabilidade",
+            "Composto de borracha otimizado para baixo desgaste",
+            "Economia de combustível através da baixa resistência ao rolamento",
+            "Excelente estabilidade e conforto em altas velocidades",
+            "Produto certificado e com garantia de fábrica",
+            "Ideal para uso em frotas de transporte rodoviário",
+          ],
+          usage:
+            "Recomendado para caminhões de carga pesada que operam principalmente em rodovias pavimentadas. A banda lisa proporciona menor ruído e maior conforto, sendo ideal para longas distâncias.",
+        },
+        "robusto-b4": {
+          id: "robusto-b4",
+          name: "XBRI ROBUSTO B4 (BORRACHUDO)",
+          title: "275/80R22,5 18 LONAS 149/146L",
+          category: "XBRI ROBUSTO B4 (BORRACHUDO) • Pneu de Carga",
+          price: 1210.0,
+          installment: "100,90",
+          image: "images/robusto-b4.jpg",
+          specs: {
+            measure: "275/80R22,5",
+            plies: "18 Lonas",
+            loadIndex: "149/146L",
+            treadType: "BORRACHUDO",
+            application: "Eixo de Tração",
+            brand: "XBRI",
+          },
+          description:
+            "O <strong>XBRI Robusto B4</strong> é um pneu de alta robustez desenvolvido para enfrentar as condições mais desafiadoras. Com sua banda de rodagem <strong>BORRACHUDA</strong>, oferece tração superior em terrenos irregulares e estradas de terra.",
+          features: [
+            "Banda de rodagem borrachuda com sulcos profundos para máxima tração",
+            "Estrutura ultra reforçada com 18 lonas para trabalhos pesados",
+            "Resistente a cortes, perfurações e desgaste acelerado",
+            "Ideal para uso misto: rodovia e estrada de terra",
+            "Excelente desempenho em condições adversas",
+            "Maior vida útil mesmo em terrenos agressivos",
+            "Produto certificado e com garantia de fábrica",
+          ],
+          usage:
+            "Recomendado para caminhões que operam em trajetos mistos, incluindo estradas não pavimentadas, obras, canteiros de mineração e áreas rurais. A banda borrachuda garante tração mesmo em condições de lama e terra.",
+        },
+        "robusto-b5": {
+          id: "robusto-b5",
+          name: "XBRI ROBUSTO B5 (BORRACHUDO)",
+          title: "295/80R22,5 18 LONAS 152/149M",
+          category: "XBRI ROBUSTO B5 (BORRACHUDO) • Pneu de Carga",
+          price: 1215.78,
+          installment: "101,32",
+          image: "images/robusto-b5.jpg",
+          specs: {
+            measure: "295/80R22,5",
+            plies: "18 Lonas",
+            loadIndex: "152/149M",
+            treadType: "BORRACHUDO",
+            application: "Eixo de Tração",
+            brand: "XBRI",
+          },
+          description:
+            "O <strong>XBRI Robusto B5</strong> é a evolução do modelo B4, com medida maior para veículos que necessitam de ainda mais capacidade de carga. Mantém toda a robustez e tração da linha Robusto em uma medida mais larga.",
+          features: [
+            "Medida 295/80 para maior capacidade de carga",
+            "Banda borrachuda de alta resistência",
+            "Estrutura reforçada com 18 lonas",
+            "Excelente desempenho em terrenos difíceis",
+            "Durabilidade superior mesmo em uso intenso",
+            "Ideal para veículos pesados em operações exigentes",
+            "Garantia de fábrica e certificação de qualidade",
+          ],
+          usage:
+            "Indicado para caminhões de grande porte que transportam cargas pesadas em condições variadas de terreno. A medida mais larga oferece melhor distribuição de peso e estabilidade.",
+        },
+        "ecoway-f1": {
+          id: "ecoway-f1",
+          name: "XBRI ECOWAY F1 (LISO)",
+          title: "295/80R22,5 18 LONAS 152/149M",
+          category: "XBRI ECOWAY F1 (LISO) • Pneu de Carga",
+          price: 1170.0,
+          installment: "97,50",
+          image: "images/ecoway-f1.jpg",
+          specs: {
+            measure: "295/80R22,5",
+            plies: "18 Lonas",
+            loadIndex: "152/149M",
+            treadType: "LISO",
+            application: "Eixo Livre/Reboque",
+            brand: "XBRI",
+          },
+          description:
+            "O <strong>XBRI Ecoway F1</strong> foi desenvolvido especificamente para eixos livres e reboques. Sua banda lisa proporciona baixo rolamento e excelente economia de combustível em operações rodoviárias.",
+          features: [
+            "Otimizado para eixo livre e reboque",
+            "Banda lisa para máxima economia de combustível",
+            "Baixa resistência ao rolamento",
+            "Desgaste uniforme e previsível",
+            "Excelente estabilidade direcional",
+            "Construção robusta com 18 lonas",
+            "Vida útil estendida em uso rodoviário",
+          ],
+          usage:
+            "Perfeito para eixos livres e reboques de caminhões que realizam principalmente trajetos rodoviários. Proporciona economia significativa de combustível e menor custo por quilômetro rodado.",
+        },
+        "ecomix-a1": {
+          id: "ecomix-a1",
+          name: "XBRI ECOMIX A1 (MISTO LISO)",
+          title: "295/80R22,5 18 LONAS 152/149L",
+          category: "XBRI ECOMIX A1 (MISTO LISO) • Pneu de Carga",
+          price: 1260.0,
+          installment: "105,00",
+          image: "images/ecomix-a1.jpg",
+          specs: {
+            measure: "295/80R22,5",
+            plies: "18 Lonas",
+            loadIndex: "152/149L",
+            treadType: "MISTO LISO",
+            application: "Eixo Direcional",
+            brand: "XBRI",
+          },
+          description:
+            "O <strong>XBRI Ecomix A1</strong> combina o melhor de dois mundos: economia da banda lisa com versatilidade para diferentes condições. Ideal para eixo direcional, oferece excelente controle e estabilidade.",
+          features: [
+            "Design misto liso para eixo direcional",
+            "Excelente controle direcional e estabilidade",
+            "Versatilidade para diferentes tipos de estrada",
+            "Economia de combustível otimizada",
+            "Resposta precisa na direção",
+            "Construção reforçada com 18 lonas",
+            "Durabilidade e conforto de rodagem",
+          ],
+          usage:
+            "Desenvolvido para o eixo direcional de caminhões, garantindo precisão na direção e segurança. Adequado tanto para rodovias quanto para estradas secundárias.",
+        },
+        "forzablock-f1": {
+          id: "forzablock-f1",
+          name: "XBRI FORZA BLOCK F1 (MISTO BORRACHUDO)",
+          title: "295/80R22,5 18 LONAS 152/149K",
+          category: "XBRI FORZA BLOCK F1 (MISTO BORRACHUDO) • Pneu de Carga",
+          price: 1511.14,
+          installment: "125,93",
+          image: "images/forzablock-f1.jpg",
+          specs: {
+            measure: "295/80R22,5",
+            plies: "18 Lonas",
+            loadIndex: "152/149K",
+            treadType: "MISTO BORRACHUDO",
+            application: "Uso Misto Intenso",
+            brand: "XBRI",
+          },
+          description:
+            "O <strong>XBRI Forza Block F1</strong> é o pneu mais robusto da linha, com design misto borrachudo para as aplicações mais exigentes. Combina tração extrema com durabilidade incomparável.",
+          features: [
+            "Design misto borrachudo para máxima tração",
+            "Ideal para uso intenso em qualquer terreno",
+            "Sulcos profundos tipo block para autolimpeza",
+            "Resistência extrema a danos e perfurações",
+            "Excelente desempenho em lama, terra e asfalto",
+            "Estrutura super reforçada para trabalhos pesados",
+            "Produto premium com garantia estendida",
+          ],
+          usage:
+            "Indicado para operações extremas que exigem o máximo do pneu: mineração, construção civil, áreas rurais e trajetos mistos com cargas pesadas. O investimento mais alto se paga pela durabilidade excepcional.",
+        },
+      };
+
+      const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+
+      // CARRINHO FLUTUANTE
+      const cartFly = document.getElementById("cartFly");
+      const openCartBtn = document.getElementById("openCart");
+      const closeCartBtn = document.getElementById("closeCart");
+      const miniItems = document.getElementById("miniItems");
+      const miniEmpty = document.getElementById("miniEmpty");
+      const miniTotal = document.getElementById("miniTotal");
+      const miniContinue = document.getElementById("miniContinue");
+      const cartCount = document.getElementById("cartCount");
+
+      function getCart() {
+        try {
+          return JSON.parse(localStorage.getItem("cart")) || [];
+        } catch {
+          return [];
+        }
+      }
+
+      function setCart(c) {
+        localStorage.setItem("cart", JSON.stringify(c));
+      }
+
+      function upCount() {
+        cartCount.textContent = getCart().reduce((s, i) => s + i.quantity, 0);
+      }
+
+      function renderMini() {
+        const cart = getCart();
+        miniItems.innerHTML = "";
+        if (cart.length === 0) {
+          miniEmpty.style.display = "block";
+          miniTotal.textContent = BRL.format(0);
+          miniContinue.disabled = true;
+          return;
+        }
+        miniEmpty.style.display = "none";
+        let total = 0;
+        cart.forEach((item, ix) => {
+          const subtotal = item.price * item.quantity;
+          total += subtotal;
+          const row = document.createElement("div");
+          row.className = "cart-item";
+          row.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div>
+              <h4>${item.name}</h4>
+              <div class="mini-price">${BRL.format(item.price)} • Subtotal: ${BRL.format(subtotal)}</div>
+              <div class="qty-row">
+                <label style="font-size:12px;color:#666">Qtd</label>
+                <select data-ix="${ix}">
+                  ${Array.from(
+                    { length: 10 },
+                    (_, i) => `<option value="${i + 1}" ${i + 1 == item.quantity ? "selected" : ""}>${i + 1}</option>`
+                  ).join("")}
+                </select>
+              </div>
+            </div>
+            <button class="remove-mini" data-remove="${ix}">✖</button>`;
+          miniItems.appendChild(row);
+        });
+        miniTotal.textContent = BRL.format(total);
+        miniContinue.disabled = false;
+      }
+
+      // Event listeners do carrinho
+      openCartBtn.addEventListener("click", () => {
+        if (cartFly.style.display === "flex") {
+          cartFly.style.display = "none";
+        } else {
+          renderMini();
+          cartFly.style.display = "flex";
+        }
+      });
+
+      closeCartBtn.addEventListener("click", () => {
+        cartFly.style.display = "none";
+      });
+
+      miniContinue.addEventListener("click", () => {
+        if (getCart().length > 0) {
+          window.location.href = "carrinho.html";
+        }
+      });
+
+      miniItems.addEventListener("change", (e) => {
+        if (e.target.tagName === "SELECT") {
+          let cart = getCart();
+          const ix = e.target.dataset.ix;
+          cart[ix].quantity = Number(e.target.value);
+          setCart(cart);
+          upCount();
+          renderMini();
+        }
+      });
+
+      document.body.addEventListener("click", (e) => {
+        if (e.target.dataset.remove !== undefined) {
+          let cart = getCart();
+          cart.splice(Number(e.target.dataset.remove), 1);
+          setCart(cart);
+          upCount();
+          renderMini();
+          if (getCart().length === 0) {
+            miniEmpty.style.display = "block";
+            miniContinue.disabled = true;
+          }
+        }
+      });
+
+      // Inicializa o carrinho
+      upCount();
+      renderMini();
+
+      // Pega o ID da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id");
+
+      console.log("🔍 Produto solicitado:", productId);
+
+      if (!productId || !products[productId]) {
+        console.error("❌ Produto não encontrado!");
+        document.getElementById("errorMessage").style.display = "block";
+      } else {
+        const product = products[productId];
+        console.log("✅ Produto encontrado:", product);
+
+        // Atualiza o título da página
+        document.title = `${product.name} — Tchê Pneus`;
+
+        // Renderiza o conteúdo
+        document.getElementById("mainContent").innerHTML = `
+          <div class="breadcrumb">
+            <a href="index.html">Início</a> / <a href="index.html">Catálogo</a> / <span>${product.name}</span>
+          </div>
+
+          <div class="product-detail">
+            <div class="product-image">
+              <img src="${product.image}" alt="${product.name}" />
+            </div>
+
+            <div class="product-info">
+              <h1>${product.title}</h1>
+              <p class="category">${product.category}</p>
+
+              <div class="price-box">
+                <div class="price">${BRL.format(product.price)}</div>
+                <div class="installment">à vista ou em até 12x de R$ ${product.installment} no cartão</div>
+              </div>
+
+              <button class="btn-buy" onclick="addToCartAndRedirect()">🛒 ADICIONAR AO CARRINHO</button>
+
+              <div class="specs-section">
+                <h2>Especificações Técnicas</h2>
+                <div class="specs-grid">
+                  <div class="spec-item">
+                    <strong>Medida</strong>
+                    <span>${product.specs.measure}</span>
+                  </div>
+                  <div class="spec-item">
+                    <strong>Lonas</strong>
+                    <span>${product.specs.plies}</span>
+                  </div>
+                  <div class="spec-item">
+                    <strong>Índice de Carga</strong>
+                    <span>${product.specs.loadIndex}</span>
+                  </div>
+                  <div class="spec-item">
+                    <strong>Tipo de Banda</strong>
+                    <span>${product.specs.treadType}</span>
+                  </div>
+                  <div class="spec-item">
+                    <strong>Aplicação</strong>
+                    <span>${product.specs.application}</span>
+                  </div>
+                  <div class="spec-item">
+                    <strong>Marca</strong>
+                    <span>${product.specs.brand}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="description">
+            <h2>Descrição do Produto</h2>
+            <p>${product.description}</p>
+            
+            <h2>Características e Benefícios</h2>
+            <ul class="features-list">
+              ${product.features.map((feature) => `<li>${feature}</li>`).join("")}
+            </ul>
+
+            <h2>Indicação de Uso</h2>
+            <p>${product.usage}</p>
+          </div>
+        `;
+      }
+
+      function addToCartAndRedirect() {
+        const product = products[productId];
+        const cart = getCart();
+
+        const cartProduct = {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          image: product.image,
+        };
+
+        const idx = cart.findIndex((p) => p.id === cartProduct.id);
+        if (idx > -1) {
+          cart[idx].quantity = Math.min(10, cart[idx].quantity + 1);
+          console.log("📦 Quantidade aumentada para:", cart[idx].quantity);
+        } else {
+          cart.push(cartProduct);
+          console.log("🆕 Produto adicionado ao carrinho!");
+        }
+
+        setCart(cart);
+        upCount();
+        renderMini();
+
+        // Abre o carrinho flutuante
+        cartFly.style.display = "flex";
+
+        // Scroll suave para o topo
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>
