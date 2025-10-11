@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Identificação — Tchê Pneus</title>
+    <link rel="icon" type="image/png" href="images/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -14,7 +15,8 @@
         body{margin:0;font-family:Poppins,sans-serif;background:var(--bg);color:var(--text)}
         header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
         .header-inner{max-width:900px;margin:0 auto;padding:14px 20px;display:flex;align-items:center}
-        .brand{color:var(--red);font-weight:700;font-size:22px}
+        .brand{color:var(--red);font-weight:700;font-size:22px;cursor:pointer;transition:opacity 0.2s;text-decoration:none}
+        .brand:hover{opacity:0.8}
         main{max-width:760px;margin:28px auto;padding:0 20px}
         .card{background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:18px}
         h2{margin:6px 0 16px;text-align:center}
@@ -26,13 +28,17 @@
         .btn:hover{background:var(--green-hover)}
         .error{color:var(--red);font-size:14px;margin-top:6px}
         footer{color:#666;text-align:center;padding:24px 10px}
+        footer p{margin:4px 0;line-height:1.5}
     </style>
 </head>
 <body>
 <header>
     <div class="header-inner">
-        <div class="brand">Tchê Pneus</div>
-        <div style="margin-left:auto">Identificação</div>
+        <a href="index.html" class="brand">Tchê Pneus</a>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+            <a href="carrinho.html" style="text-decoration:none;color:var(--text);font-weight:600">← Voltar</a>
+            <span style="color:var(--red);font-weight:700">Identificação</span>
+        </div>
     </div>
 </header>
 <main>
@@ -93,7 +99,11 @@
         </form>
     </div>
 </main>
-<footer>© 2025 Tchê Pneus — Revendedora licenciada XBRI. Todos os direitos reservados.</footer>
+<footer>
+    <p><strong>Centro Automotivo Tchee Ltda</strong> — Tchê Pneus</p>
+    <p>CNPJ: 50.311.400/0001-96 | Barueri/SP</p>
+    <p>© 2023-2025 — Todos os direitos reservados</p>
+</footer>
 <script>
     function getCart(){ try{ return JSON.parse(localStorage.getItem('cart'))||[] }catch{ return [] } }
     const form = document.getElementById('form');
